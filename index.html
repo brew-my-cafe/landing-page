@@ -21,39 +21,92 @@
       opacity: 0.9;
       transform: translateY(-2px);
     }
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+    }
+    .modal-content {
+      background: white;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      animation: fadeIn 0.3s ease;
+    }
+    .close-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.95);}
+      to {opacity: 1; transform: scale(1);}
+    }
   </style>
 </head>
 <body class="bg-white text-black font-sans">
 
   <!-- Navbar -->
-  <header class="flex justify-between items-center p-6">
-    <div class="flex items-center space-x-2">
-      <img src="logo.png" alt="GoGoHungry Logo" class="w-10 h-10">
-      <span class="text-2xl font-extrabold">GoGoHungry</span>
+  <header class="p-4 bg-white shadow-md fixed top-0 left-0 right-0 z-40">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <!-- Logo -->
+      <div class="flex items-center space-x-2">
+        <img src="gogohungry-logo.png" alt="GoGoHungry Logo" class="w-10 h-10">
+        <span class="text-2xl font-extrabold">GoGoHungry</span>
+      </div>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex space-x-8 items-center">
+        <a href="#why" class="hover:text-[var(--primary)] font-medium">Why Us</a>
+        <a href="#features" class="hover:text-[var(--primary)] font-medium">Features</a>
+        <a href="#workflow" class="hover:text-[var(--primary)] font-medium">Workflow</a>
+        <button class="btn-primary open-modal">Download App</button>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button id="menu-btn" class="md:hidden text-3xl focus:outline-none">&#9776;</button>
     </div>
-    <nav class="space-x-6 hidden md:flex">
-      <a href="#why" class="hover:text-[var(--primary)]">Why Us</a>
-      <a href="#features" class="hover:text-[var(--primary)]">Features</a>
-      <a href="#contact" class="hover:text-[var(--primary)]">Contact</a>
-    </nav>
-    <button class="btn-primary">Download App</button>
+
+    <!-- Mobile Nav -->
+    <div id="mobile-menu" class="hidden flex-col bg-white shadow-md mt-4 rounded-2xl md:hidden text-center space-y-3 py-4">
+      <a href="#why" class="block text-lg hover:text-[var(--primary)]">Why Us</a>
+      <a href="#features" class="block text-lg hover:text-[var(--primary)]">Features</a>
+      <a href="#workflow" class="block text-lg hover:text-[var(--primary)]">Workflow</a>
+      <button class="btn-primary open-modal w-4/5 mx-auto">Download App</button>
+    </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="text-center py-20 px-6">
-    <h1 class="text-5xl md:text-6xl font-extrabold mb-4">
+  <section class="text-center py-32 px-6 mt-10">
+    <h1 class="text-4xl md:text-6xl font-extrabold mb-4 leading-tight">
       Fast Delivery for Every Hungry Student 🍔
     </h1>
     <p class="text-lg md:text-xl text-gray-700 mb-8">
       Pay ₹0 extra on your food — because saving means eating more!
     </p>
-    <div class="flex justify-center gap-4">
-      <button class="btn-primary">Order Now</button>
-      <button class="border-2 border-black rounded-full px-6 py-3 font-semibold hover:bg-black hover:text-white transition">
+    <div class="flex flex-col md:flex-row justify-center gap-4">
+      <button class="btn-primary open-modal">Order Now</button>
+      <button class="border-2 border-black rounded-full px-6 py-3 font-semibold hover:bg-black hover:text-white transition open-modal">
         Explore Menu
       </button>
     </div>
-    <img src="food-delivery-illustration.png" alt="Delivery" class="mx-auto mt-16 w-2/3 md:w-1/2">
+    <!-- <img src="food-delivery-illustration.png" alt="Delivery" class="mx-auto mt-16 w-4/5 md:w-1/2"> -->
   </section>
 
   <!-- Why GoGoHungry -->
@@ -75,50 +128,134 @@
     </div>
   </section>
 
-  <!-- Features / Differentiation -->
-  <!-- Features / Differentiation -->
-<section id="features" class="py-20 px-6 text-center max-w-5xl mx-auto">
-  <h2 class="text-4xl font-bold mb-8">What Makes Us Different?</h2>
-  <div class="grid md:grid-cols-3 gap-8">
-    
-    <div class="p-4">
-      <div class="text-5xl mb-3">💸</div>
-      <h3 class="font-bold text-xl mb-2">No Extra Payments</h3>
-      <p>What you see is what you pay. No hidden delivery charges — just pure food joy!</p>
+  <!-- Features -->
+  <section id="features" class="py-20 px-6 text-center max-w-5xl mx-auto">
+    <h2 class="text-4xl font-bold mb-8">What Makes Us Different?</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="p-4">
+        <div class="text-5xl mb-3">💸</div>
+        <h3 class="font-bold text-xl mb-2">No Extra Payments</h3>
+        <p>What you see is what you pay. No hidden delivery charges — just pure food joy!</p>
+      </div>
+      <div class="p-4">
+        <div class="text-5xl mb-3">☕</div>
+        <h3 class="font-bold text-xl mb-2">Explore Nearby Cafes</h3>
+        <p>Find and order from your favorite campus cafés with smooth, fast, and reliable delivery.</p>
+      </div>
+      <div class="p-4">
+        <div class="text-5xl mb-3">🎁</div>
+        <h3 class="font-bold text-xl mb-2">Earn Hungry Coins</h3>
+        <p>Collect Hungry Coins on every order and unlock gifts, offers, and exclusive rewards!</p>
+      </div>
     </div>
-
-    <div class="p-4">
-      <div class="text-5xl mb-3">☕</div>
-      <h3 class="font-bold text-xl mb-2">Explore Nearby Cafes</h3>
-      <p>Find and order from your favorite campus cafés with smooth, fast, and reliable delivery.</p>
-    </div>
-
-    <div class="p-4">
-      <div class="text-5xl mb-3">🎁</div>
-      <h3 class="font-bold text-xl mb-2">Earn Hungry Coins</h3>
-      <p>Collect Hungry Coins on every order and unlock gifts, offers, and exclusive rewards!</p>
-    </div>
-
-  </div>
-</section>
-
-
-  <!-- Contact Form -->
-  <section id="contact" class="bg-gray-100 py-20 px-6">
-    <h2 class="text-4xl font-bold text-center mb-10">Get in Touch</h2>
-    <form class="max-w-lg mx-auto space-y-4">
-      <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" />
-      <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" />
-      <textarea rows="4" placeholder="Your Message" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"></textarea>
-      <button type="submit" class="btn-primary w-full">Send Message</button>
-    </form>
   </section>
+
+  <!-- Workflow Section -->
+  <section id="workflow" class="bg-gray-50 py-20 px-6">
+    <h2 class="text-4xl font-bold text-center mb-12">How It Works</h2>
+
+    <!-- For Students -->
+    <div class="max-w-6xl mx-auto mb-16">
+      <h3 class="text-2xl font-bold text-center text-[var(--primary)] mb-6">🎓 For Students / Users</h3>
+      <div class="grid md:grid-cols-5 gap-6 text-center">
+        <div class="p-4">
+          <div class="text-5xl mb-3">📍</div>
+          <h4 class="font-semibold">1. Discover Cafes</h4>
+          <p>View all restaurants and canteens near your college instantly.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-5xl mb-3">🛒</div>
+          <h4 class="font-semibold">2. Place Your Order</h4>
+          <p>Choose your favorites and order in a few taps.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-5xl mb-3">💳</div>
+          <h4 class="font-semibold">3. Pay Securely</h4>
+          <p>Use UPI, card, or wallet. No hidden fees ever.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-5xl mb-3">🚴‍♂️</div>
+          <h4 class="font-semibold">4. Track in Real-Time</h4>
+          <p>See live updates of your food being prepared and delivered.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-5xl mb-3">🔢</div>
+          <h4 class="font-semibold">5. Verify & Enjoy!</h4>
+          <p>Share OTP with the delivery person to confirm receipt. Done!</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- For Restaurants -->
+    <div class="max-w-6xl mx-auto">
+      <h3 class="text-2xl font-bold text-center text-[var(--primary)] mb-6">🏪 For Restaurants</h3>
+      <div class="grid md:grid-cols-5 gap-6 text-center">
+        <div class="p-4">
+          <div class="text-5xl mb-3">📲</div>
+          <h4 class="font-semibold">1. Get Orders Instantly</h4>
+          <p>Receive incoming orders through your personalized dashboard.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-5xl mb-3">✅</div>
+          <h4 class="font-semibold">2. Accept & Prepare</h4>
+          <p>Accept the order and start preparing it right away.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-5xl mb-3">🚚</div>
+          <h4 class="font-semibold">3. Update Order Status</h4>
+          <p>Keep users updated—Preparing, Out for Delivery, Delivered.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-5xl mb-3">🏦</div>
+          <h4 class="font-semibold">4. Instant Payments</h4>
+          <p>Receive payments directly in your bank account after delivery.</p>
+        </div>
+        <div class="p-4">
+          <div class="text-5xl mb-3">📊</div>
+          <h4 class="font-semibold">5. Grow with Insights</h4>
+          <p>Track your sales, performance, and let us handle your campus marketing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="launchModal" class="modal">
+    <div class="modal-content">
+      <button class="close-btn">&times;</button>
+      <h3 class="text-2xl font-bold mb-3 text-[var(--primary)]">🚀 We’re Launching Soon!</h3>
+      <p class="text-gray-700 mb-2">
+        We are working hard to launch this soon. Please stay updated — you’ll hear from us soon!
+      </p>
+      <p class="font-semibold mt-3">We are launching very soon. 🔥</p>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="bg-black text-white py-6 text-center">
     <p class="text-sm">&copy; 2025 GoGoHungry. All Rights Reserved.</p>
-    <p class="text-xs mt-2">Made with ❤️ by hungry students for hungry students.</p>
+    <p class="text-xs mt-2">📧 Reach us at <a href="mailto:app.gogohungry@gmail.com" class="underline">app.gogohungry@gmail.com</a></p>
+    <p class="text-xs mt-1">Made with ❤️ by hungry students for hungry students.</p>
   </footer>
 
+  <script>
+    const modal = document.getElementById("launchModal");
+    const openBtns = document.querySelectorAll(".open-modal");
+    const closeBtn = document.querySelector(".close-btn");
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    // Modal Controls
+    openBtns.forEach(btn => {
+      btn.addEventListener("click", () => modal.style.display = "flex");
+    });
+    closeBtn.addEventListener("click", () => modal.style.display = "none");
+    window.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
+
+    // Mobile Menu Toggle
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+    });
+  </script>
 </body>
 </html>
