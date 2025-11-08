@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GoGoHungry - Fastest Campus Food Delivery</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary: #ff8c00;
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+      font-weight: 600;
+      border-radius: 9999px;
+      padding: 0.75rem 1.5rem;
+      transition: 0.3s;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body class="bg-white text-black font-sans">
+
+  <!-- Navbar -->
+  <header class="flex justify-between items-center p-6">
+    <div class="flex items-center space-x-2">
+      <img src="logo.png" alt="GoGoHungry Logo" class="w-10 h-10">
+      <span class="text-2xl font-extrabold">GoGoHungry</span>
+    </div>
+    <nav class="space-x-6 hidden md:flex">
+      <a href="#why" class="hover:text-[var(--primary)]">Why Us</a>
+      <a href="#features" class="hover:text-[var(--primary)]">Features</a>
+      <a href="#contact" class="hover:text-[var(--primary)]">Contact</a>
+    </nav>
+    <button class="btn-primary">Download App</button>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="text-center py-20 px-6">
+    <h1 class="text-5xl md:text-6xl font-extrabold mb-4">
+      Fast Delivery for Every Hungry Student 🍔
+    </h1>
+    <p class="text-lg md:text-xl text-gray-700 mb-8">
+      Pay ₹0 extra on your food — because saving means eating more!
+    </p>
+    <div class="flex justify-center gap-4">
+      <button class="btn-primary">Order Now</button>
+      <button class="border-2 border-black rounded-full px-6 py-3 font-semibold hover:bg-black hover:text-white transition">
+        Explore Menu
+      </button>
+    </div>
+    <img src="food-delivery-illustration.png" alt="Delivery" class="mx-auto mt-16 w-2/3 md:w-1/2">
+  </section>
+
+  <!-- Why GoGoHungry -->
+  <section id="why" class="bg-[var(--primary)] text-white py-16 px-6 text-center">
+    <h2 class="text-4xl font-bold mb-10">Why GoGoHungry?</h2>
+    <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="p-6 bg-white text-black rounded-2xl shadow-lg">
+        <h3 class="font-bold text-xl mb-2">₹0 Extra Charges</h3>
+        <p>Unlike other apps, we don’t charge extra delivery or platform fees. What you see is what you pay.</p>
+      </div>
+      <div class="p-6 bg-white text-black rounded-2xl shadow-lg">
+        <h3 class="font-bold text-xl mb-2">Campus-Focused</h3>
+        <p>Tailored for college campuses – fast drops, verified canteens, and trusted student riders.</p>
+      </div>
+      <div class="p-6 bg-white text-black rounded-2xl shadow-lg">
+        <h3 class="font-bold text-xl mb-2">Eat More, Save More</h3>
+        <p>Join student combo plans to unlock exclusive canteen offers every week.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features / Differentiation -->
+  <!-- Features / Differentiation -->
+<section id="features" class="py-20 px-6 text-center max-w-5xl mx-auto">
+  <h2 class="text-4xl font-bold mb-8">What Makes Us Different?</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    
+    <div class="p-4">
+      <div class="text-5xl mb-3">💸</div>
+      <h3 class="font-bold text-xl mb-2">No Extra Payments</h3>
+      <p>What you see is what you pay. No hidden delivery charges — just pure food joy!</p>
+    </div>
+
+    <div class="p-4">
+      <div class="text-5xl mb-3">☕</div>
+      <h3 class="font-bold text-xl mb-2">Explore Nearby Cafes</h3>
+      <p>Find and order from your favorite campus cafés with smooth, fast, and reliable delivery.</p>
+    </div>
+
+    <div class="p-4">
+      <div class="text-5xl mb-3">🎁</div>
+      <h3 class="font-bold text-xl mb-2">Earn Hungry Coins</h3>
+      <p>Collect Hungry Coins on every order and unlock gifts, offers, and exclusive rewards!</p>
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- Contact Form -->
+  <section id="contact" class="bg-gray-100 py-20 px-6">
+    <h2 class="text-4xl font-bold text-center mb-10">Get in Touch</h2>
+    <form class="max-w-lg mx-auto space-y-4">
+      <input type="text" placeholder="Your Name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" />
+      <input type="email" placeholder="Your Email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]" />
+      <textarea rows="4" placeholder="Your Message" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--primary)]"></textarea>
+      <button type="submit" class="btn-primary w-full">Send Message</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white py-6 text-center">
+    <p class="text-sm">&copy; 2025 GoGoHungry. All Rights Reserved.</p>
+    <p class="text-xs mt-2">Made with ❤️ by hungry students for hungry students.</p>
+  </footer>
+
+</body>
+</html>
