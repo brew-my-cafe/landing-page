@@ -118,9 +118,10 @@
     /* Food Background Elements */
     .food-bg {
       position: absolute;
-      opacity: 0.1;
+      opacity: 0.25;
       font-size: 3rem;
       pointer-events: none;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
     }
     
     /* Responsive improvements */
@@ -146,6 +147,7 @@
       transform: translateY(-10px);
       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     }
+    
   </style>
 </head>
 <body class="bg-white text-black font-sans">
@@ -306,28 +308,28 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
         <div class="p-4 bg-white rounded-xl shadow-md feature-card animate-slide-left">
           <div class="text-5xl mb-3 food-icon">📍</div>
-          <h4 class="font-semibold">1. Discover Cafes</h4>
-          <p class="text-sm">View all restaurants and canteens near your college instantly. Find your favorite food! 🍕</p>
+          <h4 class="font-semibold text-gray-800">1. Discover Cafes</h4>
+          <p class="text-sm text-gray-700">View all restaurants and canteens near your college instantly. Find your favorite food! 🍕</p>
         </div>
         <div class="p-4 bg-white rounded-xl shadow-md feature-card animate-slide-up" style="animation-delay: 0.1s;">
           <div class="text-5xl mb-3 food-icon">🛒</div>
-          <h4 class="font-semibold">2. Place Your Order</h4>
-          <p class="text-sm">Choose your favorites and order in a few taps. Pizza, burgers, noodles - all here! 🍔</p>
+          <h4 class="font-semibold text-gray-800">2. Place Your Order</h4>
+          <p class="text-sm text-gray-700">Choose your favorites and order in a few taps. Pizza, burgers, noodles - all here! 🍔</p>
         </div>
         <div class="p-4 bg-white rounded-xl shadow-md feature-card animate-slide-up" style="animation-delay: 0.2s;">
           <div class="text-5xl mb-3 food-icon">💳</div>
-          <h4 class="font-semibold">3. Pay Securely</h4>
-          <p class="text-sm">Pay using UPI — quick, safe, and exactly what you see! 💰</p>
+          <h4 class="font-semibold text-gray-800">3. Pay Securely</h4>
+          <p class="text-sm text-gray-700">Pay using UPI — quick, safe, and exactly what you see! 💰</p>
         </div>
         <div class="p-4 bg-white rounded-xl shadow-md feature-card animate-slide-up" style="animation-delay: 0.3s;">
           <div class="text-5xl mb-3 food-icon">🚴‍♂️</div>
-          <h4 class="font-semibold">4. Track in Real-Time</h4>
-          <p class="text-sm">See live updates of your food being prepared and delivered. Watch it come to you! 🍜</p>
+          <h4 class="font-semibold text-gray-800">4. Track in Real-Time</h4>
+          <p class="text-sm text-gray-700">See live updates of your food being prepared and delivered. Watch it come to you! 🍜</p>
         </div>
         <div class="p-4 bg-white rounded-xl shadow-md feature-card animate-slide-right">
           <div class="text-5xl mb-3 food-icon">🔢</div>
-          <h4 class="font-semibold">5. Verify & Enjoy!</h4>
-          <p class="text-sm">Get the OTP from your delivery partner, confirm your order, and dig in! 🍗</p>
+          <h4 class="font-semibold text-gray-800">5. Verify & Enjoy!</h4>
+          <p class="text-sm text-gray-700">Get the OTP from your delivery partner, confirm your order, and dig in! 🍗</p>
         </div>
       </div>
     </div>
