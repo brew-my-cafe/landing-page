@@ -237,6 +237,10 @@
       position: relative;
       animation: fadeIn 0.3s ease;
     }
+    .modal-scroll {
+      max-height: 80vh;
+      overflow-y: auto;
+    }
     .close-btn {
       position: absolute;
       top: 0.5rem;
@@ -343,6 +347,9 @@
       <button class="btn-primary open-modal">Order Now 🚀</button>
       <button class="border-2 border-black rounded-full px-6 py-3 font-semibold hover:bg-black hover:text-white transition open-modal">
         Explore Menu 🍽️
+      </button>
+      <button id="terms-btn" class="border-2 border-gray-300 rounded-full px-6 py-3 font-semibold text-gray-700 hover:border-[var(--primary)] hover:text-[var(--primary)] transition" aria-label="View GoGoHungry terms and policies">
+        Terms & Policies 📜
       </button>
     </div>
     
@@ -506,7 +513,7 @@
     </div>
   </section>
 
-  <!-- Modal -->
+  <!-- Launch Modal -->
   <div id="launchModal" class="modal">
     <div class="modal-content">
       <button class="close-btn">&times;</button>
@@ -515,6 +522,77 @@
         We are working hard to launch this soon. Please stay updated — you’ll hear from us soon!
       </p>
       <p class="font-semibold mt-3">We are launching very soon. 🔥</p>
+    </div>
+  </div>
+
+  <!-- Terms & Policies Modal -->
+  <div id="termsModal" class="modal">
+    <div class="modal-content modal-scroll text-left">
+      <button class="close-btn">&times;</button>
+      <h3 class="text-2xl font-bold mb-4 text-[var(--primary)]">Terms &amp; Conditions</h3>
+      <p class="mb-4 font-semibold">Welcome to GoGoHungry! By using our services, you agree to the following terms:</p>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Orders and Delivery</h4>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-gray-700">
+        <li>Once an order is placed, it cannot be cancelled at this stage.</li>
+        <li>We are committed to delivering your food on time, fresh, and in the best quality.</li>
+        <li>Any new order management features (like cancellations or modifications) will be introduced in future updates.</li>
+      </ul>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Payment</h4>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-gray-700">
+        <li>We currently accept payments via UPI only.</li>
+        <li>Please ensure your UPI transaction is successful to avoid delays.</li>
+      </ul>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Complaints and Support</h4>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-gray-700">
+        <li>For any complaints, suggestions, or support, reach out to <a href="mailto:contact@gogohungry.xyz" class="underline text-[var(--primary)]">contact@gogohungry.xyz</a>.</li>
+        <li>Our team will respond within 36 hours.</li>
+      </ul>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">User Conduct</h4>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-gray-700">
+        <li>Users must provide accurate information while ordering.</li>
+        <li>Misuse of our platform, including fraudulent payments or abusive messages, is prohibited.</li>
+      </ul>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Disclaimer</h4>
+      <p class="text-sm text-gray-700">While we strive to ensure timely delivery and high-quality food, GoGoHungry is not liable for delays caused by unforeseen circumstances beyond our control.</p>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Updates</h4>
+      <p class="text-sm text-gray-700">We may update these terms from time to time. Changes will be effective immediately upon posting on our website.</p>
+
+      <h3 class="text-2xl font-bold mt-6 mb-4 text-[var(--primary)]">Privacy Policy</h3>
+      <p class="text-sm text-gray-700 mb-4">Your privacy matters to us at GoGoHungry.</p>
+
+      <h4 class="text-xl font-semibold mb-2">Information We Collect</h4>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-gray-700">
+        <li>Name, contact number, and delivery address for order processing.</li>
+        <li>UPI transaction details for payment verification.</li>
+      </ul>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">How We Use Your Information</h4>
+      <ul class="list-disc pl-6 space-y-2 text-sm text-gray-700">
+        <li>To process and deliver your orders.</li>
+        <li>To respond to complaints, queries, or feedback.</li>
+        <li>To improve our services and features.</li>
+      </ul>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Data Sharing</h4>
+      <p class="text-sm text-gray-700">We do not sell or share your personal information with third parties, except as required for order fulfillment (like delivery partners).</p>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Communication</h4>
+      <p class="text-sm text-gray-700">You may receive updates, offers, and notifications related to your orders or our services. You can contact us anytime at <a href="mailto:contact@gogohungry.xyz" class="underline text-[var(--primary)]">contact@gogohungry.xyz</a>.</p>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Security</h4>
+      <p class="text-sm text-gray-700">We follow industry-standard practices to protect your personal data. While we strive for maximum security, no online system is completely secure.</p>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Cookies and Tracking</h4>
+      <p class="text-sm text-gray-700">Our website may use cookies to improve user experience.</p>
+
+      <h4 class="text-xl font-semibold mt-4 mb-2">Changes to Privacy Policy</h4>
+      <p class="text-sm text-gray-700">We may update this policy periodically. Updates will be posted on our website.</p>
     </div>
   </div>
 
@@ -542,16 +620,25 @@
   <script>
     const modal = document.getElementById("launchModal");
     const openBtns = document.querySelectorAll(".open-modal");
-    const closeBtn = document.querySelector(".close-btn");
+    const closeBtn = document.querySelector("#launchModal .close-btn");
     const menuBtn = document.getElementById("menu-btn");
     const mobileMenu = document.getElementById("mobile-menu");
+    const termsBtn = document.getElementById("terms-btn");
+    const termsModal = document.getElementById("termsModal");
+    const termsCloseBtn = termsModal.querySelector(".close-btn");
 
     // Modal Controls
     openBtns.forEach(btn => {
       btn.addEventListener("click", () => modal.style.display = "flex");
     });
     closeBtn.addEventListener("click", () => modal.style.display = "none");
-    window.addEventListener("click", e => { if (e.target === modal) modal.style.display = "none"; });
+    window.addEventListener("click", e => {
+      if (e.target === modal) modal.style.display = "none";
+      if (e.target === termsModal) termsModal.style.display = "none";
+    });
+
+    termsBtn.addEventListener("click", () => termsModal.style.display = "flex");
+    termsCloseBtn.addEventListener("click", () => termsModal.style.display = "none");
 
     // Mobile Menu Toggle
     menuBtn.addEventListener("click", () => {
