@@ -789,30 +789,26 @@
           return;
         }
 
+        // Do not pass noopener in window.open's 3rd arg — Chrome can return null even when a tab opened,
+        // which used to trigger same-tab navigation and caused "new tab + current tab" both loading Play.
         var win = null;
         try {
-          win = window.open(PLAY_URL, '_blank', 'noopener,noreferrer');
+          win = window.open(PLAY_URL, '_blank');
         } catch (err) {
           win = null;
         }
 
-        if (!win) {
-          copyPlayUrl().then(showPlayToast, showPlayToast);
+        if (win) {
           try {
-            window.location.href = PLAY_URL;
-          } catch (e2) {}
+            win.opener = null;
+          } catch (e0) {}
           return;
         }
 
-        setTimeout(function () {
-          try {
-            if (win.closed) {
-              copyPlayUrl().then(showPlayToast, showPlayToast);
-            }
-          } catch (err) {
-            copyPlayUrl().then(showPlayToast, showPlayToast);
-          }
-        }, 600);
+        copyPlayUrl().then(showPlayToast, showPlayToast);
+        try {
+          window.location.href = PLAY_URL;
+        } catch (e2) {}
       }, true);
 
       var copyBtn = document.getElementById('ggh-copy-play-url');
