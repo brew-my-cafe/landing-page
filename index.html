@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>GoGoHungry - Fastest Campus Food Delivery App | Zero Delivery Charges</title>
-  <meta name="description" content="GoGoHungry - Order from college canteens & cafes with ₹0 delivery charges. Fast, fresh, and affordable food delivery for students. Download GoGoHungry now!" />
+  <title>Hungry? GoGo. | GoGoHungry — Campus Food, Zero Delivery Charges</title>
+  <meta name="description" content="Hungry? GoGo. Order from college canteens with ₹0 delivery. If we don't deliver on our side, get 2× money back plus your order free. Download GoGoHungry." />
   
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -38,38 +38,79 @@
     }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
+
+    @keyframes banner-shine {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.08); }
+    }
+    .promo-banner-pulse { animation: banner-shine 2.5s ease-in-out infinite; }
+
+    #ggh-play-toast { display: none; }
+    #ggh-play-toast.ggh-show { display: block; }
   </style>
 </head>
 <body class="bg-white text-[#1A1A1A]">
 
-  <header class="fixed top-0 w-full z-50 glass-nav border-b border-gray-100 px-6">
-    <div class="max-w-7xl mx-auto h-20 flex justify-between items-center">
-      <a href="/" class="flex items-center gap-2">
-        <img src="gogohungry-logo.png" alt="GoGoHungry Logo" class="w-10 h-10 object-contain">        
-        <span class="text-2xl font-extrabold tracking-tight">GoGoHungry</span>
-      </a>
-      <nav class="hidden md:flex gap-8 text-sm font-semibold text-gray-500">
-        <a href="ipl-ticket.html" class="hover:text-brand transition">Free IPL Ticket 🎟️</a>
-        <a href="https://www.linkedin.com/company/gogohungry/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-brand transition">LinkedIn 💼</a>
-        <a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-brand transition">Instagram 📸</a>
-      </nav>
-      <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="bg-brand text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-orange-100 hover:scale-105 transition active:scale-95">Download App</a>
+  <div id="site-fixed-top" class="fixed top-0 left-0 right-0 z-50 flex flex-col shadow-md">
+    <div id="delivery-top-banner" role="region" aria-label="Delivery guarantee promotion" class="promo-banner-pulse bg-gradient-to-r from-zinc-900 via-[#b45309] to-zinc-900 text-white border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center relative pr-10 sm:pr-12">
+        <span class="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] sm:text-xs font-black uppercase tracking-widest ring-1 ring-white/25">Live offer</span>
+        <span class="text-sm sm:text-base font-extrabold tracking-tight">
+          <span class="text-amber-200">2×</span> your money back + <span class="text-amber-200">same order FREE</span>
+        </span>
+        <span class="hidden sm:inline text-white/70 text-sm">— if we don’t deliver on our side.</span>
+        <button type="button" onclick="toggleModal('deliveryPromiseModal')" class="text-sm font-bold underline decoration-2 underline-offset-2 hover:text-amber-200 transition shrink-0">How it works</button>
+        <button type="button" id="dismiss-delivery-banner" class="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-lg text-xl leading-none text-white/80 hover:bg-white/10 hover:text-white transition" aria-label="Dismiss banner">&times;</button>
+      </div>
     </div>
-  </header>
+    <header class="glass-nav border-b border-gray-100 px-6 w-full">
+      <div class="max-w-7xl mx-auto h-20 flex justify-between items-center">
+        <a href="/" class="flex items-center gap-2">
+          <img src="gogohungry-logo.png" alt="GoGoHungry Logo" class="w-10 h-10 object-contain">        
+          <span class="text-2xl font-extrabold tracking-tight">GoGoHungry</span>
+        </a>
+        <nav class="hidden md:flex gap-8 text-sm font-semibold text-gray-500">
+          <a href="ipl-ticket.html" class="hover:text-brand transition">Free IPL Ticket 🎟️</a>
+          <a href="https://www.linkedin.com/company/gogohungry/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-brand transition">LinkedIn 💼</a>
+          <a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1 hover:text-brand transition">Instagram 📸</a>
+        </nav>
+        <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="bg-brand text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-orange-100 hover:scale-105 transition active:scale-95">Download App</a>
+      </div>
+    </header>
+  </div>
 
-  <section class="pt-44 pb-24 px-6 bg-gradient-to-b from-orange-50/50 to-white overflow-hidden relative">
+  <section id="hero-section" class="pt-56 pb-24 px-6 bg-gradient-to-b from-orange-50/50 to-white overflow-hidden relative">
     <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center text-center md:text-left">
       <div class="z-10">
+        <button type="button" onclick="toggleModal('deliveryPromiseModal')" class="w-full max-w-lg mx-auto md:mx-0 mb-6 flex items-center justify-between gap-3 rounded-2xl bg-gradient-to-r from-zinc-900 to-zinc-800 px-4 py-3.5 text-left text-white shadow-lg shadow-orange-900/20 ring-2 ring-brand/30 transition hover:ring-brand/50 hover:scale-[1.01] active:scale-[0.99] md:w-auto">
+          <div class="flex items-center gap-3 min-w-0">
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand text-lg font-black">2×</span>
+            <div>
+              <p class="text-[10px] font-bold uppercase tracking-widest text-amber-200/90">Guarantee</p>
+              <p class="text-sm font-bold leading-tight">Missed by us? Double refund + your food free.</p>
+            </div>
+          </div>
+          <span class="text-amber-200 text-sm font-bold shrink-0">Tap →</span>
+        </button>
         <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-100/50 rounded-full mb-8">
           <span class="w-2 h-2 bg-brand rounded-full animate-ping"></span>
           <span class="text-brand text-xs font-bold uppercase tracking-widest">Campus Launching Soon</span>
         </div>
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight tracking-tighter italic">
-          Hunger doesn't <br><span class="text-brand">wait for class.</span>
+        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-[1.05] tracking-tight">
+          <span class="italic">Hungry?</span> <span class="text-brand not-italic">GoGo.</span>
         </h1>
+        <p class="text-xl md:text-2xl text-gray-600 mb-6 max-w-lg mx-auto md:mx-0 font-semibold">
+          Campus food that actually shows up.
+        </p>
         <p class="text-xl text-gray-500 mb-6 max-w-lg mx-auto md:mx-0 leading-relaxed">
           Pay <span class="text-black font-bold underline decoration-brand/30">₹0 extra charges</span> — because saving means eating more! Order from college canteens and cafes with zero delivery charges.
         </p>
+        <div class="bg-gradient-to-br from-amber-50 via-white to-orange-50 rounded-2xl p-5 mb-6 max-w-lg mx-auto md:mx-0 border-2 border-brand/20 shadow-sm shadow-orange-100/50">
+          <p class="text-xs font-black uppercase tracking-widest text-brand mb-2">Our delivery promise</p>
+          <p class="text-base text-gray-800 leading-snug">
+            If your order <strong>isn’t delivered because of us</strong>, you get <strong class="text-brand">2× your money back</strong> <span class="text-gray-500">+</span> <strong>the same food you ordered, free</strong> — on us.
+          </p>
+        </div>
         <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 mb-10 max-w-lg mx-auto md:mx-0 border border-orange-100">
           <p class="text-sm text-gray-700 leading-relaxed">
             <span class="font-bold text-brand">100% Transparent:</span> Just your food price + <strong>1% platform fee</strong>. No delivery fees. No hidden charges. That's it. 
@@ -77,7 +118,7 @@
           </p>
         </div>
         <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="bg-brand text-white px-10 py-5 rounded-2xl text-lg font-bold shadow-xl shadow-orange-200 hover:bg-brand-dark transition">Order Now 🚀</a>
+          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="bg-brand text-white px-10 py-5 rounded-2xl text-lg font-bold shadow-xl shadow-orange-200 hover:bg-brand-dark transition">Order Now 🚀</a>
           <button onclick="toggleModal('termsModal')" class="bg-white border-2 border-gray-100 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-gray-50 transition">Terms & Policies 📜</button>
         </div>
       </div>
@@ -427,7 +468,7 @@
           Students pay just <span class="text-white font-bold">1% platform fee</span>. Restaurants keep <span class="text-white font-bold">90%</span> of every order. That's it. Simple, honest, transparent.
         </p>
         <div class="inline-flex gap-3">
-          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="bg-brand text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition shadow-lg shadow-orange-900/20">Order Now 🚀</a>
+          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="bg-brand text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition shadow-lg shadow-orange-900/20">Order Now 🚀</a>
         </div>
       </div>
 
@@ -435,11 +476,16 @@
   </section>
 
   <section id="why" class="py-24 px-6 bg-white relative">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-8">
+    <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
       <div class="feature-card p-10 rounded-[2.5rem] bg-white">
         <div class="text-4xl mb-6">💰</div>
         <h3 class="text-xl font-extrabold mb-4 italic">₹0 Extra Charges</h3>
         <p class="text-gray-500 text-sm leading-relaxed">Unlike other apps, we don't charge extra delivery or platform fees. What you see is what you pay. More money for food! 🍕</p>
+      </div>
+      <div class="feature-card p-10 rounded-[2.5rem] bg-white border-brand/20 bg-orange-50/20 ring-2 ring-brand/15">
+        <div class="text-4xl mb-6">🛡️</div>
+        <h3 class="text-xl font-extrabold mb-4 italic text-brand">2× refund + free food</h3>
+        <p class="text-gray-500 text-sm leading-relaxed">If we don’t deliver on our side, you get double your money back and the same order free. We put our money where your hunger is.</p>
       </div>
       <div class="feature-card p-10 rounded-[2.5rem] bg-white border-brand/20 bg-orange-50/20">
         <div class="text-4xl mb-6">🎁</div>
@@ -454,68 +500,51 @@
     </div>
   </section>
 
-  <section id="workflow" class="py-24 bg-gray-50/50 px-6 border-y border-gray-100">
-    <div class="max-w-7xl mx-auto">
-      <h2 class="text-4xl font-black text-center mb-16 italic tracking-tight underline decoration-brand decoration-4">How It Works 🚀</h2>
-
-      <div class="mb-24">
-        <h3 class="text-xs font-black uppercase tracking-[0.3em] text-brand mb-10 text-center">🎓 For Students</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-          <div class="bg-white p-8 rounded-3xl shadow-sm text-center feature-card border-none">
-            <span class="text-6xl font-black text-gray-500 block mb-4">01</span>
-            <p class="font-bold text-sm mb-2 italic text-brand">Discover</p>
-            <p class="text-[11px] text-gray-400">View all restaurants and canteens near your college instantly.</p>
+  <section id="download-app" class="py-16 md:py-24 px-6 bg-gradient-to-b from-white to-orange-50/30">
+    <div class="max-w-6xl mx-auto">
+      <div class="rounded-[2rem] md:rounded-[2.5rem] bg-gradient-to-br from-rose-50 via-orange-50/90 to-amber-50 border border-orange-100/80 shadow-xl shadow-orange-100/50 p-8 md:p-12 lg:p-14">
+        <div class="grid md:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div class="text-center md:text-left order-2 md:order-1">
+            <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-gray-900 tracking-tight mb-4 leading-tight">
+              Download the app now!
+            </h2>
+            <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-8 max-w-md mx-auto md:mx-0">
+              Order from campus canteens with <span class="font-semibold text-gray-800">₹0 delivery</span> — seamless tracking, Hungry Coins, and offers. <span class="text-brand font-semibold">Only on GoGoHungry.</span>
+            </p>
+            <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="ggh-play-store inline-block transition hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14 md:h-16 w-auto mx-auto md:mx-0" width="180" height="53" loading="lazy" />
+            </a>
+            <p class="text-xs text-gray-500 mt-3 text-center md:text-left">
+              <button type="button" class="ggh-copy-play-btn font-semibold text-brand underline decoration-brand/30 hover:decoration-brand">Copy Play Store link</button>
+              <span class="text-gray-400"> if the page won’t open</span>
+            </p>
           </div>
-          <div class="bg-white p-8 rounded-3xl shadow-sm text-center feature-card border-none">
-            <span class="text-6xl font-black text-gray-500 block mb-4">02</span>
-            <p class="font-bold text-sm mb-2 italic text-brand">Place Order</p>
-            <p class="text-[11px] text-gray-400">Choose your favorites and order in a few taps.</p>
-          </div>
-          <div class="bg-white p-8 rounded-3xl shadow-sm text-center feature-card border-none">
-            <span class="text-6xl font-black text-gray-500 block mb-4">03</span>
-            <p class="font-bold text-sm mb-2 italic text-brand">Secure Pay</p>
-            <p class="text-[11px] text-gray-400">Pay using UPI — quick, safe, and transparent.</p>
-          </div>
-          <div class="bg-white p-8 rounded-3xl shadow-sm text-center feature-card border-none">
-            <span class="text-6xl font-black text-gray-500 block mb-4">04</span>
-            <p class="font-bold text-sm mb-2 italic text-brand">Live Track</p>
-            <p class="text-[11px] text-gray-400">See live updates of your food being prepared.</p>
-          </div>
-          <div class="bg-white p-8 rounded-3xl shadow-sm text-center feature-card border-none">
-            <span class="text-6xl font-black text-gray-500 block mb-4">05</span>
-            <p class="font-bold text-sm mb-2 italic text-brand">Verify & Enjoy</p>
-            <p class="text-[11px] text-gray-400">Verify your OTP and enjoy your hot meal!</p>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <h3 class="text-xs font-black uppercase tracking-[0.3em] text-gray-400 mb-10 text-center italic">🏪 For Restaurants</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-6 text-center">
-          <div class="bg-white p-8 rounded-3xl shadow-sm feature-card border-none">
-            <span class="text-6xl font-black text-orange-500 block mb-4 tracking-tighter">01</span>
-            <p class="font-bold text-sm mb-2 italic">Get Orders</p>
-            <p class="text-[11px] text-gray-400 leading-relaxed">Receive incoming orders through your dashboard instantly.</p>
-          </div>
-          <div class="bg-white p-8 rounded-3xl shadow-sm feature-card border-none">
-            <span class="text-6xl font-black text-orange-500 block mb-4 tracking-tighter">02</span>
-            <p class="font-bold text-sm mb-2 italic">Accept & Prep</p>
-            <p class="text-[11px] text-gray-400 leading-relaxed">Accept the order and start preparing it right away.</p>
-          </div>
-          <div class="bg-white p-8 rounded-3xl shadow-sm feature-card border-none">
-            <span class="text-6xl font-black text-orange-500 block mb-4 tracking-tighter">03</span>
-            <p class="font-bold text-sm mb-2 italic">Live Status</p>
-            <p class="text-[11px] text-gray-400 leading-relaxed">Keep users updated—Preparing or Out for Delivery.</p>
-          </div>
-          <div class="bg-white p-8 rounded-3xl shadow-sm feature-card border-none">
-            <span class="text-6xl font-black text-orange-500 block mb-4 tracking-tighter">04</span>
-            <p class="font-bold text-sm mb-2 italic text-brand font-black underline">Instant Pay</p>
-            <p class="text-[11px] text-gray-400 leading-relaxed font-medium">Receive earnings directly in your bank account safely.</p>
-          </div>
-          <div class="bg-white p-8 rounded-3xl shadow-sm feature-card border-none">
-            <span class="text-6xl font-black text-orange-500 block mb-4 tracking-tighter">05</span>
-            <p class="font-bold text-sm mb-2 italic">Growth Hub</p>
-            <p class="text-[11px] text-gray-400 leading-relaxed">Track sales performance and grow your campus reach.</p>
+          <div class="flex justify-center order-1 md:order-2">
+            <div class="relative w-full max-w-[280px]">
+              <div class="absolute -inset-1 bg-gradient-to-br from-orange-200/60 to-rose-200/50 rounded-[2.75rem] blur-lg opacity-80"></div>
+              <div class="relative rounded-[2.5rem] bg-gray-900 p-[10px] shadow-2xl shadow-gray-900/25">
+                <div class="rounded-[2rem] bg-gray-950 pt-3 px-3 pb-4">
+                  <div class="mx-auto mb-3 h-6 w-24 rounded-full bg-gray-800"></div>
+                  <div class="rounded-[1.35rem] bg-white px-5 pt-6 pb-7 flex flex-col items-center min-h-[280px]">
+                    <p class="text-xs font-semibold text-gray-500 text-center leading-snug mb-4 px-1">
+                      Scan the QR code to download the app
+                    </p>
+                    <div class="rounded-xl bg-white p-2.5 shadow-inner ring-1 ring-gray-100">
+                      <!-- Add your QR image as landing-page/play-store-qr.png (links to Play Store) -->
+                      <img
+                        src="qr-code.png"
+                        alt="QR code to download GoGoHungry on Google Play"
+                        width="176"
+                        height="176"
+                        class="w-40 h-40 md:w-44 md:h-44 object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                    <p class="mt-4 text-[11px] text-gray-400 text-center">Opens Google Play</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -573,10 +602,9 @@
 
         <div class="text-center md:text-right flex flex-col items-center md:items-end">
             <p class="font-bold text-xs uppercase tracking-widest text-gray-600 mb-8">Install App</p>
-            <div class="flex flex-col gap-3 w-48">
-            <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="bg-white/5 border border-white/10 p-4 rounded-xl text-[10px] font-bold text-gray-200 hover:bg-white/10 transition text-center">PLAY STORE</a>
-                <div class="bg-white/5 border border-white/10 p-4 rounded-xl text-[10px] font-bold text-gray-400 hover:bg-white/10 transition cursor-not-allowed">APP STORE (SOON)</div>
-            </div>
+            <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="ggh-play-store inline-block transition hover:opacity-90">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14 w-auto" width="180" height="53" loading="lazy" />
+            </a>
         </div>
       </div>
 
@@ -601,6 +629,36 @@
       </div>
     </div>
   </footer>
+
+  <div id="ggh-play-toast" class="fixed bottom-6 left-4 right-4 z-[200] max-w-lg mx-auto rounded-2xl border border-gray-200 bg-white p-4 shadow-2xl shadow-gray-900/15" role="status">
+    <p class="text-sm text-gray-700 leading-snug mb-3">
+      Some built-in browsers block Google Play. <strong>Copy the link</strong> and paste it into Chrome, Edge, or your phone’s browser.
+    </p>
+    <div class="flex flex-wrap gap-2">
+      <button type="button" id="ggh-copy-play-url" class="flex-1 min-w-[8rem] rounded-xl bg-brand px-4 py-2.5 text-sm font-bold text-white hover:opacity-95 transition">Copy Play Store link</button>
+      <button type="button" id="ggh-dismiss-play-toast" class="rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition">Dismiss</button>
+    </div>
+  </div>
+
+  <div id="deliveryPromiseModal" class="modal">
+    <div class="modal-content text-center">
+      <button type="button" onclick="toggleModal('deliveryPromiseModal')" class="absolute top-6 right-6 text-2xl font-light hover:text-brand transition">&times;</button>
+      <div class="mb-4 inline-flex rounded-full bg-brand/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-brand">2× money-back + free meal</div>
+      <h3 class="text-2xl md:text-3xl font-black mb-4 text-gray-900 leading-tight">If we don’t deliver on our side, you win twice.</h3>
+      <p class="text-gray-600 mb-6 leading-relaxed text-left">
+        When a delivery fails because of <strong>GoGoHungry</strong> (our ops/platform side — not wrong address, unreachable customer, etc.), you get <strong class="text-brand">200% of what you paid back</strong> and we’ll comp <strong>the same food you ordered</strong> so you don’t go hungry.
+      </p>
+      <ul class="text-left text-sm text-gray-600 space-y-2 mb-6 list-disc pl-5">
+        <li>Applies when the fault is on <strong>our</strong> side, as verified by us.</li>
+        <li>“2×” means refund of twice the order value you paid for that order (details shared in-app).</li>
+        <li>Free meal = same items from the same outlet, subject to availability.</li>
+      </ul>
+      <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="ggh-play-store inline-flex w-full justify-center bg-brand text-white px-6 py-4 rounded-2xl font-bold hover:bg-brand-dark transition">Order on the app</a>
+      <p class="text-xs text-gray-500 mt-4 text-center">
+        Store won’t open? <button type="button" class="ggh-copy-play-btn font-bold text-brand underline decoration-brand/40 hover:decoration-brand">Copy link instead</button>
+      </p>
+    </div>
+  </div>
 
   <div id="launchModal" class="modal">
     <div class="modal-content text-center">
@@ -634,15 +692,181 @@
 
   <script>
     // Prevent this landing page from being embedded in iframes
-    // (fixes "play.google.com refused to connect" when previews wrap the page)
     if (window.top !== window.self) {
       window.top.location = window.location.href;
     }
+
+    /** Google Play: many embedded browsers block play.google.com — use intent on Android + copy fallback. */
+    (function initPlayStoreLinks() {
+      var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.gogohungry.app';
+      var PKG = 'com.gogohungry.app';
+      var STORE_RX = /play\.google\.com\/store\//;
+
+      function copyPlayUrl() {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(PLAY_URL);
+        }
+        return Promise.reject();
+      }
+
+      function showPlayToast() {
+        var t = document.getElementById('ggh-play-toast');
+        if (t) {
+          t.classList.add('ggh-show');
+        }
+      }
+
+      function hidePlayToast() {
+        var t = document.getElementById('ggh-play-toast');
+        if (t) {
+          t.classList.remove('ggh-show');
+        }
+      }
+
+      function tryAndroidMarketIntent() {
+        var intent =
+          'intent://details?id=' +
+          encodeURIComponent(PKG) +
+          '#Intent;scheme=market;package=com.android.vending;end';
+        var iframe = document.createElement('iframe');
+        iframe.setAttribute('style', 'display:none;width:0;height:0;border:0');
+        iframe.setAttribute('src', intent);
+        document.body.appendChild(iframe);
+        setTimeout(function () {
+          try {
+            if (iframe.parentNode) {
+              iframe.parentNode.removeChild(iframe);
+            }
+          } catch (e) {}
+        }, 2000);
+      }
+
+      document.addEventListener('click', function (e) {
+        if (e.target.closest && e.target.closest('.ggh-copy-play-btn')) {
+          e.preventDefault();
+          copyPlayUrl().then(
+            function () {
+              hidePlayToast();
+              var n = document.createElement('div');
+              n.className =
+                'fixed bottom-6 left-1/2 z-[210] -translate-x-1/2 rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white shadow-lg';
+              n.textContent = 'Link copied';
+              document.body.appendChild(n);
+              setTimeout(function () {
+                n.remove();
+              }, 2200);
+            },
+            function () {
+              showPlayToast();
+            }
+          );
+          return;
+        }
+
+        var a = e.target && e.target.closest && e.target.closest('a[href]');
+        if (!a || !STORE_RX.test(a.getAttribute('href') || '')) {
+          return;
+        }
+        if (e.button !== 0) {
+          return;
+        }
+        e.preventDefault();
+        e.stopPropagation();
+
+        var isAndroid = /Android/i.test(navigator.userAgent || '');
+
+        if (isAndroid) {
+          tryAndroidMarketIntent();
+          return;
+        }
+
+        if (window.top !== window.self) {
+          try {
+            window.top.location.href = PLAY_URL;
+          } catch (err) {
+            copyPlayUrl().then(showPlayToast, showPlayToast);
+          }
+          return;
+        }
+
+        var win = null;
+        try {
+          win = window.open(PLAY_URL, '_blank', 'noopener,noreferrer');
+        } catch (err) {
+          win = null;
+        }
+
+        if (!win) {
+          copyPlayUrl().then(showPlayToast, showPlayToast);
+          try {
+            window.location.href = PLAY_URL;
+          } catch (e2) {}
+          return;
+        }
+
+        setTimeout(function () {
+          try {
+            if (win.closed) {
+              copyPlayUrl().then(showPlayToast, showPlayToast);
+            }
+          } catch (err) {
+            copyPlayUrl().then(showPlayToast, showPlayToast);
+          }
+        }, 600);
+      }, true);
+
+      var copyBtn = document.getElementById('ggh-copy-play-url');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', function () {
+          copyPlayUrl().then(
+            function () {
+              copyBtn.textContent = 'Copied!';
+              setTimeout(function () {
+                copyBtn.textContent = 'Copy Play Store link';
+              }, 2000);
+            },
+            function () {
+              copyBtn.textContent = 'Select & copy from address bar';
+            }
+          );
+        });
+      }
+
+      var dismissBtn = document.getElementById('ggh-dismiss-play-toast');
+      if (dismissBtn) {
+        dismissBtn.addEventListener('click', hidePlayToast);
+      }
+    })();
 
     function toggleModal(id) {
       const modal = document.getElementById(id);
       modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
     }
+
+    (function initDeliveryBanner() {
+      var banner = document.getElementById('delivery-top-banner');
+      var hero = document.getElementById('hero-section');
+      var dismissKey = 'ggh_2x_banner_dismissed';
+
+      function applyDismissed() {
+        if (!banner || !hero) return;
+        banner.classList.add('hidden');
+        hero.classList.remove('pt-56');
+        hero.classList.add('pt-44');
+      }
+
+      if (sessionStorage.getItem(dismissKey)) {
+        applyDismissed();
+      }
+
+      var btn = document.getElementById('dismiss-delivery-banner');
+      if (btn) {
+        btn.addEventListener('click', function() {
+          sessionStorage.setItem(dismissKey, '1');
+          applyDismissed();
+        });
+      }
+    })();
 
     // Close on background click
     window.onclick = function(event) {
