@@ -1,216 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Free IPL Ticket Giveaway | VIT Chennai | GoGoHungry</title>
-  <meta name="description" content="VIT Chennai: orders on 29 March 2026 (RCB vs SRH match day) on GoGoHungry enter our lucky draw for a free IPL ticket. Official terms inside.">
+  <meta name="description" content="VIT Chennai: orders on 29 March 2026 (RCB vs SRH match day) on GoGoHungry enter our lucky draw for a free IPL ticket. Official terms inside." />
+  <link rel="icon" type="image/png" href="gogohungry-logo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
-    
-    * {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    }
-
-    :root {
-      --brand: #FF5200;
-      --brand-dark: #E64A00;
-    }
-
+    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+    :root { --brand: #FF5200; --brand-dark: #E64A00; --night: #0c1222; }
     .text-brand { color: var(--brand); }
     .bg-brand { background-color: var(--brand); }
-    .bg-brand-dark { background-color: var(--brand-dark); }
-    .border-brand { border-color: var(--brand); }
+    .glass-nav { backdrop-filter: blur(12px); background-color: rgba(255, 255, 255, 0.88); }
 
-    /* Hero gradient background */
-    .hero-grid {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      position: relative;
-    }
-
-    /* Animations */
     @keyframes float {
       0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
+      50% { transform: translateY(-12px); }
     }
+    .animate-float { animation: float 3.5s ease-in-out infinite; }
 
     @keyframes shimmer {
-      0% { background-position: -1000px 0; }
-      100% { background-position: 1000px 0; }
+      0% { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
     }
-
-    @keyframes pulse-light {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.8; }
-    }
-
-    @keyframes confetti-fall {
-      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-    }
-
-    @keyframes glow {
-      0%, 100% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.3); }
-      50% { box-shadow: 0 0 40px rgba(255, 215, 0, 0.6), 0 0 60px rgba(255, 82, 0, 0.4); }
-    }
-
-    .animate-float { animation: float 6s ease-in-out infinite; }
     .shimmer-text {
-      background: linear-gradient(90deg, #FFD700 0%, #FFA500 50%, #FFD700 100%);
+      background: linear-gradient(90deg, #fff 0%, #fde68a 25%, #fff 50%, #fde68a 75%, #fff 100%);
       background-size: 200% auto;
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 3s linear infinite;
+      color: transparent;
+      animation: shimmer 4s linear infinite;
+    }
+
+    .hero-grid {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% 100%, rgba(255, 82, 0, 0.35), transparent),
+        radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.2), transparent 45%),
+        radial-gradient(circle at 80% 20%, rgba(250, 204, 21, 0.15), transparent 40%),
+        linear-gradient(165deg, #0c1222 0%, #1a2744 45%, #0f172a 100%);
+    }
+
+    .ticket-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 25px 50px -12px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 82, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
 
     .stadium-lights {
-      background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, transparent 70%);
-      animation: pulse-light 3s ease-in-out infinite;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.9) 0%, transparent 55%);
+      opacity: 0.35;
     }
 
     .confetti-dot {
       position: absolute;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      animation: confetti-fall 8s linear infinite;
-    }
-
-    .ticket-card {
-      background: linear-gradient(135deg, #2d3436 0%, #1e272e 100%);
-      border: 2px solid rgba(255, 215, 0, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .ticket-card::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: linear-gradient(45deg, #FFD700, var(--brand), #FFD700);
-      border-radius: inherit;
-      opacity: 0;
-      transition: opacity 0.3s;
-      z-index: -1;
-    }
-
-    .ticket-card:hover::before {
+      width: 6px;
+      height: 6px;
+      border-radius: 9999px;
       opacity: 0.5;
-      animation: glow 2s ease-in-out infinite;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    .feature-card {
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 20px 40px rgba(255, 82, 0, 0.2);
+      animation: float 4s ease-in-out infinite;
     }
   </style>
 </head>
 <body class="bg-white text-[#1A1A1A]">
 
-  <!-- Hero Section with Stadium Theme -->
+  <header class="fixed top-0 w-full z-50 glass-nav border-b border-gray-100 px-6">
+    <div class="max-w-7xl mx-auto h-20 flex justify-between items-center gap-4">
+      <a href="/" class="flex items-center gap-2 min-w-0">
+        <img src="gogohungry-logo.png" alt="GoGoHungry" class="w-10 h-10 object-contain shrink-0" />
+        <span class="text-xl sm:text-2xl font-extrabold tracking-tight truncate">GoGoHungry</span>
+      </a>
+      <nav class="hidden md:flex gap-6 text-sm font-semibold text-gray-500">
+        <a href="/" class="hover:text-brand transition">Home</a>
+        <a href="ipl-ticket.html" class="text-brand">IPL Giveaway</a>
+        <a href="https://www.linkedin.com/company/gogohungry/" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition">LinkedIn</a>
+        <a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition">Instagram</a>
+      </nav>
+      <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="bg-brand text-white px-4 sm:px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-orange-100 hover:scale-105 transition shrink-0">Download App</a>
+    </div>
+  </header>
+
   <section class="hero-grid pt-32 pb-20 md:pb-28 px-6 relative overflow-hidden min-h-[90vh] flex items-center">
-    <!-- Animated Background Effects -->
     <div class="absolute inset-0 pointer-events-none">
-      <div class="stadium-lights absolute top-8 left-[8%] w-32 h-32"></div>
-      <div class="stadium-lights absolute top-16 right-[12%] w-24 h-24" style="animation-delay: 0.5s;"></div>
-      <div class="stadium-lights absolute bottom-32 left-1/4 w-20 h-20 opacity-25"></div>
-      
-      <!-- Confetti dots -->
+      <div class="stadium-lights absolute top-8 left-[8%] w-24 h-24"></div>
+      <div class="stadium-lights absolute top-16 right-[12%] w-20 h-20" style="animation-delay: 0.5s;"></div>
+      <div class="stadium-lights absolute bottom-32 left-1/4 w-16 h-16 opacity-25"></div>
       <div class="confetti-dot bg-yellow-300 top-[20%] left-[15%]" style="animation-delay: 0.2s;"></div>
       <div class="confetti-dot bg-brand top-[35%] right-[18%]" style="animation-delay: 1s;"></div>
       <div class="confetti-dot bg-blue-400 bottom-[28%] right-[22%]" style="animation-delay: 0.6s;"></div>
       <div class="confetti-dot bg-white bottom-[40%] left-[10%]" style="animation-delay: 1.2s;"></div>
-      <div class="confetti-dot bg-yellow-300 top-[60%] left-[25%]" style="animation-delay: 1.8s;"></div>
-      <div class="confetti-dot bg-brand top-[45%] right-[30%]" style="animation-delay: 2.2s;"></div>
     </div>
 
     <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 lg:gap-10 items-center relative z-10 w-full">
-      <!-- Left Content -->
       <div class="text-center lg:text-left">
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 px-5 py-3 bg-white/10 rounded-full mb-8 border border-white/20 backdrop-blur-sm hover:bg-white/15 transition">
-          <span class="text-3xl" aria-hidden="true">🎟️</span>
-          <span class="text-amber-200/90 text-sm font-bold uppercase tracking-widest">29 Mar · RCB vs SRH · VIT Chennai</span>
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full mb-6 border border-white/10">
+          <span class="text-2xl" aria-hidden="true">🎟️</span>
+          <span class="text-amber-200/90 text-xs font-bold uppercase tracking-widest">29 Mar · RCB vs SRH · VIT Chennai</span>
         </div>
-
-        <!-- Headline -->
-        <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-white mb-6 leading-tight tracking-tight">
-          Win a free <span class="shimmer-text">IPL ticket</span> 🏆
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold text-white mb-5 leading-tight tracking-tight">
+          Win a free <span class="shimmer-text">IPL ticket</span>
         </h1>
-
-        <!-- Description -->
-        <p class="text-lg sm:text-xl text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8">
-          This giveaway applies only to orders placed on <strong class="text-white">29 March 2026</strong> — match night for <strong class="text-amber-200">RCB vs SRH</strong>. <strong class="text-white">VIT Chennai</strong> students who order on GoGoHungry that day can enter; we'll pick <strong class="text-white">one lucky winner</strong> using several internal factors. Prize: a <strong class="text-amber-200">Chennai IPL match ticket</strong> 🎉
+        <p class="text-lg text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed mb-8">
+          This giveaway applies only to orders placed on <strong class="text-white">29 March 2026</strong> — match night for <strong class="text-white">RCB vs SRH</strong>. <strong class="text-white">VIT Chennai</strong> students who order on GoGoHungry that day can enter; we’ll pick <strong class="text-white">one lucky winner</strong> using several internal factors. Prize: a <strong class="text-white">Chennai IPL match ticket</strong> (see terms for allocation).
         </p>
-
-        <!-- CTA Buttons -->
-        <div class="flex flex-wrap gap-4 justify-center lg:justify-start mb-6">
-          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="bg-brand text-white px-10 py-5 rounded-2xl text-lg font-bold shadow-2xl shadow-orange-900/50 hover:bg-brand-dark hover:scale-105 transition-all duration-300">
-            Order & Enter 🚀
-          </a>
-          <a href="#terms" class="bg-white/10 text-white border-2 border-white/30 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-white/20 backdrop-blur-sm transition-all duration-300">
-            Read Terms 📜
-          </a>
+        <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
+          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="bg-brand text-white px-8 py-4 rounded-2xl text-base font-bold shadow-xl shadow-orange-900/40 hover:bg-[#E64A00] transition">Order &amp; enter 🚀</a>
+          <a href="#terms" class="bg-white/10 text-white border border-white/20 px-8 py-4 rounded-2xl text-base font-bold hover:bg-white/15 transition">Read terms</a>
         </div>
-
-        <!-- Instagram requirement -->
-        <p class="text-sm text-slate-400 max-w-md mx-auto lg:mx-0 bg-white/5 rounded-xl p-4 border border-white/10 backdrop-blur-sm">
-          <span class="text-amber-200 font-bold">⚠️ Important:</span> You must follow GoGoHungry's official Instagram to stay eligible — see full rules below.
+        <p class="text-xs text-slate-500 mt-6 max-w-md mx-auto lg:mx-0">
+          You must follow GoGoHungry’s official Instagram to stay eligible — see full rules below.
         </p>
       </div>
 
-      <!-- Right Side - Ticket Card -->
       <div class="flex justify-center lg:justify-end">
         <div class="relative w-full max-w-md">
-          <!-- Glow effect -->
-          <div class="absolute -inset-6 bg-gradient-to-br from-orange-500/30 to-blue-600/20 rounded-[3rem] blur-3xl opacity-60"></div>
-          
-          <!-- Ticket -->
-          <div class="ticket-card relative rounded-[2.5rem] p-8 md:p-10 rotate-0 lg:rotate-2 animate-float shadow-2xl">
+          <div class="absolute -inset-4 bg-gradient-to-br from-orange-500/30 to-blue-600/20 rounded-[2.5rem] blur-2xl"></div>
+          <div class="ticket-card relative rounded-[2rem] p-8 md:p-10 rotate-0 lg:rotate-2 animate-float">
             <div class="flex justify-between items-start gap-4 mb-8">
               <div>
-                <p class="text-[11px] font-black uppercase tracking-[0.25em] text-slate-400 mb-2">GoGoHungry Presents</p>
-                <p class="text-3xl font-extrabold text-white italic leading-tight">LUCKY DRAW 🎲</p>
+                <p class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-500 mb-1">GoGoHungry Presents</p>
+                <p class="text-2xl font-extrabold text-white italic">LUCKY DRAW</p>
               </div>
-              <div class="text-6xl animate-pulse" aria-hidden="true">🏏</div>
+              <div class="text-5xl" aria-hidden="true">🏏</div>
             </div>
-
-            <!-- Ticket Details -->
-            <div class="border-t border-dashed border-white/20 border-b py-6 space-y-5 mb-6">
-              <div class="flex justify-between items-center text-base">
+            <div class="border-t border-dashed border-white/20 border-b py-6 space-y-4">
+              <div class="flex justify-between text-sm">
                 <span class="text-slate-400">Qualifying day</span>
                 <span class="font-bold text-white">29 Mar 2026</span>
               </div>
-              <div class="flex justify-between items-center text-base">
+              <div class="flex justify-between text-sm">
                 <span class="text-slate-400">Match night</span>
-                <span class="font-bold text-amber-200 text-right">RCB vs SRH</span>
+                <span class="font-bold text-amber-200/90 text-right">RCB vs SRH</span>
               </div>
-              <div class="flex justify-between items-center text-base">
+              <div class="flex justify-between text-sm">
                 <span class="text-slate-400">Prize ticket</span>
-                <span class="font-bold text-white text-right">Chennai IPL 🏟️</span>
+                <span class="font-bold text-white text-right">Chennai IPL</span>
               </div>
-              <div class="flex justify-between items-center text-base">
+              <div class="flex justify-between text-sm">
                 <span class="text-slate-400">Seat tier</span>
-                <span class="font-bold text-amber-200">Standard / medium</span>
+                <span class="font-bold text-amber-200/90">Standard / medium</span>
               </div>
             </div>
-
-            <!-- Footer Note -->
-            <div class="flex items-start gap-3 bg-white/5 rounded-xl p-4 backdrop-blur-sm border border-white/10">
-              <div class="h-12 w-12 rounded-xl bg-brand/30 flex items-center justify-center text-2xl shrink-0">🎟️</div>
-              <p class="text-xs text-slate-300 leading-relaxed">
-                Stylized ticket for the campaign — not a real barcode. Match & seat decided by GoGoHungry; winner announced on our official channels.
+            <div class="mt-8 flex items-center gap-3">
+              <div class="h-12 w-12 rounded-xl bg-brand/20 flex items-center justify-center text-2xl">🎟️</div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                Stylized ticket for the campaign — not a real barcode. Match &amp; seat decided by GoGoHungry; winner announced on our official channels.
               </p>
             </div>
           </div>
@@ -219,180 +157,133 @@
     </div>
   </section>
 
-  <!-- How to Enter Section -->
-  <section class="py-24 px-6 bg-gradient-to-b from-orange-50/60 to-white">
+  <section class="py-20 px-6 bg-gradient-to-b from-orange-50/60 to-white">
     <div class="max-w-5xl mx-auto">
-      <!-- Section Header -->
-      <div class="text-center mb-16">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand/10 rounded-full mb-6">
-          <span class="text-brand text-xs font-bold uppercase tracking-widest">🎯 Simple Entry</span>
-        </div>
-        <h2 class="text-4xl md:text-5xl font-extrabold mb-4 italic tracking-tight">
-          Order on <span class="text-brand">RCB vs SRH</span> night
-        </h2>
-        <p class="text-xl text-gray-500 max-w-2xl mx-auto">
-          Only orders placed on <strong class="text-gray-700">29 March 2026</strong> (RCB vs SRH match day) from <strong class="text-gray-700">VIT Chennai</strong> on GoGoHungry count. We weigh multiple signals — not just "most orders."
-        </p>
-      </div>
-
-      <!-- Feature Cards -->
-      <div class="grid sm:grid-cols-3 gap-8">
-        <div class="feature-card bg-white rounded-3xl p-8 border-2 border-orange-100 shadow-lg text-center">
-          <div class="text-6xl mb-6" aria-hidden="true">🎓</div>
-          <h3 class="font-extrabold text-xl mb-3 italic">VIT Chennai + match day</h3>
+      <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-4 italic tracking-tight">Order on RCB vs SRH night</h2>
+      <p class="text-center text-gray-500 max-w-2xl mx-auto mb-12">Only orders placed on <strong class="text-gray-700">29 March 2026</strong> (RCB vs SRH match day) from <strong class="text-gray-700">VIT Chennai</strong> on GoGoHungry count. We weigh multiple signals — not just “most orders.”</p>
+      <div class="grid sm:grid-cols-3 gap-6">
+        <div class="bg-white rounded-3xl p-8 border border-orange-100 shadow-sm text-center">
+          <div class="text-4xl mb-4" aria-hidden="true">🎓</div>
+          <h3 class="font-extrabold text-lg mb-2">VIT Chennai + match day</h3>
           <p class="text-sm text-gray-500 leading-relaxed">Students at VIT Chennai only, with orders on 29 March 2026 (RCB vs SRH) via GoGoHungry.</p>
         </div>
-
-        <div class="feature-card bg-white rounded-3xl p-8 border-2 border-orange-200 shadow-xl text-center ring-2 ring-brand/20">
-          <div class="text-6xl mb-6" aria-hidden="true">🍀</div>
-          <h3 class="font-extrabold text-xl mb-3 italic text-brand">Lucky draw vibes</h3>
+        <div class="bg-white rounded-3xl p-8 border border-orange-100 shadow-sm text-center ring-2 ring-brand/20">
+          <div class="text-4xl mb-4" aria-hidden="true">🍀</div>
+          <h3 class="font-extrabold text-lg mb-2">Lucky draw vibes</h3>
           <p class="text-sm text-gray-500 leading-relaxed">Winner(s) picked from a draw that uses internal factors — our call is final.</p>
         </div>
-
-        <div class="feature-card bg-white rounded-3xl p-8 border-2 border-orange-100 shadow-lg text-center">
-          <div class="text-6xl mb-6" aria-hidden="true">📸</div>
-          <h3 class="font-extrabold text-xl mb-3 italic">Follow on Instagram</h3>
-          <p class="text-sm text-gray-500 leading-relaxed">Follow GoGoHungry's official Instagram; unfollowing before the announcement may disqualify you.</p>
+        <div class="bg-white rounded-3xl p-8 border border-orange-100 shadow-sm text-center">
+          <div class="text-4xl mb-4" aria-hidden="true">📸</div>
+          <h3 class="font-extrabold text-lg mb-2">Follow on Instagram</h3>
+          <p class="text-sm text-gray-500 leading-relaxed">Follow GoGoHungry’s official Instagram; unfollowing before the announcement may disqualify you.</p>
         </div>
-      </div>
-
-      <!-- CTA Banner -->
-      <div class="mt-16 bg-gradient-to-r from-gray-900 to-gray-800 rounded-[2.5rem] p-10 text-white text-center shadow-2xl hover:shadow-3xl transition">
-        <h3 class="text-3xl font-extrabold mb-4 italic">Ready to win? 🎉</h3>
-        <p class="text-lg text-gray-300 mb-6 max-w-2xl mx-auto">Order food on match day and get a chance to watch IPL live!</p>
-        <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand text-white px-10 py-5 rounded-2xl text-lg font-bold shadow-xl hover:scale-105 transition-all">
-          Download App Now 🚀
-        </a>
       </div>
     </div>
   </section>
 
-  <!-- Terms & Conditions Section -->
-  <section id="terms" class="py-24 px-6 bg-white border-t-2 border-gray-100">
-    <div class="max-w-4xl mx-auto">
-      <!-- Header -->
-      <div class="flex items-center gap-4 mb-12">
-        <span class="text-5xl" aria-hidden="true">🎟️</span>
-        <div>
-          <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight italic leading-tight">GoGoHungry IPL Ticket Giveaway</h2>
-          <p class="text-lg text-gray-500 mt-1">Terms & Conditions</p>
-        </div>
+  <section id="terms" class="py-20 px-6 bg-white border-t border-gray-100">
+    <div class="max-w-3xl mx-auto">
+      <div class="flex items-center gap-3 mb-8">
+        <span class="text-3xl" aria-hidden="true">🎟️</span>
+        <h2 class="text-2xl md:text-3xl font-extrabold tracking-tight">GoGoHungry IPL Ticket Giveaway – Terms &amp; Conditions</h2>
       </div>
 
-      <!-- Terms Content -->
       <div class="text-gray-600 text-sm leading-relaxed space-y-10">
-        <section class="bg-orange-50/50 rounded-2xl p-6 border border-orange-100">
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">✓</span> Eligibility
-          </h3>
+        <section>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Eligibility</h3>
           <ul class="list-disc pl-5 space-y-2">
-            <li>This offer is valid only for students of <strong>VIT Chennai</strong>.</li>
-            <li>Only orders placed through GoGoHungry on <strong>29 March 2026</strong> (the calendar day of the Indian Premier League match between Royal Challengers Bengaluru and Sunrisers Hyderabad — "RCB vs SRH") are eligible. Orders on any other date do not qualify.</li>
+            <li>This offer is valid only for students of VIT Chennai.</li>
+            <li>Only orders placed through GoGoHungry on <strong>29 March 2026</strong> (the calendar day of the Indian Premier League match between Royal Challengers Bengaluru and Sunrisers Hyderabad — “RCB vs SRH”) are eligible. Orders on any other date do not qualify.</li>
             <li>GoGoHungry may treat the qualifying window as the full calendar day in India (IST) unless communicated otherwise on official channels.</li>
           </ul>
         </section>
 
         <section>
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">🎲</span> Selection of Winner
-          </h3>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Selection of Winner</h3>
           <ul class="list-disc pl-5 space-y-2">
             <li>One (or more) winners will be selected from eligible entries (qualifying orders on 29 March 2026 as above) via a lucky draw based on multiple internal factors (orders, activity, etc.).</li>
-            <li>The decision of GoGoHungry will be <strong>final and non-negotiable</strong>.</li>
+            <li>The decision of GoGoHungry will be final and non-negotiable.</li>
           </ul>
         </section>
 
         <section>
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">🎁</span> Prize Details
-          </h3>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Prize Details</h3>
           <ul class="list-disc pl-5 space-y-2">
-            <li>The winner will receive <strong>one ticket</strong> for an Indian Premier League match.</li>
-            <li>The ticket will be a <strong>standard/medium category</strong> ticket (not VIP).</li>
+            <li>The winner will receive one ticket for an Indian Premier League match.</li>
+            <li>The ticket will be a standard/medium category ticket (not VIP).</li>
           </ul>
         </section>
 
         <section>
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">📅</span> Match Allocation
-          </h3>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Match Allocation</h3>
           <ul class="list-disc pl-5 space-y-2">
-            <li>The ticket will be for selected <strong>Chennai matches</strong> (preferably towards the later phase of the tournament).</li>
+            <li>The ticket will be for selected Chennai matches (preferably towards the later phase of the tournament).</li>
             <li>Exact match date and seat will be decided by GoGoHungry.</li>
           </ul>
         </section>
 
         <section>
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">✈️</span> Travel & Expenses
-          </h3>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Travel &amp; Expenses</h3>
           <ul class="list-disc pl-5 space-y-2">
-            <li>GoGoHungry will <strong>not cover</strong> travel, accommodation, or any additional expenses.</li>
+            <li>GoGoHungry will not cover travel, accommodation, or any additional expenses.</li>
             <li>The winner is responsible for reaching the stadium and attending the match.</li>
           </ul>
         </section>
 
-        <section class="bg-blue-50 rounded-2xl p-6 border border-blue-100">
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-blue-600">⚠️</span> Mandatory Requirement
-          </h3>
+        <section>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Mandatory Requirement</h3>
           <ul class="list-disc pl-5 space-y-2">
-            <li>The participant must <strong>follow GoGoHungry's official Instagram handle</strong> to be eligible.</li>
-            <li>Unfollowing before winner announcement may lead to <strong>disqualification</strong>.</li>
+            <li>The participant must follow GoGoHungry’s official Instagram handle to be eligible.</li>
+            <li>Unfollowing before winner announcement may lead to disqualification.</li>
           </ul>
         </section>
 
         <section>
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">🚫</span> Non-Transferable
-          </h3>
-          <p>The ticket is <strong>non-transferable</strong> and cannot be exchanged for cash or any other benefit.</p>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Non-Transferable</h3>
+          <p>The ticket is non-transferable and cannot be exchanged for cash or any other benefit.</p>
         </section>
 
         <section>
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">🛡️</span> Fraud & Misuse
-          </h3>
-          <p>Any fraudulent activity, fake orders, or misuse will result in <strong>immediate disqualification</strong>.</p>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Fraud &amp; Misuse</h3>
+          <p>Any fraudulent activity, fake orders, or misuse will result in immediate disqualification.</p>
         </section>
 
         <section>
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">📢</span> Announcement of Winner
-          </h3>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Announcement of Winner</h3>
           <ul class="list-disc pl-5 space-y-2">
-            <li>The winner will be announced on <strong>GoGoHungry's official platforms</strong>.</li>
+            <li>The winner will be announced on GoGoHungry’s official platforms.</li>
             <li>If the winner does not respond within the given time, another winner may be selected.</li>
           </ul>
         </section>
 
         <section>
-          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-4 flex items-center gap-2">
-            <span class="text-brand">⚙️</span> Modification Rights
-          </h3>
-          <p>GoGoHungry reserves the right to <strong>modify or cancel</strong> the campaign at any time without prior notice.</p>
+          <h3 class="text-base font-extrabold text-black uppercase tracking-wider mb-3">Modification Rights</h3>
+          <p>GoGoHungry reserves the right to modify or cancel the campaign at any time without prior notice.</p>
         </section>
       </div>
 
-      <!-- Back Link -->
-      <div class="mt-12 text-center">
-        <a href="index.html" class="inline-flex items-center gap-2 text-brand font-bold hover:underline transition">
-          <span>←</span> Back to GoGoHungry Home
-        </a>
-      </div>
     </div>
   </section>
 
-  <!-- Footer CTA -->
-  <section class="py-16 px-6 bg-gradient-to-br from-orange-50 to-amber-50">
-    <div class="max-w-3xl mx-auto text-center">
-      <h3 class="text-3xl font-extrabold mb-4 italic">Good luck! 🍀</h3>
-      <p class="text-lg text-gray-600 mb-6">Don't miss your chance to watch IPL live. Order on 29 March 2026!</p>
-      <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand text-white px-10 py-5 rounded-2xl text-lg font-bold shadow-xl hover:bg-brand-dark hover:scale-105 transition-all">
-        Download GoGoHungry App 🚀
+  <footer class="bg-[#0A0A0A] text-white py-16 px-6">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+      <a href="/" class="flex items-center gap-2">
+        <img src="gogohungry-logo.png" alt="" class="w-9 h-9 object-contain" />
+        <span class="font-bold">GoGoHungry</span>
       </a>
+      <div class="flex flex-wrap justify-center gap-6 text-sm text-gray-400">
+        <a href="/" class="hover:text-white transition">Home</a>
+        <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Download</a>
+        <a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Instagram @thegogohungry</a>
+      </div>
+      <p class="text-xs text-gray-600 text-center md:text-right">© 2026 GoGoHungry</p>
     </div>
-  </section>
+  </footer>
 
+  <script>
+    if (window.top !== window.self) {
+      window.top.location = window.location.href;
+    }
+  </script>
 </body>
 </html>
