@@ -1,548 +1,694 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  
   <title>Hungry? GoGo. | GoGoHungry — Campus Food, Zero Delivery Charges</title>
   <meta name="description" content="Hungry? GoGo. Order from college canteens with ₹0 delivery. If we don't deliver on our side, get 2× money back plus your order free. Download GoGoHungry." />
-  
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-    :root { --brand: #FF5200; --brand-dark: #E64A00; }
+    :root {
+      --brand: #FF5200;
+      --brand-dark: #E64A00;
+      --brand-light: #FFF0E8;
+      --brand-mid: #FF7A3D;
+    }
+    * { box-sizing: border-box; }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; background: #fff; color: #111; }
     .text-brand { color: var(--brand); }
     .bg-brand { background-color: var(--brand); }
-    .glass-nav { backdrop-filter: blur(12px); background-color: rgba(255, 255, 255, 0.85); }
-    
-    /* Subtle Modern Shadows */
-    .feature-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #f3f4f6; }
-    .feature-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); border-color: var(--brand); }
 
-    /* Restoring Floating Animations */
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
+    /* NAV */
+    .glass-nav {
+      backdrop-filter: blur(16px);
+      background: rgba(255,255,255,0.92);
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+
+    /* Announcement bar */
+    .top-bar {
+      background: linear-gradient(90deg, #1a1a1a 0%, #2d1200 50%, #1a1a1a 100%);
+    }
+
+    /* Hero */
+    .hero-bg {
+      background: radial-gradient(ellipse 80% 60% at 65% 40%, #fff0e8 0%, #fff 70%);
+    }
+
+    /* Phone mockup */
+    .phone-shell {
+      background: #111;
+      border-radius: 3rem;
+      padding: 12px;
+      box-shadow: 0 40px 80px rgba(255,82,0,0.18), 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .phone-screen {
+      background: #fff;
+      border-radius: 2.4rem;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    /* Floating badges */
+    @keyframes floatA {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    @keyframes floatB {
+      0%,100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-    .animate-float { animation: float 3s ease-in-out infinite; display: inline-block; }
+    .float-a { animation: floatA 3.5s ease-in-out infinite; }
+    .float-b { animation: floatB 4s ease-in-out infinite 1s; }
 
-    /* Modal Styling */
-    .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.5); align-items: center; justify-content: center; backdrop-filter: blur(4px); }
-    .modal-content { background: white; width: 90%; max-width: 600px; max-height: 85vh; overflow-y: auto; border-radius: 28px; padding: 2.5rem; position: relative; animation: slideUp 0.3s ease-out; }
-    
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    /* Feature cards */
+    .feat-card {
+      background: #fff;
+      border: 1px solid #f0f0f0;
+      border-radius: 1.5rem;
+      transition: box-shadow 0.25s, border-color 0.25s, transform 0.25s;
+    }
+    .feat-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--brand);
+      box-shadow: 0 12px 32px rgba(255,82,0,0.08);
     }
 
+    /* Step numbers */
+    .step-num {
+      width: 48px; height: 48px;
+      border-radius: 50%;
+      background: var(--brand-light);
+      color: var(--brand);
+      font-weight: 800;
+      font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Pill badge */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .pill-brand {
+      background: var(--brand-light);
+      color: var(--brand);
+    }
+    .pill-live {
+      background: #111;
+      color: #fff;
+    }
+
+    /* CTA button */
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 14px;
+      padding: 16px 32px;
+      font-size: 16px;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 8px 24px rgba(255,82,0,0.25);
+    }
+    .btn-primary:hover { background: var(--brand-dark); transform: translateY(-1px); }
+    .btn-primary:active { transform: scale(0.98); }
+
+    .btn-ghost {
+      background: #fff;
+      color: #111;
+      font-weight: 700;
+      border-radius: 14px;
+      padding: 14px 28px;
+      font-size: 16px;
+      border: 2px solid #eee;
+      cursor: pointer;
+      display: inline-block;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--brand); background: var(--brand-light); }
+
+    /* Guarantee block */
+    .guarantee-block {
+      background: linear-gradient(135deg, #111 0%, #1f0900 100%);
+      border-radius: 20px;
+      border: 1px solid rgba(255,82,0,0.25);
+    }
+
+    /* Savings calculator */
+    .calc-input {
+      border: 2px solid #eee;
+      border-radius: 14px;
+      padding: 14px 20px 14px 44px;
+      font-size: 24px;
+      font-weight: 700;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .calc-input:focus { border-color: var(--brand); }
+
+    /* Tab buttons */
+    .tab-active { background: var(--brand); color: #fff; box-shadow: 0 4px 14px rgba(255,82,0,0.3); }
+    .tab-inactive { background: transparent; color: #888; }
+
+    /* Section divider */
+    .section-divider {
+      width: 48px; height: 4px;
+      background: var(--brand);
+      border-radius: 2px;
+      margin: 0 auto 20px;
+    }
+
+    /* Comparison table row */
+    .compare-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f5f5f5;
+      font-size: 14px;
+    }
+    .compare-row:last-child { border-bottom: none; }
+
+    /* Modal */
+    .modal { display: none; position: fixed; inset: 0; z-index: 100; background: rgba(0,0,0,0.55); align-items: center; justify-content: center; backdrop-filter: blur(6px); }
+    .modal-box { background: #fff; width: 92%; max-width: 580px; max-height: 88vh; overflow-y: auto; border-radius: 2rem; padding: 2.5rem; position: relative; animation: slideUp 0.3s ease; }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
     .no-scrollbar::-webkit-scrollbar { display: none; }
 
-    @keyframes banner-shine {
-      0%, 100% { filter: brightness(1); }
-      50% { filter: brightness(1.08); }
-    }
-    .promo-banner-pulse { animation: banner-shine 2.5s ease-in-out infinite; }
-
+    /* Toast */
     #ggh-play-toast { display: none; }
     #ggh-play-toast.ggh-show { display: block; }
+
+    /* Promo bar animation */
+    @keyframes shimmer {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+    .top-bar-inner { animation: shimmer 3s ease-in-out infinite; }
+
+    /* How it works connector */
+    .steps-connector {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--brand), #ffb380);
+      z-index: 0;
+    }
+
+    /* Download section */
+    .download-section {
+      background: linear-gradient(135deg, #fff7f3 0%, #fff 60%, #fff0e8 100%);
+    }
+
+    /* Compliance */
+    .db-badge {
+      background: #f9fafb;
+      border: 1px solid #eee;
+      border-radius: 1.5rem;
+    }
+
+    /* Footer */
+    footer { background: #0a0a0a; }
+
+    @media (max-width: 768px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .phone-wrapper { display: none; }
+      .steps-connector { display: none; }
+    }
   </style>
 </head>
-<body class="bg-white text-[#1A1A1A]">
+<body>
 
-  <div id="site-fixed-top" class="fixed top-0 left-0 right-0 z-50 flex flex-col shadow-md">
-    <div id="delivery-top-banner" role="region" aria-label="Delivery guarantee promotion" class="promo-banner-pulse bg-gradient-to-r from-zinc-900 via-[#b45309] to-zinc-900 text-white border-b border-white/10">
-      <div class="max-w-7xl mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-center relative pr-10 sm:pr-12">
-        <span class="inline-flex items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-0.5 text-[10px] sm:text-xs font-black uppercase tracking-widest ring-1 ring-white/25">Live offer</span>
-        <span class="text-sm sm:text-base font-extrabold tracking-tight">
-          <span class="text-amber-200">2×</span> your money back + <span class="text-amber-200">same order FREE</span>
+  <!-- Fixed top container -->
+  <div class="fixed top-0 left-0 right-0 z-50 flex flex-col">
+    <!-- Announcement bar -->
+    <div id="delivery-top-banner" class="top-bar text-white">
+      <div class="top-bar-inner max-w-7xl mx-auto px-4 py-2.5 flex flex-wrap items-center justify-center gap-3 text-center relative" style="padding-right:2.5rem;">
+        <span class="pill pill-live" style="font-size:9px; padding:3px 10px;">Live Offer</span>
+        <span style="font-size:14px; font-weight:800; letter-spacing:-0.02em;">
+          <span style="color:#ffb380;">2×</span> refund + <span style="color:#ffb380;">same order FREE</span>
         </span>
-        <span class="hidden sm:inline text-white/70 text-sm">— if we don’t deliver on our side.</span>
-        <button type="button" onclick="toggleModal('deliveryPromiseModal')" class="text-sm font-bold underline decoration-2 underline-offset-2 hover:text-amber-200 transition shrink-0">How it works</button>
-        <button type="button" id="dismiss-delivery-banner" class="absolute right-2 top-1/2 -translate-y-1/2 flex h-8 w-8 items-center justify-center rounded-lg text-xl leading-none text-white/80 hover:bg-white/10 hover:text-white transition" aria-label="Dismiss banner">&times;</button>
+        <span style="font-size:13px; color:rgba(255,255,255,0.5); display:none;" class="sm:hidden md:inline">— if we miss the mark.</span>
+        <button type="button" onclick="toggleModal('deliveryPromiseModal')" style="font-size:13px; font-weight:700; text-decoration:underline; color:#ffb380; background:none; border:none; cursor:pointer;">How it works</button>
+        <button id="dismiss-delivery-banner" style="position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(255,255,255,0.6); font-size:18px; cursor:pointer; width:32px; height:32px; border-radius:8px; display:flex; align-items:center; justify-content:center;" aria-label="Dismiss">&times;</button>
       </div>
     </div>
-    <header class="glass-nav border-b border-gray-100 px-6 w-full">
-      <div class="max-w-7xl mx-auto h-20 flex justify-between items-center">
-        <a href="/" class="flex items-center gap-2">
-          <img src="gogohungry-logo.png" alt="GoGoHungry Logo" class="w-10 h-10 object-contain">        
-          <span class="text-2xl font-extrabold tracking-tight">GoGoHungry</span>
+    <!-- Navbar -->
+    <header class="glass-nav">
+      <div class="max-w-7xl mx-auto px-6 h-[72px] flex justify-between items-center">
+        <a href="/" style="display:flex; align-items:center; gap:10px; text-decoration:none; color:inherit;">
+          <img src="gogohungry-logo.png" alt="GoGoHungry" style="width:38px; height:38px; object-fit:contain;" onerror="this.style.display='none'">
+          <span style="font-size:20px; font-weight:800; letter-spacing:-0.03em; color:#111;">GoGo<span style="color:var(--brand);">Hungry</span></span>
         </a>
-        <nav class="hidden md:flex gap-8 text-sm font-semibold text-gray-500">
-          <a href="ipl-ticket.html" class="hover:text-brand transition">Free IPL Ticket</a>
-          <a href="https://www.linkedin.com/company/gogohungry/" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition">LinkedIn</a>
-          <a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener noreferrer" class="hover:text-brand transition">Instagram</a>
+        <nav style="display:none;" class="md:flex gap-8 text-sm font-semibold text-gray-500" id="desktop-nav">
+          <a href="ipl-ticket.html" style="color:#666; text-decoration:none; font-size:14px; font-weight:600; transition:color 0.2s;" onmouseover="this.style.color='var(--brand)'" onmouseout="this.style.color='#666'">Free IPL Ticket</a>
+          <a href="https://www.linkedin.com/company/gogohungry/" target="_blank" rel="noopener" style="color:#666; text-decoration:none; font-size:14px; font-weight:600; transition:color 0.2s;" onmouseover="this.style.color='var(--brand)'" onmouseout="this.style.color='#666'">LinkedIn</a>
+          <a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener" style="color:#666; text-decoration:none; font-size:14px; font-weight:600; transition:color 0.2s;" onmouseover="this.style.color='var(--brand)'" onmouseout="this.style.color='#666'">Instagram</a>
         </nav>
-        <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="bg-brand text-white px-6 py-2.5 rounded-xl text-sm font-bold shadow-lg shadow-orange-100 hover:scale-105 transition active:scale-95">Download App</a>
+        <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener" class="btn-primary" style="padding:11px 22px; font-size:14px; border-radius:12px; text-decoration:none;">Download App</a>
       </div>
     </header>
   </div>
 
-  <section id="hero-section" class="pt-56 pb-24 px-6 bg-gradient-to-b from-orange-50/50 to-white overflow-hidden relative">
-    <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center text-center md:text-left">
-      <div class="z-10">
-        <button type="button" onclick="toggleModal('deliveryPromiseModal')" class="w-full max-w-lg mx-auto md:mx-0 mb-6 flex items-center justify-between gap-3 rounded-2xl bg-gradient-to-r from-zinc-900 to-zinc-800 px-4 py-3.5 text-left text-white shadow-lg shadow-orange-900/20 ring-2 ring-brand/30 transition hover:ring-brand/50 hover:scale-[1.01] active:scale-[0.99] md:w-auto">
-          <div class="flex items-center gap-3 min-w-0">
-            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand text-lg font-black">2×</span>
-            <div>
-              <p class="text-[10px] font-bold uppercase tracking-widest text-amber-200/90">Guarantee</p>
-              <p class="text-sm font-bold leading-tight">Missed by us? Double refund + your food free.</p>
-            </div>
-          </div>
-          <span class="text-amber-200 text-sm font-bold shrink-0">Tap →</span>
-        </button>
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-orange-100/50 rounded-full mb-8">
-          <span class="w-2 h-2 bg-brand rounded-full animate-ping"></span>
-          <span class="text-brand text-xs font-bold uppercase tracking-widest">Campus Launching Soon</span>
+  <!-- HERO -->
+  <section id="hero-section" class="hero-bg" style="padding-top:160px; padding-bottom:96px; overflow:hidden; position:relative;">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center hero-grid">
+
+      <!-- Left content -->
+      <div>
+        <!-- Status pill -->
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:20px;">
+          <span style="width:8px; height:8px; border-radius:50%; background:var(--brand); display:block; animation: floatA 1.5s ease-in-out infinite;"></span>
+          <span class="pill pill-brand">Campus Launching Soon</span>
         </div>
-        <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-[1.05] tracking-tight">
-          <span class="italic">Hungry?</span> <span class="text-brand not-italic">GoGo.</span>
+
+        <!-- Guarantee card -->
+        <button type="button" onclick="toggleModal('deliveryPromiseModal')" class="guarantee-block" style="width:100%; max-width:480px; display:flex; align-items:center; gap:14px; padding:14px 18px; margin-bottom:28px; cursor:pointer; border:none; text-align:left; transition:opacity 0.2s;" onmouseover="this.style.opacity='0.9'" onmouseout="this.style.opacity='1'">
+          <div style="width:48px; height:48px; border-radius:12px; background:var(--brand); color:#fff; font-size:16px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0;">2×</div>
+          <div>
+            <p style="font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:#ffb380; margin:0 0 2px;">Our Guarantee</p>
+            <p style="font-size:14px; font-weight:700; color:#fff; margin:0; line-height:1.4;">Missed by us? Double refund + same food free.</p>
+          </div>
+          <span style="color:#ffb380; font-size:18px; margin-left:auto; flex-shrink:0;">→</span>
+        </button>
+
+        <!-- Headline -->
+        <h1 style="font-size:clamp(48px,6vw,76px); font-weight:800; letter-spacing:-0.04em; line-height:1; margin:0 0 16px; color:#111;">
+          <em style="font-style:italic; color:#555;">Hungry?</em><br>
+          <span style="color:var(--brand);">GoGo.</span>
         </h1>
-        <p class="text-xl md:text-2xl text-gray-600 mb-6 max-w-lg mx-auto md:mx-0 font-semibold">
+        <p style="font-size:clamp(18px,2.2vw,22px); font-weight:600; color:#444; margin:0 0 16px; max-width:440px;">
           Campus food that actually shows up.
         </p>
-        <p class="text-xl text-gray-500 mb-6 max-w-lg mx-auto md:mx-0 leading-relaxed">
-          Pay <span class="text-black font-bold underline decoration-brand/30">₹0 extra charges</span> — because saving means eating more! Order from college canteens and cafes with zero delivery charges.
-        </p>
-        <div class="bg-gradient-to-br from-amber-50 via-white to-orange-50 rounded-2xl p-5 mb-6 max-w-lg mx-auto md:mx-0 border-2 border-brand/20 shadow-sm shadow-orange-100/50">
-          <p class="text-xs font-black uppercase tracking-widest text-brand mb-2">Our delivery promise</p>
-          <p class="text-base text-gray-800 leading-snug">
-            If your order <strong>isn’t delivered because of us</strong>, you get <strong class="text-brand">2× your money back</strong> <span class="text-gray-500">+</span> <strong>the same food you ordered, free</strong> — on us.
+
+        <!-- Zero fees highlight -->
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:24px; max-width:460px;">
+          <div style="width:36px; height:36px; border-radius:10px; background:var(--brand-light); color:var(--brand); font-size:18px; display:flex; align-items:center; justify-content:center; flex-shrink:0; font-weight:800;">₹0</div>
+          <p style="font-size:15px; color:#555; margin:0; line-height:1.5;">
+            <strong style="color:#111;">Zero delivery fees.</strong> Order from college canteens with just a 1% platform fee — nothing else. No fine print.
           </p>
         </div>
-        <div class="bg-white/80 backdrop-blur-sm rounded-2xl p-4 mb-10 max-w-lg mx-auto md:mx-0 border border-orange-100">
-          <p class="text-sm text-gray-700 leading-relaxed">
-            <span class="font-bold text-brand">100% Transparent:</span> Just your food price + <strong>1% platform fee</strong>. No delivery fees. No hidden charges. That's it. 
-            <a href="#pricing" class="text-brand font-bold underline hover:text-brand-dark">See how much you save →</a>
+
+        <!-- Pricing note -->
+        <div style="background:#fff; border:1px solid #f0e8e0; border-radius:14px; padding:14px 18px; margin-bottom:32px; max-width:460px;">
+          <p style="font-size:13px; color:#555; margin:0; line-height:1.6;">
+            <strong style="color:var(--brand);">100% transparent:</strong> food price + 1% fee. That's it.
+            <a href="#pricing" style="color:var(--brand); font-weight:700; text-decoration:none;">See how much you save →</a>
           </p>
         </div>
-        <div class="flex flex-wrap gap-4 justify-center md:justify-start">
-          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="bg-brand text-white px-10 py-5 rounded-2xl text-lg font-bold shadow-xl shadow-orange-200 hover:bg-brand-dark transition">Order Now 🚀</a>
-          <button onclick="toggleModal('termsModal')" class="bg-white border-2 border-gray-100 px-10 py-5 rounded-2xl text-lg font-bold hover:bg-gray-50 transition">Terms & Policies 📜</button>
+
+        <!-- CTAs -->
+        <div style="display:flex; flex-wrap:wrap; gap:12px;">
+          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener" class="btn-primary">Order Now 🚀</a>
+          <button onclick="toggleModal('termsModal')" class="btn-ghost">Terms & Policies</button>
         </div>
       </div>
-      <div class="relative flex justify-center items-center h-[600px] w-full">
-  <div class="absolute w-[500px] h-[500px] bg-orange-200/30 rounded-full blur-[120px] -z-10"></div>
-  
-  <div class="absolute w-72 h-[520px] bg-gray-800 rounded-[2.8rem] border-[8px] border-gray-700 shadow-2xl translate-x-24 -translate-y-8 rotate-[12deg] opacity-30 hidden lg:block">
-     <div class="bg-orange-50 h-full w-full rounded-[2rem]"></div>
-  </div>
 
-  <div class="w-80 h-[600px] bg-gray-900 rounded-[3.2rem] border-[12px] border-gray-800 shadow-[0_50px_100px_-20px_rgba(255,82,0,0.3)] p-5 overflow-hidden z-10 transition-transform hover:scale-105 duration-500">
-      <div class="bg-white h-full rounded-[2.4rem] p-6 flex flex-col justify-between items-center relative overflow-hidden">
-          
-          <div class="w-24 h-5 bg-gray-100 rounded-full mb-4"></div>
-          
-          <div class="w-full flex-1 flex flex-col items-center justify-center space-y-8">
-            <div class="text-7xl animate-bounce drop-shadow-lg">🍕</div>
-            
-            <div class="space-y-4 w-full px-2">
-              <div class="h-4 w-3/4 bg-gray-100 rounded-full mx-auto"></div>
-              <div class="h-4 w-1/2 bg-gray-100 rounded-full mx-auto"></div>
+      <!-- Phone mockup -->
+      <div class="phone-wrapper" style="display:flex; justify-content:center; align-items:center; position:relative; height:600px;">
+        <!-- Glow -->
+        <div style="position:absolute; width:400px; height:400px; background:radial-gradient(circle, rgba(255,82,0,0.12) 0%, transparent 70%); border-radius:50%; z-index:0;"></div>
+
+        <!-- Back phone (decorative) -->
+        <div style="position:absolute; width:240px; height:440px; background:#e8e8e8; border-radius:2.5rem; z-index:1; transform:rotate(10deg) translate(100px,-20px); opacity:0.25;"></div>
+
+        <!-- Main phone -->
+        <div class="phone-shell" style="width:280px; height:540px; position:relative; z-index:2;">
+          <div class="phone-screen" style="display:flex; flex-direction:column;">
+            <!-- Status bar -->
+            <div style="background:#fff; padding:10px 20px 6px; display:flex; justify-content:center;">
+              <div style="width:72px; height:18px; background:#f0f0f0; border-radius:999px;"></div>
             </div>
-
-            <div class="grid grid-cols-2 gap-4 w-full">
-              <div class="h-24 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center text-2xl">🍔</div>
-              <div class="h-24 bg-gray-50 rounded-2xl border border-gray-100 flex items-center justify-center text-2xl">🍜</div>
+            <!-- App content -->
+            <div style="flex:1; background:#fff; display:flex; flex-direction:column; padding:16px; gap:14px; overflow:hidden;">
+              <!-- Header -->
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <p style="font-size:10px; color:#888; margin:0; font-weight:600;">GOOD MORNING 👋</p>
+                  <p style="font-size:14px; font-weight:800; color:#111; margin:0;">What's your vibe?</p>
+                </div>
+                <div style="width:32px; height:32px; border-radius:50%; background:var(--brand-light); display:flex; align-items:center; justify-content:center;">
+                  <span style="font-size:16px;">🔔</span>
+                </div>
+              </div>
+              <!-- Search bar -->
+              <div style="background:#f7f7f7; border-radius:12px; padding:10px 14px; display:flex; align-items:center; gap:8px;">
+                <span style="font-size:16px;">🔍</span>
+                <span style="font-size:12px; color:#aaa; font-weight:500;">Search canteens...</span>
+              </div>
+              <!-- Food emoji grid -->
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; flex:1;">
+                <div style="background:#fff7f3; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #ffe5d5; gap:6px;">
+                  <span style="font-size:28px;">🍕</span>
+                  <span style="font-size:10px; font-weight:700; color:#333;">Pizza</span>
+                  <span style="font-size:9px; background:var(--brand); color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹89</span>
+                </div>
+                <div style="background:#fff0fb; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #f5d5ed; gap:6px;">
+                  <span style="font-size:28px;">🍜</span>
+                  <span style="font-size:10px; font-weight:700; color:#333;">Noodles</span>
+                  <span style="font-size:9px; background:#333; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹65</span>
+                </div>
+                <div style="background:#f0fff4; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #c3f0d2; gap:6px;">
+                  <span style="font-size:28px;">🥗</span>
+                  <span style="font-size:10px; font-weight:700; color:#333;">Salad</span>
+                  <span style="font-size:9px; background:#16a34a; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹55</span>
+                </div>
+                <div style="background:#fff8f0; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #ffd9aa; gap:6px;">
+                  <span style="font-size:28px;">☕</span>
+                  <span style="font-size:10px; font-weight:700; color:#333;">Coffee</span>
+                  <span style="font-size:9px; background:#b45309; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹30</span>
+                </div>
+              </div>
+              <!-- Bottom CTA -->
+              <div style="background:var(--brand); border-radius:14px; padding:12px; display:flex; align-items:center; justify-content:center; gap:6px;">
+                <span style="color:#fff; font-size:12px; font-weight:800; letter-spacing:0.02em;">₹0 DELIVERY · ORDER NOW</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div class="h-14 w-full bg-brand rounded-2xl mt-6 shadow-lg shadow-orange-100 flex items-center justify-center">
-             <div class="w-12 h-1.5 bg-white/30 rounded-full"></div>
+        <!-- Floating badge 1 -->
+        <div class="float-a" style="position:absolute; top:80px; left:0; background:#fff; border:1px solid #f0f0f0; border-radius:14px; padding:10px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); z-index:10;">
+          <div style="width:32px; height:32px; border-radius:10px; background:var(--brand-light); display:flex; align-items:center; justify-content:center; font-size:16px;">⚡</div>
+          <div>
+            <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#aaa; margin:0;">Delivery</p>
+            <p style="font-size:14px; font-weight:800; color:var(--brand); margin:0; font-style:italic;">₹0 Fees</p>
           </div>
+        </div>
+
+        <!-- Floating badge 2 -->
+        <div class="float-b" style="position:absolute; bottom:100px; right:0; background:#fff; border:1px solid #f0f0f0; border-radius:14px; padding:10px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); z-index:10;">
+          <div style="display:flex; margin-right:2px;">
+            <div style="width:24px; height:24px; border-radius:50%; background:#ffb380; border:2px solid #fff; z-index:2;"></div>
+            <div style="width:24px; height:24px; border-radius:50%; background:var(--brand); border:2px solid #fff; margin-left:-8px;"></div>
+            <div style="width:24px; height:24px; border-radius:50%; background:#ff7a3d; border:2px solid #fff; margin-left:-8px;"></div>
+          </div>
+          <p style="font-size:12px; font-weight:800; color:#111; margin:0; white-space:nowrap; font-style:italic;">1k+ Students</p>
+        </div>
       </div>
-  </div>
-  
-  <div class="absolute top-20 -left-4 md:-left-12 bg-white shadow-2xl p-4 rounded-2xl z-20 animate-float border border-gray-100 hidden sm:flex">
-    <div class="flex items-center gap-3">
-       <div class="bg-brand/10 text-brand p-2 rounded-xl">
-         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-       </div>
-       <div>
-         <p class="text-[10px] font-black uppercase text-gray-400 leading-none tracking-widest">Delivery</p>
-         <p class="text-sm font-bold text-black italic leading-tight">₹0 Fees</p>
-       </div>
     </div>
-  </div>
 
-  <div class="absolute bottom-20 -right-4 md:-right-12 bg-white shadow-2xl p-4 rounded-2xl z-20 animate-float border border-gray-100 hidden sm:flex" style="animation-delay: 1s;">
-    <div class="flex items-center gap-3">
-       <div class="flex -space-x-2">
-          <div class="w-6 h-6 rounded-full bg-orange-200 border-2 border-white"></div>
-          <div class="w-6 h-6 rounded-full bg-orange-400 border-2 border-white"></div>
-       </div>
-       <p class="text-[11px] font-black text-black leading-none uppercase tracking-tighter italic">1k+ Hungry Students</p>
-    </div>
-  </div>
-</div>
+    <!-- Scroll hint -->
+    <div style="text-align:center; margin-top:60px; opacity:0.4;">
+      <div style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#888; margin-bottom:8px;">Scroll to explore</div>
+      <div style="width:1px; height:40px; background:linear-gradient(to bottom, #888, transparent); margin:0 auto;"></div>
     </div>
   </section>
 
-  <!-- Pricing Comparison Section -->
-  <section id="pricing" class="py-24 px-6 bg-gradient-to-b from-white via-orange-50/30 to-white relative overflow-hidden">
+  <!-- WHY GOGOHUNGRY (4 features) -->
+  <section id="why" style="padding:96px 24px; background:#fff;">
     <div class="max-w-7xl mx-auto">
+      <div style="text-align:center; margin-bottom:56px;">
+        <div class="section-divider"></div>
+        <h2 style="font-size:clamp(32px,4vw,48px); font-weight:800; letter-spacing:-0.03em; color:#111; margin:0 0 12px;">Built for campus life.</h2>
+        <p style="font-size:17px; color:#777; max-width:480px; margin:0 auto; line-height:1.6;">Everything other apps get wrong, we get right.</p>
+      </div>
 
-      <!-- Section Header -->
-      <div class="text-center mb-16">
-        <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand/10 rounded-full mb-6">
-          <span class="text-brand text-xs font-bold uppercase tracking-widest">💰 Zero Hidden Fees</span>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px;">
+        <!-- Card 1 -->
+        <div class="feat-card" style="padding:36px 28px;">
+          <div style="width:52px; height:52px; border-radius:16px; background:var(--brand-light); display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">💰</div>
+          <h3 style="font-size:18px; font-weight:800; letter-spacing:-0.02em; color:#111; margin:0 0 10px; font-style:italic;">₹0 Extra Charges</h3>
+          <p style="font-size:14px; color:#888; line-height:1.7; margin:0;">No delivery fee. No platform fee. Not ₹20, not ₹50. Literally zero. You pay exactly what the menu says.</p>
         </div>
-        <h2 class="text-5xl md:text-6xl font-extrabold mb-6 italic tracking-tight">
-          Honest Pricing. <span class="text-brand">Real Savings.</span>
+        <!-- Card 2 — featured -->
+        <div class="feat-card" style="padding:36px 28px; background:#fff7f3; border-color:rgba(255,82,0,0.2); box-shadow:0 8px 32px rgba(255,82,0,0.06);">
+          <div style="width:52px; height:52px; border-radius:16px; background:var(--brand); display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">🛡️</div>
+          <h3 style="font-size:18px; font-weight:800; letter-spacing:-0.02em; color:var(--brand); margin:0 0 10px; font-style:italic;">2× Refund Guarantee</h3>
+          <p style="font-size:14px; color:#888; line-height:1.7; margin:0;">If we miss the mark, you get double your money back + the same order free. We put our money where your hunger is.</p>
+        </div>
+        <!-- Card 3 -->
+        <div class="feat-card" style="padding:36px 28px;">
+          <div style="width:52px; height:52px; border-radius:16px; background:#fff0fb; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">🎁</div>
+          <h3 style="font-size:18px; font-weight:800; letter-spacing:-0.02em; color:#111; margin:0 0 10px; font-style:italic;">Hungry Coins</h3>
+          <p style="font-size:14px; color:#888; line-height:1.7; margin:0;">Earn coins on every order. Redeem for gifts, offers, and exclusive campus rewards. More orders, more perks.</p>
+        </div>
+        <!-- Card 4 -->
+        <div class="feat-card" style="padding:36px 28px;">
+          <div style="width:52px; height:52px; border-radius:16px; background:#f0f8ff; display:flex; align-items:center; justify-content:center; font-size:24px; margin-bottom:20px;">🎓</div>
+          <h3 style="font-size:18px; font-weight:800; letter-spacing:-0.02em; color:#111; margin:0 0 10px; font-style:italic;">Campus-Only</h3>
+          <p style="font-size:14px; color:#888; line-height:1.7; margin:0;">Built for colleges — verified canteens, fast drops, and real-time tracking designed for your campus layout.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section style="padding:96px 24px; background:#fafafa;">
+    <div class="max-w-5xl mx-auto">
+      <div style="text-align:center; margin-bottom:56px;">
+        <div class="section-divider"></div>
+        <h2 style="font-size:clamp(32px,4vw,48px); font-weight:800; letter-spacing:-0.03em; color:#111; margin:0 0 12px;">Order in 5 taps.</h2>
+        <p style="font-size:17px; color:#777; max-width:400px; margin:0 auto;">From craving to canteen, faster than you thought possible.</p>
+      </div>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:24px; position:relative;">
+        <div style="text-align:center; padding:0 12px;">
+          <div class="step-num" style="margin:0 auto 16px;">1</div>
+          <h4 style="font-size:15px; font-weight:700; color:#111; margin:0 0 8px;">Browse</h4>
+          <p style="font-size:13px; color:#888; margin:0; line-height:1.6;">See all canteens near your college instantly.</p>
+        </div>
+        <div style="text-align:center; padding:0 12px;">
+          <div class="step-num" style="margin:0 auto 16px;">2</div>
+          <h4 style="font-size:15px; font-weight:700; color:#111; margin:0 0 8px;">Pick</h4>
+          <p style="font-size:13px; color:#888; margin:0; line-height:1.6;">Choose your favourites and add to cart.</p>
+        </div>
+        <div style="text-align:center; padding:0 12px;">
+          <div class="step-num" style="margin:0 auto 16px;">3</div>
+          <h4 style="font-size:15px; font-weight:700; color:#111; margin:0 0 8px;">Pay</h4>
+          <p style="font-size:13px; color:#888; margin:0; line-height:1.6;">UPI payment — quick, safe, and transparent.</p>
+        </div>
+        <div style="text-align:center; padding:0 12px;">
+          <div class="step-num" style="margin:0 auto 16px;">4</div>
+          <h4 style="font-size:15px; font-weight:700; color:#111; margin:0 0 8px;">Track</h4>
+          <p style="font-size:13px; color:#888; margin:0; line-height:1.6;">Live updates as your food is prepared.</p>
+        </div>
+        <div style="text-align:center; padding:0 12px;">
+          <div style="width:48px; height:48px; border-radius:50%; background:var(--brand); color:#fff; font-size:22px; display:flex; align-items:center; justify-content:center; margin:0 auto 16px; flex-shrink:0;">🍔</div>
+          <h4 style="font-size:15px; font-weight:700; color:#111; margin:0 0 8px;">Eat</h4>
+          <p style="font-size:13px; color:#888; margin:0; line-height:1.6;">Collect your hot meal. Earn Hungry Coins.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING CALCULATOR -->
+  <section id="pricing" style="padding:96px 24px; background:#fff;">
+    <div class="max-w-5xl mx-auto">
+      <div style="text-align:center; margin-bottom:48px;">
+        <div class="section-divider"></div>
+        <h2 style="font-size:clamp(32px,4vw,48px); font-weight:800; letter-spacing:-0.03em; color:#111; margin:0 0 12px;">
+          Honest Pricing. <span style="color:var(--brand);">Real Savings.</span>
         </h2>
-        <p class="text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
-          No delivery fee. No platform fee for restaurants. No gimmicks. Just <span class="font-bold text-black">transparent pricing</span> for everyone.
-        </p>
+        <p style="font-size:17px; color:#777; max-width:480px; margin:0 auto; line-height:1.6;">No delivery fee. No platform fee. Just transparent pricing for everyone.</p>
       </div>
 
-      <!-- Tab Switcher -->
-      <div class="flex justify-center mb-12">
-        <div class="bg-gray-100 p-1.5 rounded-2xl inline-flex gap-1">
-          <button id="tabStudent" onclick="switchTab('student')" class="px-8 py-3.5 rounded-xl text-sm font-bold transition-all bg-brand text-white shadow-lg">🎓 For Students</button>
-          <button id="tabRestaurant" onclick="switchTab('restaurant')" class="px-8 py-3.5 rounded-xl text-sm font-bold transition-all text-gray-500 hover:text-gray-700">🏪 For Restaurants</button>
+      <!-- Tab switcher -->
+      <div style="display:flex; justify-content:center; margin-bottom:40px;">
+        <div style="background:#f5f5f5; padding:6px; border-radius:16px; display:inline-flex; gap:6px;">
+          <button id="tabStudent" onclick="switchTab('student')" style="padding:12px 28px; border-radius:12px; font-size:14px; font-weight:700; border:none; cursor:pointer; transition:all 0.2s;" class="tab-active">🎓 For Students</button>
+          <button id="tabRestaurant" onclick="switchTab('restaurant')" style="padding:12px 28px; border-radius:12px; font-size:14px; font-weight:700; border:none; cursor:pointer; transition:all 0.2s;" class="tab-inactive">🏪 For Restaurants</button>
         </div>
       </div>
 
-      <!-- ===================== STUDENT TAB ===================== -->
+      <!-- STUDENT section -->
       <div id="studentSection">
+        <div style="background:#fff; border:1px solid #f0f0f0; border-radius:2rem; padding:clamp(24px,4vw,48px); box-shadow:0 4px 32px rgba(0,0,0,0.04);">
+          <h3 style="font-size:20px; font-weight:800; text-align:center; margin:0 0 6px; letter-spacing:-0.02em; font-style:italic;">See How Much You Save 🧮</h3>
+          <p style="text-align:center; color:#aaa; font-size:14px; margin:0 0 36px;">Enter your order amount and compare</p>
 
-        <!-- Student Calculator -->
-        <div class="bg-white rounded-[3rem] p-8 md:p-12 shadow-2xl border-2 border-orange-100 mb-12">
-          <h3 class="text-2xl font-extrabold text-center mb-2 italic tracking-tight">See How Much You Save 🧮</h3>
-          <p class="text-center text-gray-400 text-sm mb-10">Enter any order amount and compare instantly</p>
+          <div style="position:relative; margin-bottom:32px;">
+            <span style="position:absolute; left:18px; top:50%; transform:translateY(-50%); font-size:22px; font-weight:700; color:#bbb;">₹</span>
+            <input type="number" id="orderAmount" value="500" min="50" step="50" class="calc-input" placeholder="500">
+          </div>
 
-          <div class="grid md:grid-cols-2 gap-10">
-            <!-- GoGoHungry Side -->
-            <div class="space-y-6">
-              <div>
-                <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Your Order Value</label>
-                <div class="relative">
-                  <span class="absolute left-5 top-1/2 -translate-y-1/2 text-2xl font-bold text-gray-400">₹</span>
-                  <input type="number" id="orderAmount" value="500" min="50" step="50"
-                    class="w-full pl-14 pr-6 py-5 text-3xl font-bold border-2 border-gray-200 rounded-2xl focus:border-brand focus:outline-none transition">
-                </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <!-- GoGoHungry -->
+            <div style="background:#fff7f3; border-radius:18px; padding:24px; border:1.5px solid rgba(255,82,0,0.15);">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:18px;">
+                <div style="width:28px; height:28px; border-radius:8px; background:var(--brand); color:#fff; font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center;">G</div>
+                <span style="font-size:12px; font-weight:800; color:var(--brand); letter-spacing:0.06em; text-transform:uppercase;">GoGoHungry</span>
               </div>
-
-              <div class="bg-gradient-to-br from-orange-50 to-orange-100/50 rounded-2xl p-6 border border-orange-200">
-                <div class="flex items-center gap-2 mb-4">
-                  <div class="w-7 h-7 bg-brand rounded-lg flex items-center justify-center text-white font-black text-[10px]">G</div>
-                  <p class="text-sm font-extrabold text-brand uppercase tracking-wider">GoGoHungry</p>
-                </div>
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-600 text-sm">Food Price</span>
-                    <span class="font-bold" id="gFoodAmount">₹500</span>
-                  </div>
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-600 text-sm">Platform Fee (1%)</span>
-                    <span class="font-bold text-brand" id="gPlatformFee">₹5</span>
-                  </div>
-                  <div class="flex justify-between items-center text-green-600">
-                    <span class="text-sm font-semibold">Delivery Fee</span>
-                    <span class="font-extrabold text-lg">FREE</span>
-                  </div>
-                  <div class="flex justify-between items-center text-green-600">
-                    <span class="text-sm font-semibold">Other Charges</span>
-                    <span class="font-extrabold text-lg">₹0</span>
-                  </div>
-                  <div class="border-t-2 border-orange-200 pt-4 mt-4">
-                    <div class="flex justify-between items-center">
-                      <span class="text-lg font-extrabold">Total You Pay</span>
-                      <span class="text-3xl font-extrabold text-brand" id="gTotal">₹505</span>
-                    </div>
-                  </div>
-                </div>
+              <div class="compare-row"><span style="color:#666;">Food Price</span><span style="font-weight:700;" id="gFoodAmount">₹500</span></div>
+              <div class="compare-row"><span style="color:#666;">Platform Fee (1%)</span><span style="font-weight:700; color:var(--brand);" id="gPlatformFee">₹5</span></div>
+              <div class="compare-row"><span style="color:#666;">Delivery Fee</span><span style="font-weight:800; color:#16a34a;">FREE</span></div>
+              <div class="compare-row" style="border-bottom:none; padding-top:14px; margin-top:6px; border-top:2px solid rgba(255,82,0,0.1);">
+                <span style="font-size:16px; font-weight:800;">Total</span>
+                <span style="font-size:28px; font-weight:800; color:var(--brand);" id="gTotal">₹505</span>
               </div>
             </div>
-
-            <!-- Competitor Side -->
-            <div class="space-y-6">
-              <div class="h-[88px] flex items-end pb-3">
-                <p class="text-sm font-bold text-gray-400 uppercase tracking-wider">Typical Other Apps</p>
+            <!-- Others -->
+            <div style="background:#fafafa; border-radius:18px; padding:24px; border:1.5px solid #e8e8e8; position:relative;">
+              <div style="position:absolute; top:-12px; right:16px; background:#ef4444; color:#fff; font-size:10px; font-weight:800; padding:4px 12px; border-radius:20px; letter-spacing:0.06em; text-transform:uppercase;">Overpriced</div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:18px;">
+                <div style="width:28px; height:28px; border-radius:8px; background:#ccc; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:800; color:#fff;">?</div>
+                <span style="font-size:12px; font-weight:800; color:#aaa; letter-spacing:0.06em; text-transform:uppercase;">Other Apps</span>
               </div>
-
-              <div class="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 relative">
-                <div class="absolute -top-3 right-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Overpriced</div>
-                <div class="flex items-center gap-2 mb-4">
-                  <div class="w-7 h-7 bg-gray-300 rounded-lg"></div>
-                  <p class="text-sm font-extrabold text-gray-400 uppercase tracking-wider">Other Apps</p>
-                </div>
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-500 text-sm">Food Price</span>
-                    <span class="font-bold" id="cFoodAmount">₹500</span>
-                  </div>
-                  <div class="flex justify-between items-center text-red-500">
-                    <span class="text-sm">Delivery Fee</span>
-                    <span class="font-bold" id="cDeliveryFee">₹40</span>
-                  </div>
-                  <div class="flex justify-between items-center text-red-500">
-                    <span class="text-sm">Platform Fee</span>
-                    <span class="font-bold" id="cPlatformFee">₹30</span>
-                  </div>
-                  <div class="flex justify-between items-center text-red-500">
-                    <span class="text-sm">GST & Other Charges</span>
-                    <span class="font-bold" id="cOtherFee">₹15</span>
-                  </div>
-                  <div class="border-t-2 border-gray-300 pt-4 mt-4">
-                    <div class="flex justify-between items-center">
-                      <span class="text-lg font-extrabold">Total You Pay</span>
-                      <span class="text-3xl font-extrabold text-red-600" id="cTotal">₹535</span>
-                    </div>
-                  </div>
-                </div>
+              <div class="compare-row"><span style="color:#888;">Food Price</span><span style="font-weight:700;" id="cFoodAmount">₹500</span></div>
+              <div class="compare-row"><span style="color:#ef4444;">Delivery Fee</span><span style="font-weight:700; color:#ef4444;" id="cDeliveryFee">₹40</span></div>
+              <div class="compare-row"><span style="color:#ef4444;">Platform Fee</span><span style="font-weight:700; color:#ef4444;" id="cPlatformFee">₹30</span></div>
+              <div class="compare-row"><span style="color:#ef4444;">GST & Other</span><span style="font-weight:700; color:#ef4444;" id="cOtherFee">₹15</span></div>
+              <div class="compare-row" style="border-bottom:none; padding-top:14px; margin-top:6px; border-top:2px solid #e8e8e8;">
+                <span style="font-size:16px; font-weight:800;">Total</span>
+                <span style="font-size:28px; font-weight:800; color:#ef4444;" id="cTotal">₹585</span>
               </div>
             </div>
           </div>
 
-          <!-- Savings Banner -->
-          <div class="mt-10 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-6 text-white text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2220%22 height=%2220%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M0 0h20v20H0z%22 fill=%22none%22/%3E%3Cpath d=%22M10 0v20M0 10h20%22 stroke=%22rgba(255,255,255,0.05)%22/%3E%3C/svg%3E')]"></div>
-            <div class="relative z-10">
-              <p class="text-sm font-bold uppercase tracking-widest opacity-80 mb-1">You Save with GoGoHungry</p>
-              <p class="text-5xl font-extrabold mb-2" id="studentSavings">₹30</p>
-              <p class="text-sm opacity-80" id="savingsNote">on every single order — no coupon needed!</p>
-            </div>
+          <!-- Savings banner -->
+          <div style="margin-top:24px; background:linear-gradient(135deg, #16a34a 0%, #15803d 100%); border-radius:18px; padding:24px; text-align:center; color:#fff;">
+            <p style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; opacity:0.8; margin:0 0 4px;">You save with GoGoHungry</p>
+            <p style="font-size:48px; font-weight:800; margin:4px 0; letter-spacing:-0.04em;" id="studentSavings">₹80</p>
+            <p style="font-size:13px; opacity:0.75; margin:0;" id="savingsNote">on every single order — no coupon needed!</p>
           </div>
         </div>
 
-        <!-- Student Benefits Cards -->
-        <div class="grid sm:grid-cols-3 gap-5 mb-8">
-          <div class="bg-white rounded-2xl p-6 text-center border-2 border-green-100 shadow-sm">
-            <div class="text-4xl mb-3">🚫💸</div>
-            <h4 class="font-extrabold text-lg mb-1 italic">₹0 Delivery Fee</h4>
-            <p class="text-gray-400 text-xs">No delivery charges, ever. Not ₹20, not ₹50. Literally zero.</p>
+        <!-- Student benefit pills -->
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:14px; margin-top:20px;">
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:16px; padding:20px; text-align:center;">
+            <div style="font-size:28px; margin-bottom:10px;">🚫</div>
+            <h4 style="font-size:14px; font-weight:800; color:#166534; margin:0 0 6px; font-style:italic;">₹0 Delivery</h4>
+            <p style="font-size:12px; color:#4ade80; margin:0; color:#15803d;">Not ₹20, not ₹50. Zero.</p>
           </div>
-          <div class="bg-white rounded-2xl p-6 text-center border-2 border-green-100 shadow-sm">
-            <div class="text-4xl mb-3">🏷️</div>
-            <h4 class="font-extrabold text-lg mb-1 italic">Just 1% Platform Fee</h4>
-            <p class="text-gray-400 text-xs">On a ₹200 order, that's just ₹2. Others charge ₹30-50+ in hidden fees.</p>
+          <div style="background:#fff7f3; border:1px solid #ffd5b8; border-radius:16px; padding:20px; text-align:center;">
+            <div style="font-size:28px; margin-bottom:10px;">🏷️</div>
+            <h4 style="font-size:14px; font-weight:800; color:var(--brand); margin:0 0 6px; font-style:italic;">Just 1% Fee</h4>
+            <p style="font-size:12px; color:#c45c00; margin:0;">₹200 order? That's ₹2.</p>
           </div>
-          <div class="bg-white rounded-2xl p-6 text-center border-2 border-green-100 shadow-sm">
-            <div class="text-4xl mb-3">🙅‍♂️</div>
-            <h4 class="font-extrabold text-lg mb-1 italic">No Fake Discounts</h4>
-            <p class="text-gray-400 text-xs">No inflated prices. No gimmicks. What you see is the real price, always.</p>
+          <div style="background:#f0fdf4; border:1px solid #bbf7d0; border-radius:16px; padding:20px; text-align:center;">
+            <div style="font-size:28px; margin-bottom:10px;">🙅</div>
+            <h4 style="font-size:14px; font-weight:800; color:#166534; margin:0 0 6px; font-style:italic;">No Fake Deals</h4>
+            <p style="font-size:12px; color:#15803d; margin:0;">Real prices, always.</p>
           </div>
         </div>
       </div>
 
-      <!-- ===================== RESTAURANT TAB ===================== -->
-      <div id="restaurantSection" class="hidden">
+      <!-- RESTAURANT section -->
+      <div id="restaurantSection" style="display:none;">
+        <div style="background:#fff; border:1px solid #f0f0f0; border-radius:2rem; padding:clamp(24px,4vw,48px); box-shadow:0 4px 32px rgba(0,0,0,0.04);">
+          <h3 style="font-size:20px; font-weight:800; text-align:center; margin:0 0 6px; letter-spacing:-0.02em; font-style:italic;">See How Much You Earn 📊</h3>
+          <p style="text-align:center; color:#aaa; font-size:14px; margin:0 0 36px;">Enter order value and see actual earnings</p>
 
-        <!-- Restaurant Calculator -->
-        <div class="bg-white rounded-[3rem] p-8 md:p-12 shadow-2xl border-2 border-blue-100 mb-12">
-          <h3 class="text-2xl font-extrabold text-center mb-2 italic tracking-tight">See How Much You Earn 📊</h3>
-          <p class="text-center text-gray-400 text-sm mb-10">Enter order value and see your actual earnings</p>
+          <div style="position:relative; margin-bottom:32px;">
+            <span style="position:absolute; left:18px; top:50%; transform:translateY(-50%); font-size:22px; font-weight:700; color:#bbb;">₹</span>
+            <input type="number" id="restOrderAmount" value="500" min="50" step="50" class="calc-input">
+          </div>
 
-          <div class="grid md:grid-cols-2 gap-10">
-            <!-- GoGoHungry Restaurant Side -->
-            <div class="space-y-6">
-              <div>
-                <label class="block text-sm font-bold text-gray-700 mb-3 uppercase tracking-wider">Order Value</label>
-                <div class="relative">
-                  <span class="absolute left-5 top-1/2 -translate-y-1/2 text-2xl font-bold text-gray-400">₹</span>
-                  <input type="number" id="restOrderAmount" value="500" min="50" step="50"
-                    class="w-full pl-14 pr-6 py-5 text-3xl font-bold border-2 border-gray-200 rounded-2xl focus:border-blue-500 focus:outline-none transition">
-                </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+            <div style="background:#eff6ff; border-radius:18px; padding:24px; border:1.5px solid #bfdbfe;">
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:18px;">
+                <div style="width:28px; height:28px; border-radius:8px; background:#2563eb; color:#fff; font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center;">G</div>
+                <span style="font-size:12px; font-weight:800; color:#1d4ed8; letter-spacing:0.06em; text-transform:uppercase;">GoGoHungry</span>
               </div>
-
-              <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-200">
-                <div class="flex items-center gap-2 mb-4">
-                  <div class="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black text-[10px]">G</div>
-                  <p class="text-sm font-extrabold text-blue-600 uppercase tracking-wider">On GoGoHungry</p>
-                </div>
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-600 text-sm">Order Value</span>
-                    <span class="font-bold" id="rOrderVal">₹500</span>
-                  </div>
-                  <div class="flex justify-between items-center text-blue-600">
-                    <span class="text-sm">Our Commission (10%)</span>
-                    <span class="font-bold" id="rCommission">-₹50</span>
-                  </div>
-                  <div class="flex justify-between items-center text-green-600">
-                    <span class="text-sm font-semibold">Delivery Fee from You</span>
-                    <span class="font-extrabold text-lg">₹0</span>
-                  </div>
-                  <div class="flex justify-between items-center text-green-600">
-                    <span class="text-sm font-semibold">Platform Fee</span>
-                    <span class="font-extrabold text-lg">₹0</span>
-                  </div>
-                  <div class="flex justify-between items-center text-green-600">
-                    <span class="text-sm font-semibold">Any Other Fee</span>
-                    <span class="font-extrabold text-lg">₹0</span>
-                  </div>
-                  <div class="border-t-2 border-blue-200 pt-4 mt-4">
-                    <div class="flex justify-between items-center">
-                      <span class="text-lg font-extrabold">You Earn</span>
-                      <span class="text-3xl font-extrabold text-green-600" id="rEarnings">₹450</span>
-                    </div>
-                    <p class="text-right text-green-600 font-bold text-sm mt-1" id="rPercent">90% of order value!</p>
-                  </div>
-                </div>
+              <div class="compare-row"><span style="color:#666;">Order Value</span><span style="font-weight:700;" id="rOrderVal">₹500</span></div>
+              <div class="compare-row"><span style="color:#2563eb;">Commission (10%)</span><span style="font-weight:700; color:#2563eb;" id="rCommission">-₹50</span></div>
+              <div class="compare-row"><span style="color:#16a34a;">Delivery Fee from You</span><span style="font-weight:800; color:#16a34a;">₹0</span></div>
+              <div class="compare-row"><span style="color:#16a34a;">Other Fees</span><span style="font-weight:800; color:#16a34a;">₹0</span></div>
+              <div class="compare-row" style="border-bottom:none; padding-top:14px; margin-top:6px; border-top:2px solid #bfdbfe;">
+                <span style="font-size:16px; font-weight:800;">You Earn</span>
+                <span style="font-size:28px; font-weight:800; color:#16a34a;" id="rEarnings">₹450</span>
               </div>
+              <p style="text-align:right; color:#16a34a; font-size:13px; font-weight:800; margin:4px 0 0;" id="rPercent">90% of order</p>
             </div>
-
-            <!-- Competitor Restaurant Side -->
-            <div class="space-y-6">
-              <div class="h-[88px] flex items-end pb-3">
-                <p class="text-sm font-bold text-gray-400 uppercase tracking-wider">Typical Other Platforms</p>
+            <div style="background:#fafafa; border-radius:18px; padding:24px; border:1.5px solid #e8e8e8; position:relative;">
+              <div style="position:absolute; top:-12px; right:16px; background:#ef4444; color:#fff; font-size:10px; font-weight:800; padding:4px 12px; border-radius:20px; text-transform:uppercase; letter-spacing:0.06em;">High Cuts</div>
+              <div style="display:flex; align-items:center; gap:8px; margin-bottom:18px;">
+                <div style="width:28px; height:28px; border-radius:8px; background:#ccc; color:#fff; font-size:11px; font-weight:800; display:flex; align-items:center; justify-content:center;">?</div>
+                <span style="font-size:12px; font-weight:800; color:#aaa; text-transform:uppercase; letter-spacing:0.06em;">Others</span>
               </div>
-
-              <div class="bg-gray-50 rounded-2xl p-6 border-2 border-gray-200 relative">
-                <div class="absolute -top-3 right-4 bg-red-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">High Cuts</div>
-                <div class="flex items-center gap-2 mb-4">
-                  <div class="w-7 h-7 bg-gray-300 rounded-lg"></div>
-                  <p class="text-sm font-extrabold text-gray-400 uppercase tracking-wider">Other Platforms</p>
-                </div>
-                <div class="space-y-3">
-                  <div class="flex justify-between items-center">
-                    <span class="text-gray-500 text-sm">Order Value</span>
-                    <span class="font-bold" id="crOrderVal">₹500</span>
-                  </div>
-                  <div class="flex justify-between items-center text-red-500">
-                    <span class="text-sm">Commission (20-30%)</span>
-                    <span class="font-bold" id="crCommission">-₹125</span>
-                  </div>
-                  <div class="flex justify-between items-center text-red-500">
-                    <span class="text-sm">Platform/Tech Fee</span>
-                    <span class="font-bold" id="crPlatformFee">-₹20</span>
-                  </div>
-                  <div class="flex justify-between items-center text-red-500">
-                    <span class="text-sm">Payment Gateway Fee</span>
-                    <span class="font-bold" id="crPaymentFee">-₹10</span>
-                  </div>
-                  <div class="flex justify-between items-center text-red-500">
-                    <span class="text-sm">Other Deductions</span>
-                    <span class="font-bold" id="crOtherFee">-₹15</span>
-                  </div>
-                  <div class="border-t-2 border-gray-300 pt-4 mt-4">
-                    <div class="flex justify-between items-center">
-                      <span class="text-lg font-extrabold">You Earn</span>
-                      <span class="text-3xl font-extrabold text-red-600" id="crEarnings">₹330</span>
-                    </div>
-                    <p class="text-right text-red-500 font-bold text-sm mt-1" id="crPercent">Only ~66% of order value</p>
-                  </div>
-                </div>
+              <div class="compare-row"><span style="color:#888;">Order Value</span><span style="font-weight:700;" id="crOrderVal">₹500</span></div>
+              <div class="compare-row"><span style="color:#ef4444;">Commission (25%)</span><span style="font-weight:700; color:#ef4444;" id="crCommission">-₹125</span></div>
+              <div class="compare-row"><span style="color:#ef4444;">Platform Fee</span><span style="font-weight:700; color:#ef4444;" id="crPlatformFee">-₹20</span></div>
+              <div class="compare-row"><span style="color:#ef4444;">Payment Fee</span><span style="font-weight:700; color:#ef4444;" id="crPaymentFee">-₹10</span></div>
+              <div class="compare-row"><span style="color:#ef4444;">Others</span><span style="font-weight:700; color:#ef4444;" id="crOtherFee">-₹15</span></div>
+              <div class="compare-row" style="border-bottom:none; padding-top:14px; margin-top:6px; border-top:2px solid #e8e8e8;">
+                <span style="font-size:16px; font-weight:800;">You Earn</span>
+                <span style="font-size:28px; font-weight:800; color:#ef4444;" id="crEarnings">₹330</span>
               </div>
+              <p style="text-align:right; color:#ef4444; font-size:13px; font-weight:800; margin:4px 0 0;" id="crPercent">~66%</p>
             </div>
           </div>
 
-          <!-- Restaurant Savings Banner -->
-          <div class="mt-10 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl p-6 text-white text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2220%22 height=%2220%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M0 0h20v20H0z%22 fill=%22none%22/%3E%3Cpath d=%22M10 0v20M0 10h20%22 stroke=%22rgba(255,255,255,0.05)%22/%3E%3C/svg%3E')]"></div>
-            <div class="relative z-10">
-              <p class="text-sm font-bold uppercase tracking-widest opacity-80 mb-1">Extra Earnings with GoGoHungry</p>
-              <p class="text-5xl font-extrabold mb-2" id="restSavings">₹120</p>
-              <p class="text-sm opacity-80">more per order compared to other platforms!</p>
-            </div>
+          <div style="margin-top:24px; background:linear-gradient(135deg, #1d4ed8 0%, #1e40af 100%); border-radius:18px; padding:24px; text-align:center; color:#fff;">
+            <p style="font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; opacity:0.8; margin:0 0 4px;">Extra earnings with GoGoHungry</p>
+            <p style="font-size:48px; font-weight:800; margin:4px 0; letter-spacing:-0.04em;" id="restSavings">₹120</p>
+            <p style="font-size:13px; opacity:0.75; margin:0;">more per order vs other platforms!</p>
           </div>
         </div>
 
-        <!-- Restaurant Benefits Cards -->
-        <div class="grid sm:grid-cols-3 gap-5 mb-8">
-          <div class="bg-white rounded-2xl p-6 text-center border-2 border-blue-100 shadow-sm">
-            <div class="text-4xl mb-3">💰</div>
-            <h4 class="font-extrabold text-lg mb-1 italic">Keep 90%</h4>
-            <p class="text-gray-400 text-xs">You keep 90% of every order. Just a flat 10% commission. No surprises.</p>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:14px; margin-top:20px;">
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:16px; padding:20px; text-align:center;">
+            <div style="font-size:28px; margin-bottom:10px;">💰</div>
+            <h4 style="font-size:14px; font-weight:800; color:#1e40af; margin:0 0 6px; font-style:italic;">Keep 90%</h4>
+            <p style="font-size:12px; color:#1d4ed8; margin:0;">Flat 10% commission only.</p>
           </div>
-          <div class="bg-white rounded-2xl p-6 text-center border-2 border-blue-100 shadow-sm">
-            <div class="text-4xl mb-3">🚫</div>
-            <h4 class="font-extrabold text-lg mb-1 italic">Zero Extra Fees</h4>
-            <p class="text-gray-400 text-xs">No delivery fee, no platform fee, no tech fee, no payment gateway fee. Nothing.</p>
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:16px; padding:20px; text-align:center;">
+            <div style="font-size:28px; margin-bottom:10px;">🚫</div>
+            <h4 style="font-size:14px; font-weight:800; color:#1e40af; margin:0 0 6px; font-style:italic;">Zero Extra Fees</h4>
+            <p style="font-size:12px; color:#1d4ed8; margin:0;">Nothing else ever.</p>
           </div>
-          <div class="bg-white rounded-2xl p-6 text-center border-2 border-blue-100 shadow-sm">
-            <div class="text-4xl mb-3">📊</div>
-            <h4 class="font-extrabold text-lg mb-1 italic">100% Transparent</h4>
-            <p class="text-gray-400 text-xs">What we say is what we do. 10% is 10%. No hidden deductions. Ever.</p>
+          <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:16px; padding:20px; text-align:center;">
+            <div style="font-size:28px; margin-bottom:10px;">📊</div>
+            <h4 style="font-size:14px; font-weight:800; color:#1e40af; margin:0 0 6px; font-style:italic;">100% Transparent</h4>
+            <p style="font-size:12px; color:#1d4ed8; margin:0;">10% is 10%. Always.</p>
           </div>
         </div>
       </div>
 
-      <!-- Bottom CTA -->
-      <div class="bg-gradient-to-r from-gray-900 to-gray-800 rounded-[2.5rem] p-8 md:p-10 text-white text-center mt-6">
-        <p class="text-sm font-bold uppercase tracking-widest text-gray-400 mb-4">Our Promise</p>
-        <h3 class="text-3xl md:text-4xl font-extrabold italic mb-4">No delivery fees. No platform fees. No hidden costs.</h3>
-        <p class="text-lg text-gray-400 max-w-2xl mx-auto mb-6">
-          Students pay just <span class="text-white font-bold">1% platform fee</span>. Restaurants keep <span class="text-white font-bold">90%</span> of every order. That's it. Simple, honest, transparent.
-        </p>
-        <div class="inline-flex gap-3">
-          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="bg-brand text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition shadow-lg shadow-orange-900/20">Order Now 🚀</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section id="why" class="py-24 px-6 bg-white relative">
-    <div class="max-w-7xl mx-auto grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
-      <div class="feature-card p-10 rounded-[2.5rem] bg-white">
-        <div class="text-4xl mb-6">💰</div>
-        <h3 class="text-xl font-extrabold mb-4 italic">₹0 Extra Charges</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Unlike other apps, we don't charge extra delivery or platform fees. What you see is what you pay. More money for food! 🍕</p>
-      </div>
-      <div class="feature-card p-10 rounded-[2.5rem] bg-white border-brand/20 bg-orange-50/20 ring-2 ring-brand/15">
-        <div class="text-4xl mb-6">🛡️</div>
-        <h3 class="text-xl font-extrabold mb-4 italic text-brand">2× refund + free food</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">If we don’t deliver on our side, you get double your money back and the same order free. We put our money where your hunger is.</p>
-      </div>
-      <div class="feature-card p-10 rounded-[2.5rem] bg-white border-brand/20 bg-orange-50/20">
-        <div class="text-4xl mb-6">🎁</div>
-        <h3 class="text-xl font-extrabold mb-4 italic text-brand">Hungry Coins</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Collect Hungry Coins on every order and unlock gifts, offers, and exclusive rewards! More orders = more rewards! 🍔</p>
-      </div>
-      <div class="feature-card p-10 rounded-[2.5rem] bg-white">
-        <div class="text-4xl mb-6">🎓</div>
-        <h3 class="text-xl font-extrabold mb-4 italic text-brand">Campus-Focused</h3>
-        <p class="text-gray-500 text-sm leading-relaxed">Tailored for college campuses – fast drops, verified canteens, and direct delivery. Fresh food, fast delivery! 🚴‍♂️</p>
+      <!-- Bottom promise -->
+      <div style="margin-top:36px; background:linear-gradient(135deg, #111 0%, #1a0800 100%); border-radius:24px; padding:40px 36px; color:#fff; text-align:center;">
+        <p style="font-size:11px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; color:#888; margin:0 0 12px;">Our Promise</p>
+        <h3 style="font-size:clamp(20px,3vw,30px); font-weight:800; letter-spacing:-0.03em; font-style:italic; margin:0 0 12px;">No delivery fees. No platform fees. No surprises.</h3>
+        <p style="color:#777; font-size:15px; max-width:500px; margin:0 auto 24px; line-height:1.6;">Students pay just <strong style="color:#fff;">1%</strong>. Restaurants keep <strong style="color:#fff;">90%</strong>. Simple.</p>
+        <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener" class="btn-primary" style="text-decoration:none;">Order Now 🚀</a>
       </div>
     </div>
   </section>
 
-  <section id="download-app" class="py-16 md:py-24 px-6 bg-gradient-to-b from-white to-orange-50/30">
-    <div class="max-w-6xl mx-auto">
-      <div class="rounded-[2rem] md:rounded-[2.5rem] bg-gradient-to-br from-rose-50 via-orange-50/90 to-amber-50 border border-orange-100/80 shadow-xl shadow-orange-100/50 p-8 md:p-12 lg:p-14">
-        <div class="grid md:grid-cols-2 gap-10 lg:gap-14 items-center">
-          <div class="text-center md:text-left order-2 md:order-1">
-            <h2 class="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold text-gray-900 tracking-tight mb-4 leading-tight">
-              Download the app now!
-            </h2>
-            <p class="text-gray-600 text-lg md:text-xl leading-relaxed mb-8 max-w-md mx-auto md:mx-0">
-              Order from campus canteens with <span class="font-semibold text-gray-800">₹0 delivery</span> — seamless tracking, Hungry Coins, and offers. <span class="text-brand font-semibold">Only on GoGoHungry.</span>
-            </p>
-            <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="ggh-play-store inline-block transition hover:opacity-90 hover:scale-[1.02] active:scale-[0.98]">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14 md:h-16 w-auto mx-auto md:mx-0" width="180" height="53" loading="lazy" />
-            </a>
-            <p class="text-xs text-gray-500 mt-3 text-center md:text-left">
-              <button type="button" class="ggh-copy-play-btn font-semibold text-brand underline decoration-brand/30 hover:decoration-brand">Copy Play Store link</button>
-              <span class="text-gray-400"> if the page won’t open</span>
-            </p>
-          </div>
-          <div class="flex justify-center order-1 md:order-2">
-            <div class="relative w-full max-w-[280px]">
-              <div class="absolute -inset-1 bg-gradient-to-br from-orange-200/60 to-rose-200/50 rounded-[2.75rem] blur-lg opacity-80"></div>
-              <div class="relative rounded-[2.5rem] bg-gray-900 p-[10px] shadow-2xl shadow-gray-900/25">
-                <div class="rounded-[2rem] bg-gray-950 pt-3 px-3 pb-4">
-                  <div class="mx-auto mb-3 h-6 w-24 rounded-full bg-gray-800"></div>
-                  <div class="rounded-[1.35rem] bg-white px-5 pt-6 pb-7 flex flex-col items-center min-h-[280px]">
-                    <p class="text-xs font-semibold text-gray-500 text-center leading-snug mb-4 px-1">
-                      Scan the QR code to download the app
-                    </p>
-                    <div class="rounded-xl bg-white p-2.5 shadow-inner ring-1 ring-gray-100">
-                      <!-- Add your QR image as landing-page/play-store-qr.png (links to Play Store) -->
-                      <img
-                        src="qr-code.png"
-                        alt="QR code to download GoGoHungry on Google Play"
-                        width="176"
-                        height="176"
-                        class="w-40 h-40 md:w-44 md:h-44 object-contain"
-                        loading="lazy"
-                      />
-                    </div>
-                    <p class="mt-4 text-[11px] text-gray-400 text-center">Opens Google Play</p>
-                  </div>
+  <!-- DOWNLOAD APP -->
+  <section id="download-app" class="download-section" style="padding:96px 24px;">
+    <div class="max-w-5xl mx-auto">
+      <div style="background:#fff; border:1px solid #f0e8e0; border-radius:2.5rem; padding:clamp(32px,5vw,64px); box-shadow:0 8px 48px rgba(255,82,0,0.06); display:grid; grid-template-columns:1fr auto; gap:48px; align-items:center;" class="download-inner">
+        <div>
+          <div class="section-divider" style="margin:0 0 20px;"></div>
+          <h2 style="font-size:clamp(28px,4vw,44px); font-weight:800; letter-spacing:-0.03em; color:#111; margin:0 0 14px; line-height:1.1;">Download the app<br>and order now.</h2>
+          <p style="font-size:16px; color:#777; line-height:1.7; margin:0 0 28px; max-width:380px;">
+            ₹0 delivery, live tracking, and Hungry Coins — all in one campus-only app.
+            <strong style="color:var(--brand);"> Only on GoGoHungry.</strong>
+          </p>
+          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener" class="ggh-play-store" style="display:inline-block;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height:56px; width:auto;" loading="lazy">
+          </a>
+          <p style="font-size:12px; color:#bbb; margin:12px 0 0;">
+            <button class="ggh-copy-play-btn" style="color:var(--brand); font-weight:700; text-decoration:underline; background:none; border:none; cursor:pointer; font-size:12px; font-family:inherit;">Copy Play Store link</button>
+            <span style="color:#ccc;"> if the page won't open</span>
+          </p>
+        </div>
+
+        <!-- QR code phone -->
+        <div style="flex-shrink:0;">
+          <div style="background:#111; border-radius:2rem; padding:10px; width:180px; box-shadow:0 20px 48px rgba(0,0,0,0.2);">
+            <div style="background:#000; border-radius:1.6rem; padding-top:10px; padding-left:10px; padding-right:10px; padding-bottom:16px;">
+              <div style="width:60px; height:14px; background:#222; border-radius:20px; margin:0 auto 12px;"></div>
+              <div style="background:#fff; border-radius:1.2rem; padding:16px; text-align:center;">
+                <p style="font-size:10px; color:#888; margin:0 0 10px; font-weight:600; line-height:1.4;">Scan to download</p>
+                <div style="background:#fff; border:1px solid #f0f0f0; border-radius:10px; padding:8px;">
+                  <img src="qr-code.png" alt="QR code" style="width:100%; height:auto; display:block;" onerror="this.parentElement.innerHTML='<div style=\'width:100%;aspect-ratio:1;background:#f5f5f5;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:24px;\'>📱</div>'">
                 </div>
+                <p style="font-size:9px; color:#bbb; margin:10px 0 0;">Opens Google Play</p>
               </div>
             </div>
           </div>
@@ -551,153 +697,160 @@
     </div>
   </section>
 
-  <section id="compliance" class="py-24 px-6 bg-white">
-    <div class="max-w-4xl mx-auto bg-gray-50 rounded-[3rem] p-12 md:p-16 flex flex-col md:flex-row items-center gap-12 relative shadow-inner">
-      <div class="flex-1">
-        <div class="flex items-center gap-3 mb-4">
-            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-            <span class="text-xs font-black text-blue-900 tracking-tighter uppercase">D-U-N-S® Verified Profile</span>
+  <!-- TRUST / COMPLIANCE -->
+  <section id="compliance" style="padding:80px 24px; background:#fff;">
+    <div class="max-w-3xl mx-auto">
+      <div class="db-badge" style="padding:40px 40px; display:flex; align-items:center; gap:36px; flex-wrap:wrap; justify-content:center;">
+        <div style="flex:1; min-width:220px;">
+          <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+            <span style="width:8px; height:8px; border-radius:50%; background:#16a34a; display:block; animation: floatA 2s ease-in-out infinite;"></span>
+            <span style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#166534;">D-U-N-S® Verified</span>
+          </div>
+          <h2 style="font-size:clamp(22px,3vw,32px); font-weight:800; font-style:italic; letter-spacing:-0.03em; color:#111; margin:0 0 12px;">Registered &amp; Verified.</h2>
+          <p style="font-size:14px; color:#888; line-height:1.7; margin:0 0 20px; max-width:380px;">
+            GoGoHungry is authenticated by <strong style="color:#111;">Dun &amp; Bradstreet</strong>, meeting global standards for reliability. Payments secured through <strong style="color:#111;">Razorpay</strong> industry-grade encryption.
+          </p>
+          <img src="https://razorpay.com/assets/razorpay-logo.svg" alt="Razorpay" style="height:20px; opacity:0.35; filter:grayscale(1);">
         </div>
-        <h2 class="text-3xl font-extrabold mb-6 italic tracking-tight leading-none">Registered & Verified.</h2>
-        <p class="text-gray-500 text-sm leading-relaxed mb-6">
-          GoGoHungry is an authenticated business entity. Our credentials are verified by <strong>Dun & Bradstreet</strong>, meeting global standards for reliability. Payments are secured through <strong>Razorpay</strong> industry-grade encryption.
-        </p>
-        <img src="https://razorpay.com/assets/razorpay-logo.svg" class="h-5 opacity-40 grayscale" alt="Razorpay">
-      </div>
-      <div class="w-40 h-40 bg-white rounded-full flex flex-col items-center justify-center border-4 border-white shadow-xl">
-        <span class="text-4xl font-black text-blue-900 leading-none lowercase italic">d&b</span>
-        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-[0.2em] mt-3">Verified Entity</span>
+        <div style="width:96px; height:96px; background:#fff; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; border:3px solid #e5e7eb; box-shadow:0 4px 16px rgba(0,0,0,0.06); flex-shrink:0;">
+          <span style="font-size:26px; font-weight:900; color:#1e3a8a; font-style:italic; line-height:1;">d&amp;b</span>
+          <span style="font-size:8px; font-weight:700; color:#aaa; text-transform:uppercase; letter-spacing:0.12em; margin-top:6px;">Verified</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <footer class="bg-[#0A0A0A] text-white pt-24 pb-12 px-6">
+  <!-- FOOTER -->
+  <footer style="background:#0a0a0a; color:#fff; padding:72px 24px 32px;">
     <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-16 mb-20 border-b border-white/5 pb-16">
-        <div class="text-center md:text-left">
-          <div class="flex items-center justify-center md:justify-start gap-2 mb-8">
-            <div class="w-8 h-8 bg-brand rounded-lg flex items-center justify-center text-white font-black text-sm">G</div>
-            <span class="text-xl font-bold tracking-tight">GoGoHungry</span>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:48px; margin-bottom:60px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div>
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+            <div style="width:32px; height:32px; background:var(--brand); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; color:#fff;">G</div>
+            <span style="font-size:18px; font-weight:800; letter-spacing:-0.02em;">GoGoHungry</span>
           </div>
-          <p class="text-sm flex flex-wrap justify-center md:justify-start items-center gap-x-4 gap-y-2 mb-4">
-            <span class="font-semibold text-gray-400">Connect with us:</span>
-            <a href="https://www.linkedin.com/company/gogohungry/?viewAsMember=true" target="_blank" rel="noopener noreferrer" class="underline hover:text-brand transition flex items-center gap-1">
-              <span>LinkedIn</span> <span class="text-xs">💼</span>
-            </a>
-            <a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener noreferrer" class="underline hover:text-brand transition flex items-center gap-1">
-              <span>Instagram</span> <span class="text-xs">📸</span>
-            </a>
-          </p>
-          <p class="text-xs text-gray-500 italic">📧 Reach us at: <a href="mailto:contact@gogohungry.xyz" class="underline">contact@gogohungry.xyz</a></p>
+          <p style="font-size:13px; color:#555; line-height:1.7; margin:0 0 20px; max-width:240px;">Campus food that actually shows up. Zero delivery fees. Built for students, by students.</p>
+          <div style="display:flex; gap:10px;">
+            <a href="https://www.linkedin.com/company/gogohungry/" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:10px; background:#1a1a1a; border:1px solid #2a2a2a; display:flex; align-items:center; justify-content:center; font-size:16px; text-decoration:none; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--brand)'" onmouseout="this.style.borderColor='#2a2a2a'">💼</a>
+            <a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener" style="width:36px; height:36px; border-radius:10px; background:#1a1a1a; border:1px solid #2a2a2a; display:flex; align-items:center; justify-content:center; font-size:16px; text-decoration:none; transition:border-color 0.2s;" onmouseover="this.style.borderColor='var(--brand)'" onmouseout="this.style.borderColor='#2a2a2a'">📸</a>
+          </div>
         </div>
 
-        <div class="text-center">
-            <p class="font-bold text-xs uppercase tracking-widest text-gray-600 mb-8">Navigation</p>
-            <ul class="space-y-4 text-sm font-medium text-gray-400">
-                <li><a href="ipl-ticket.html" class="hover:text-white transition">Free IPL Ticket 🎟️</a></li>
-                <li><a href="https://www.instagram.com/thegogohungry?igsh=N2xvejlnN2Z6cjI5" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Instagram 📸</a></li>
-                <li><button onclick="toggleModal('termsModal')" class="hover:text-white transition">Terms & Policies 📜</button></li>
-            </ul>
+        <div>
+          <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#444; margin:0 0 20px;">Navigate</p>
+          <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:12px;">
+            <li><a href="ipl-ticket.html" style="color:#666; text-decoration:none; font-size:14px; font-weight:500; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#666'">Free IPL Ticket 🎟️</a></li>
+            <li><a href="https://www.instagram.com/thegogohungry" target="_blank" rel="noopener" style="color:#666; text-decoration:none; font-size:14px; font-weight:500; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#666'">Instagram 📸</a></li>
+            <li><button onclick="toggleModal('termsModal')" style="color:#666; background:none; border:none; font-size:14px; font-weight:500; cursor:pointer; padding:0; font-family:inherit; transition:color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#666'">Terms & Policies 📜</button></li>
+          </ul>
         </div>
 
-        <div class="text-center md:text-right flex flex-col items-center md:items-end">
-            <p class="font-bold text-xs uppercase tracking-widest text-gray-600 mb-8">Install App</p>
-            <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="ggh-play-store inline-block transition hover:opacity-90">
-              <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" class="h-14 w-auto" width="180" height="53" loading="lazy" />
-            </a>
+        <div>
+          <p style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:#444; margin:0 0 20px;">Get the App</p>
+          <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener" class="ggh-play-store" style="display:inline-block;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" alt="Get it on Google Play" style="height:48px; width:auto; opacity:0.85;" loading="lazy">
+          </a>
+          <p style="font-size:12px; color:#333; margin:12px 0 0;">📧 <a href="mailto:contact@gogohungry.xyz" style="color:#555; text-decoration:none;">contact@gogohungry.xyz</a></p>
         </div>
       </div>
 
-      <div class="text-center space-y-6">
-        <p class="text-sm font-medium italic">
-          Made with ❤️ by <span class="text-brand font-bold">hungry students</span> for hungry students.
-        </p>
-        
-        <div class="flex justify-center gap-6 text-2xl py-4">
-          <span class="animate-float" style="animation-delay: 0s;">🍕</span>
-          <span class="animate-float" style="animation-delay: 0.5s;">🍔</span>
-          <span class="animate-float" style="animation-delay: 1s;">🍜</span>
-          <span class="animate-float" style="animation-delay: 1.5s;">🍗</span>
-          <span class="animate-float" style="animation-delay: 2s;">☕</span>
+      <div style="text-align:center;">
+        <p style="font-size:13px; font-style:italic; color:#444; margin:0 0 20px;">Made with ❤️ by <span style="color:var(--brand); font-weight:700;">hungry students</span> for hungry students.</p>
+        <div style="display:flex; justify-content:center; gap:20px; font-size:22px; margin-bottom:24px;">
+          <span style="animation:floatA 3s ease-in-out infinite;">🍕</span>
+          <span style="animation:floatB 3.5s ease-in-out infinite 0.5s;">🍔</span>
+          <span style="animation:floatA 4s ease-in-out infinite 1s;">🍜</span>
+          <span style="animation:floatB 3.2s ease-in-out infinite 1.5s;">🍗</span>
+          <span style="animation:floatA 3.8s ease-in-out infinite 2s;">☕</span>
         </div>
-
-        <div class="pt-8">
-          <p class="text-[10px] text-gray-600 leading-loose max-w-2xl mx-auto font-bold tracking-widest uppercase">
-            © 2026 GoGoHungry (gogohungry) - Best Campus Food Delivery App | Zero Delivery Charges | College Food Ordering Service
-          </p>
-        </div>
+        <p style="font-size:10px; color:#333; letter-spacing:0.08em; text-transform:uppercase; font-weight:700;">© 2026 GoGoHungry · Best Campus Food Delivery · Zero Delivery Charges</p>
       </div>
     </div>
   </footer>
 
-  <div id="ggh-play-toast" class="fixed bottom-6 left-4 right-4 z-[200] max-w-lg mx-auto rounded-2xl border border-gray-200 bg-white p-4 shadow-2xl shadow-gray-900/15" role="status">
-    <p class="text-sm text-gray-700 leading-snug mb-3">
-      Some built-in browsers block Google Play. <strong>Copy the link</strong> and paste it into Chrome, Edge, or your phone’s browser.
-    </p>
-    <div class="flex flex-wrap gap-2">
-      <button type="button" id="ggh-copy-play-url" class="flex-1 min-w-[8rem] rounded-xl bg-brand px-4 py-2.5 text-sm font-bold text-white hover:opacity-95 transition">Copy Play Store link</button>
-      <button type="button" id="ggh-dismiss-play-toast" class="rounded-xl border border-gray-200 px-4 py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition">Dismiss</button>
+  <!-- Play store toast -->
+  <div id="ggh-play-toast" style="position:fixed; bottom:24px; left:16px; right:16px; z-index:200; max-width:480px; margin:0 auto; background:#fff; border:1px solid #eee; border-radius:20px; padding:16px; box-shadow:0 8px 32px rgba(0,0,0,0.15);" role="status">
+    <p style="font-size:14px; color:#555; margin:0 0 12px; line-height:1.5;">Some browsers block Google Play. <strong>Copy the link</strong> and paste it into Chrome.</p>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <button id="ggh-copy-play-url" class="btn-primary" style="flex:1; min-width:120px; border:none; cursor:pointer; font-family:inherit; font-size:14px; text-align:center;">Copy Play Store link</button>
+      <button id="ggh-dismiss-play-toast" style="border:1px solid #e5e5e5; background:#fff; border-radius:12px; padding:12px 16px; font-size:14px; font-weight:600; color:#666; cursor:pointer; font-family:inherit;">Dismiss</button>
     </div>
   </div>
 
+  <!-- MODALS -->
   <div id="deliveryPromiseModal" class="modal">
-    <div class="modal-content text-center">
-      <button type="button" onclick="toggleModal('deliveryPromiseModal')" class="absolute top-6 right-6 text-2xl font-light hover:text-brand transition">&times;</button>
-      <div class="mb-4 inline-flex rounded-full bg-brand/10 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-brand">2× money-back + free meal</div>
-      <h3 class="text-2xl md:text-3xl font-black mb-4 text-gray-900 leading-tight">If we don’t deliver on our side, you win twice.</h3>
-      <p class="text-gray-600 mb-6 leading-relaxed text-left">
-        When a delivery fails because of <strong>GoGoHungry</strong> (our ops/platform side — not wrong address, unreachable customer, etc.), you get <strong class="text-brand">200% of what you paid back</strong> and we’ll comp <strong>the same food you ordered</strong> so you don’t go hungry.
-      </p>
-      <ul class="text-left text-sm text-gray-600 space-y-2 mb-6 list-disc pl-5">
-        <li>Applies when the fault is on <strong>our</strong> side, as verified by us.</li>
-        <li>“2×” means refund of twice the order value you paid for that order (details shared in-app).</li>
-        <li>Free meal = same items from the same outlet, subject to availability.</li>
+    <div class="modal-box" style="text-align:center;">
+      <button onclick="toggleModal('deliveryPromiseModal')" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:24px; cursor:pointer; color:#aaa;">&times;</button>
+      <div class="pill pill-brand" style="margin:0 auto 16px;">2× money-back + free meal</div>
+      <h3 style="font-size:24px; font-weight:800; color:#111; margin:0 0 14px; letter-spacing:-0.02em; line-height:1.2;">If we don't deliver on our side, you win twice.</h3>
+      <p style="color:#666; margin:0 0 20px; line-height:1.7; text-align:left; font-size:15px;">When a delivery fails because of <strong>GoGoHungry</strong> (our platform — not wrong address, unreachable customer, etc.), you get <strong style="color:var(--brand);">200% of what you paid back</strong> and we'll comp <strong>the same food you ordered</strong>.</p>
+      <ul style="text-align:left; font-size:14px; color:#666; line-height:1.7; padding-left:20px; margin-bottom:24px;">
+        <li>Applies when fault is on <strong>our</strong> side, verified by us.</li>
+        <li>"2×" = refund of twice the order value paid.</li>
+        <li>Free meal = same items, subject to availability.</li>
       </ul>
-      <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener noreferrer" class="ggh-play-store inline-flex w-full justify-center bg-brand text-white px-6 py-4 rounded-2xl font-bold hover:bg-brand-dark transition">Order on the app</a>
-      <p class="text-xs text-gray-500 mt-4 text-center">
-        Store won’t open? <button type="button" class="ggh-copy-play-btn font-bold text-brand underline decoration-brand/40 hover:decoration-brand">Copy link instead</button>
-      </p>
+      <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener" class="btn-primary ggh-play-store" style="display:block; text-align:center; text-decoration:none;">Order on the app</a>
+      <p style="font-size:12px; color:#bbb; margin:12px 0 0;">Can't open? <button class="ggh-copy-play-btn" style="color:var(--brand); font-weight:700; text-decoration:underline; background:none; border:none; cursor:pointer; font-size:12px; font-family:inherit;">Copy link instead</button></p>
     </div>
   </div>
 
   <div id="launchModal" class="modal">
-    <div class="modal-content text-center">
-      <button onclick="toggleModal('launchModal')" class="absolute top-6 right-6 text-2xl font-light hover:text-brand transition">&times;</button>
-      <h3 class="text-3xl font-black mb-4 text-brand italic">Launching Soon! 🚀</h3>
-      <p class="text-gray-500 mb-8 leading-relaxed italic">We are working hard to launch this soon. Please stay updated — you’ll hear from us very soon! 🔥</p>
-      <div class="bg-orange-50 p-6 rounded-[1.5rem] border border-orange-100 font-bold text-brand">Stay hungry. Stay tuned.</div>
+    <div class="modal-box" style="text-align:center;">
+      <button onclick="toggleModal('launchModal')" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:24px; cursor:pointer; color:#aaa;">&times;</button>
+      <h3 style="font-size:28px; font-weight:800; color:var(--brand); font-style:italic; margin:0 0 12px;">Launching Soon! 🚀</h3>
+      <p style="color:#777; margin:0 0 24px; line-height:1.7;">We're working hard to launch at your campus. Stay updated!</p>
+      <div style="background:var(--brand-light); border-radius:16px; padding:20px; font-weight:800; color:var(--brand); font-style:italic; font-size:18px;">Stay hungry. Stay tuned.</div>
     </div>
   </div>
 
   <div id="termsModal" class="modal">
-    <div class="modal-content no-scrollbar">
-      <button onclick="toggleModal('termsModal')" class="absolute top-6 right-6 text-2xl font-light hover:text-brand transition">&times;</button>
-      <h3 class="text-2xl font-black mb-8 italic underline decoration-brand decoration-2 text-black">Terms & Policies Overview 📜</h3>
-      <div class="space-y-8 text-sm text-gray-600 leading-relaxed">
+    <div class="modal-box no-scrollbar">
+      <button onclick="toggleModal('termsModal')" style="position:absolute; top:20px; right:20px; background:none; border:none; font-size:24px; cursor:pointer; color:#aaa;">&times;</button>
+      <h3 style="font-size:22px; font-weight:800; font-style:italic; color:#111; margin:0 0 28px; text-decoration:underline; text-decoration-color:var(--brand);">Terms & Policies 📜</h3>
+      <div style="display:flex; flex-direction:column; gap:24px; font-size:14px; color:#666; line-height:1.7;">
         <div>
-          <p class="font-bold text-black mb-2 uppercase tracking-widest text-xs italic">Cancellations</p>
-          <p>Once an order is placed, it cannot be cancelled at this stage. We ensure your food is prepared fresh and immediately.</p>
+          <p style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#111; margin:0 0 8px; font-style:italic;">Cancellations</p>
+          <p style="margin:0;">Once an order is placed, it cannot be cancelled. We ensure your food is prepared fresh and immediately.</p>
         </div>
         <div>
-          <p class="font-bold text-black mb-2 uppercase tracking-widest text-xs italic">Refund Policy</p>
-          <p>Orders cannot be refunded once confirmed. We are refining this workflow for future updates.</p>
+          <p style="font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#111; margin:0 0 8px; font-style:italic;">Refund Policy</p>
+          <p style="margin:0;">Orders cannot be refunded once confirmed. We are refining this workflow for future updates.</p>
         </div>
-        <div class="p-6 bg-gray-50 rounded-2xl border border-gray-100 flex justify-between items-center">
-            <span class="text-xs font-bold text-black italic">Read full document:</span>
-            <a href="terms.html" target="_blank" class="text-brand font-bold underline">terms.html →</a>
+        <div style="background:#fafafa; border-radius:14px; border:1px solid #f0f0f0; padding:16px; display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-size:13px; font-weight:700; color:#111; font-style:italic;">Read full document:</span>
+          <a href="terms.html" target="_blank" style="color:var(--brand); font-weight:700; text-decoration:none;">terms.html →</a>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Prevent this landing page from being embedded in iframes
     if (window.top !== window.self) {
       window.top.location = window.location.href;
     }
 
-    /** Google Play: many embedded browsers block play.google.com — use intent on Android + copy fallback. */
-    (function initPlayStoreLinks() {
+    /* Nav visibility fix for md breakpoint */
+    (function() {
+      var nav = document.getElementById('desktop-nav');
+      function checkNav() {
+        nav.style.display = window.innerWidth >= 768 ? 'flex' : 'none';
+      }
+      checkNav();
+      window.addEventListener('resize', checkNav);
+    })();
+
+    /* Download section responsive */
+    (function() {
+      var inner = document.querySelector('.download-inner');
+      function checkDownload() {
+        if (inner) inner.style.gridTemplateColumns = window.innerWidth < 640 ? '1fr' : '1fr auto';
+      }
+      checkDownload();
+      window.addEventListener('resize', checkDownload);
+    })();
+
+    /* Play store links */
+    (function() {
       var PLAY_URL = 'https://play.google.com/store/apps/details?id=com.gogohungry.app';
       var PKG = 'com.gogohungry.app';
       var STORE_RX = /play\.google\.com\/store\//;
@@ -708,262 +861,144 @@
         }
         return Promise.reject();
       }
-
-      function showPlayToast() {
-        var t = document.getElementById('ggh-play-toast');
-        if (t) {
-          t.classList.add('ggh-show');
-        }
-      }
-
-      function hidePlayToast() {
-        var t = document.getElementById('ggh-play-toast');
-        if (t) {
-          t.classList.remove('ggh-show');
-        }
-      }
-
-      function tryAndroidMarketIntent() {
-        var intent =
-          'intent://details?id=' +
-          encodeURIComponent(PKG) +
-          '#Intent;scheme=market;package=com.android.vending;end';
+      function showPlayToast() { document.getElementById('ggh-play-toast').classList.add('ggh-show'); }
+      function hidePlayToast() { document.getElementById('ggh-play-toast').classList.remove('ggh-show'); }
+      function tryAndroidIntent() {
+        var intent = 'intent://details?id=' + encodeURIComponent(PKG) + '#Intent;scheme=market;package=com.android.vending;end';
         var iframe = document.createElement('iframe');
-        iframe.setAttribute('style', 'display:none;width:0;height:0;border:0');
+        iframe.setAttribute('style', 'display:none');
         iframe.setAttribute('src', intent);
         document.body.appendChild(iframe);
-        setTimeout(function () {
-          try {
-            if (iframe.parentNode) {
-              iframe.parentNode.removeChild(iframe);
-            }
-          } catch (e) {}
-        }, 2000);
+        setTimeout(function() { try { iframe.parentNode.removeChild(iframe); } catch(e) {} }, 2000);
       }
 
-      document.addEventListener('click', function (e) {
+      document.addEventListener('click', function(e) {
         if (e.target.closest && e.target.closest('.ggh-copy-play-btn')) {
           e.preventDefault();
           copyPlayUrl().then(
-            function () {
+            function() {
               hidePlayToast();
               var n = document.createElement('div');
-              n.className =
-                'fixed bottom-6 left-1/2 z-[210] -translate-x-1/2 rounded-full bg-gray-900 px-4 py-2 text-sm font-semibold text-white shadow-lg';
-              n.textContent = 'Link copied';
+              n.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#111;color:#fff;padding:10px 20px;border-radius:999px;font-size:14px;font-weight:600;z-index:999;';
+              n.textContent = 'Link copied!';
               document.body.appendChild(n);
-              setTimeout(function () {
-                n.remove();
-              }, 2200);
+              setTimeout(function() { n.remove(); }, 2200);
             },
-            function () {
-              showPlayToast();
-            }
+            function() { showPlayToast(); }
           );
           return;
         }
-
         var a = e.target && e.target.closest && e.target.closest('a[href]');
-        if (!a || !STORE_RX.test(a.getAttribute('href') || '')) {
-          return;
-        }
-        if (e.button !== 0) {
-          return;
-        }
-        e.preventDefault();
-        e.stopPropagation();
-
-        var isAndroid = /Android/i.test(navigator.userAgent || '');
-
-        if (isAndroid) {
-          tryAndroidMarketIntent();
-          return;
-        }
-
+        if (!a || !STORE_RX.test(a.getAttribute('href') || '')) return;
+        if (e.button !== 0) return;
+        e.preventDefault(); e.stopPropagation();
+        if (/Android/i.test(navigator.userAgent || '')) { tryAndroidIntent(); return; }
         if (window.top !== window.self) {
-          try {
-            window.top.location.href = PLAY_URL;
-          } catch (err) {
-            copyPlayUrl().then(showPlayToast, showPlayToast);
-          }
+          try { window.top.location.href = PLAY_URL; } catch(err) { copyPlayUrl().then(showPlayToast, showPlayToast); }
           return;
         }
-
-        // Do not pass noopener in window.open's 3rd arg — Chrome can return null even when a tab opened,
-        // which used to trigger same-tab navigation and caused "new tab + current tab" both loading Play.
         var win = null;
-        try {
-          win = window.open(PLAY_URL, '_blank');
-        } catch (err) {
-          win = null;
-        }
-
-        if (win) {
-          try {
-            win.opener = null;
-          } catch (e0) {}
-          return;
-        }
-
+        try { win = window.open(PLAY_URL, '_blank'); } catch(err) {}
+        if (win) { try { win.opener = null; } catch(e0) {} return; }
         copyPlayUrl().then(showPlayToast, showPlayToast);
-        try {
-          window.location.href = PLAY_URL;
-        } catch (e2) {}
+        try { window.location.href = PLAY_URL; } catch(e2) {}
       }, true);
 
       var copyBtn = document.getElementById('ggh-copy-play-url');
       if (copyBtn) {
-        copyBtn.addEventListener('click', function () {
+        copyBtn.addEventListener('click', function() {
           copyPlayUrl().then(
-            function () {
-              copyBtn.textContent = 'Copied!';
-              setTimeout(function () {
-                copyBtn.textContent = 'Copy Play Store link';
-              }, 2000);
-            },
-            function () {
-              copyBtn.textContent = 'Select & copy from address bar';
-            }
+            function() { copyBtn.textContent = 'Copied!'; setTimeout(function() { copyBtn.textContent = 'Copy Play Store link'; }, 2000); },
+            function() { copyBtn.textContent = 'Copy from address bar'; }
           );
         });
       }
-
       var dismissBtn = document.getElementById('ggh-dismiss-play-toast');
-      if (dismissBtn) {
-        dismissBtn.addEventListener('click', hidePlayToast);
-      }
+      if (dismissBtn) dismissBtn.addEventListener('click', hidePlayToast);
     })();
 
+    /* Modal */
     function toggleModal(id) {
-      const modal = document.getElementById(id);
+      var modal = document.getElementById(id);
       modal.style.display = (modal.style.display === 'flex') ? 'none' : 'flex';
     }
+    window.onclick = function(event) {
+      if (event.target.classList.contains('modal')) event.target.style.display = 'none';
+    };
 
-    (function initDeliveryBanner() {
+    /* Dismiss banner */
+    (function() {
       var banner = document.getElementById('delivery-top-banner');
       var hero = document.getElementById('hero-section');
-      var dismissKey = 'ggh_2x_banner_dismissed';
-
+      var key = 'ggh_2x_banner_dismissed';
       function applyDismissed() {
-        if (!banner || !hero) return;
-        banner.classList.add('hidden');
-        hero.classList.remove('pt-56');
-        hero.classList.add('pt-44');
+        if (banner) banner.classList.add('hidden');
+        if (hero) { hero.style.paddingTop = '120px'; }
       }
-
-      if (sessionStorage.getItem(dismissKey)) {
-        applyDismissed();
-      }
-
+      if (sessionStorage.getItem(key)) applyDismissed();
       var btn = document.getElementById('dismiss-delivery-banner');
-      if (btn) {
-        btn.addEventListener('click', function() {
-          sessionStorage.setItem(dismissKey, '1');
-          applyDismissed();
-        });
-      }
+      if (btn) btn.addEventListener('click', function() { sessionStorage.setItem(key, '1'); applyDismissed(); });
     })();
 
-    // Close on background click
-    window.onclick = function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-      }
-    }
-
-    // Tab Switcher
+    /* Tab switcher */
     function switchTab(tab) {
-      const studentBtn = document.getElementById('tabStudent');
-      const restaurantBtn = document.getElementById('tabRestaurant');
-      const studentSection = document.getElementById('studentSection');
-      const restaurantSection = document.getElementById('restaurantSection');
-
+      var sBtn = document.getElementById('tabStudent');
+      var rBtn = document.getElementById('tabRestaurant');
+      var sSection = document.getElementById('studentSection');
+      var rSection = document.getElementById('restaurantSection');
       if (tab === 'student') {
-        studentBtn.className = 'px-8 py-3.5 rounded-xl text-sm font-bold transition-all bg-brand text-white shadow-lg';
-        restaurantBtn.className = 'px-8 py-3.5 rounded-xl text-sm font-bold transition-all text-gray-500 hover:text-gray-700';
-        studentSection.classList.remove('hidden');
-        restaurantSection.classList.add('hidden');
+        sBtn.className = 'tab-active'; rBtn.className = 'tab-inactive';
+        sSection.style.display = ''; rSection.style.display = 'none';
       } else {
-        restaurantBtn.className = 'px-8 py-3.5 rounded-xl text-sm font-bold transition-all bg-blue-600 text-white shadow-lg';
-        studentBtn.className = 'px-8 py-3.5 rounded-xl text-sm font-bold transition-all text-gray-500 hover:text-gray-700';
-        restaurantSection.classList.remove('hidden');
-        studentSection.classList.add('hidden');
+        rBtn.className = 'tab-active'; rBtn.style.background = '#2563eb';
+        sBtn.className = 'tab-inactive';
+        rSection.style.display = ''; sSection.style.display = 'none';
       }
     }
 
-    // Student Calculator
+    /* Student calculator */
     function calcStudent() {
-      const amt = parseFloat(document.getElementById('orderAmount').value) || 500;
-
-      // GoGoHungry: food + 1% platform fee only
-      const gPlatform = Math.round(amt * 0.01);
-      const gTotal = amt + gPlatform;
-
-      // Competitor: food + delivery + platform + other charges
-      const cDelivery = 40;
-      const cPlatform = 30;
-      const cOther = 15;
-      const cTotal = amt + cDelivery + cPlatform + cOther;
-
-      const savings = cTotal - gTotal;
-
-      // Update GoGoHungry
-      document.getElementById('gFoodAmount').textContent = `₹${amt}`;
-      document.getElementById('gPlatformFee').textContent = `₹${gPlatform}`;
-      document.getElementById('gTotal').textContent = `₹${gTotal}`;
-
-      // Update Competitor
-      document.getElementById('cFoodAmount').textContent = `₹${amt}`;
-      document.getElementById('cDeliveryFee').textContent = `₹${cDelivery}`;
-      document.getElementById('cPlatformFee').textContent = `₹${cPlatform}`;
-      document.getElementById('cOtherFee').textContent = `₹${cOther}`;
-      document.getElementById('cTotal').textContent = `₹${cTotal}`;
-
-      // Savings
-      document.getElementById('studentSavings').textContent = savings > 0 ? `₹${savings}` : `₹0`;
-      document.getElementById('savingsNote').textContent = savings > 0
-        ? `saved on every single order — no coupon needed!`
-        : `Even at low amounts, you never pay hidden fees!`;
+      var amt = parseFloat(document.getElementById('orderAmount').value) || 500;
+      var gP = Math.round(amt * 0.01);
+      var gT = amt + gP;
+      var cD = 40, cP = 30, cO = 15;
+      var cT = amt + cD + cP + cO;
+      var savings = cT - gT;
+      document.getElementById('gFoodAmount').textContent = '₹' + amt;
+      document.getElementById('gPlatformFee').textContent = '₹' + gP;
+      document.getElementById('gTotal').textContent = '₹' + gT;
+      document.getElementById('cFoodAmount').textContent = '₹' + amt;
+      document.getElementById('cDeliveryFee').textContent = '₹' + cD;
+      document.getElementById('cPlatformFee').textContent = '₹' + cP;
+      document.getElementById('cOtherFee').textContent = '₹' + cO;
+      document.getElementById('cTotal').textContent = '₹' + cT;
+      document.getElementById('studentSavings').textContent = savings > 0 ? '₹' + savings : '₹0';
+      document.getElementById('savingsNote').textContent = savings > 0 ? 'saved on every single order — no coupon needed!' : 'No hidden fees, ever!';
     }
 
-    // Restaurant Calculator
+    /* Restaurant calculator */
     function calcRestaurant() {
-      const amt = parseFloat(document.getElementById('restOrderAmount').value) || 500;
-
-      // GoGoHungry: 10% commission, nothing else
-      const rComm = Math.round(amt * 0.10);
-      const rEarn = amt - rComm;
-
-      // Competitor: ~25% commission + platform fee + payment fee + other
-      const crComm = Math.round(amt * 0.25);
-      const crPlatform = 20;
-      const crPayment = 10;
-      const crOther = 15;
-      const crEarn = amt - crComm - crPlatform - crPayment - crOther;
-
-      const extraEarnings = rEarn - crEarn;
-
-      // GoGoHungry side
-      document.getElementById('rOrderVal').textContent = `₹${amt}`;
-      document.getElementById('rCommission').textContent = `-₹${rComm}`;
-      document.getElementById('rEarnings').textContent = `₹${rEarn}`;
-      document.getElementById('rPercent').textContent = `90% of order value!`;
-
-      // Competitor side
-      document.getElementById('crOrderVal').textContent = `₹${amt}`;
-      document.getElementById('crCommission').textContent = `-₹${crComm}`;
-      document.getElementById('crPlatformFee').textContent = `-₹${crPlatform}`;
-      document.getElementById('crPaymentFee').textContent = `-₹${crPayment}`;
-      document.getElementById('crOtherFee').textContent = `-₹${crOther}`;
-      document.getElementById('crEarnings').textContent = `₹${crEarn}`;
-      const crPct = Math.round((crEarn / amt) * 100);
-      document.getElementById('crPercent').textContent = `Only ~${crPct}% of order value`;
-
-      // Extra earnings
-      document.getElementById('restSavings').textContent = `₹${extraEarnings}`;
+      var amt = parseFloat(document.getElementById('restOrderAmount').value) || 500;
+      var rC = Math.round(amt * 0.10);
+      var rE = amt - rC;
+      var crC = Math.round(amt * 0.25);
+      var crP = 20, crPay = 10, crO = 15;
+      var crE = amt - crC - crP - crPay - crO;
+      var extra = rE - crE;
+      document.getElementById('rOrderVal').textContent = '₹' + amt;
+      document.getElementById('rCommission').textContent = '-₹' + rC;
+      document.getElementById('rEarnings').textContent = '₹' + rE;
+      document.getElementById('rPercent').textContent = '90% of order';
+      document.getElementById('crOrderVal').textContent = '₹' + amt;
+      document.getElementById('crCommission').textContent = '-₹' + crC;
+      document.getElementById('crPlatformFee').textContent = '-₹' + crP;
+      document.getElementById('crPaymentFee').textContent = '-₹' + crPay;
+      document.getElementById('crOtherFee').textContent = '-₹' + crO;
+      document.getElementById('crEarnings').textContent = '₹' + crE;
+      document.getElementById('crPercent').textContent = '~' + Math.round((crE/amt)*100) + '%';
+      document.getElementById('restSavings').textContent = '₹' + extra;
     }
 
-    // Initialize on page load
     document.addEventListener('DOMContentLoaded', function() {
       calcStudent();
       calcRestaurant();
