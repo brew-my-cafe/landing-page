@@ -3,77 +3,218 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="color-scheme" content="dark" />
   <title>GoGoHungry | Terms &amp; Privacy</title>
   <link rel="icon" type="image/png" href="gogohungry-logo.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    :root { --primary: #ff8c00; }
+    :root {
+      --brand: #FF5200;
+      --brand-dark: #E64A00;
+      --brand-light: rgba(255, 82, 0, 0.12);
+      --border-brand: rgba(255, 82, 0, 0.35);
+      --bg: #000000;
+      --bg-card: #111111;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #ffffff;
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --text-dim: rgba(255, 255, 255, 0.35);
+    }
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       margin: 0;
-      padding: 0;
-      background: #fafafa;
-      color: #1f2937;
-      line-height: 1.6;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
     }
-    header {
-      background: #000;
-      color: #fff;
-      padding: 1.5rem;
-      text-align: center;
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 10%, rgba(255, 82, 0, 0.12) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 10% 90%, rgba(255, 82, 0, 0.06) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
     }
-    main {
+    body > * { position: relative; z-index: 1; }
+
+    .glass-nav {
+      backdrop-filter: blur(20px);
+      background: rgba(0, 0, 0, 0.75);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .nav-inner {
       max-width: 900px;
-      margin: 2rem auto;
-      background: #fff;
-      border-radius: 1rem;
-      padding: 2rem;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
     }
-    h1, h2, h3 {
-      color: #111827;
-      margin-top: 2rem;
-    }
-    header h1,
-    header p {
-      color: #fff;
-      margin-top: 0;
-    }
-    header h1 { margin-bottom: 0.25rem; }
-    h1 { margin-top: 0; font-size: 2.25rem; }
-    section + section { border-top: 1px solid #f3f4f6; padding-top: 1.5rem; margin-top: 1.5rem; }
-    ul { padding-left: 1.25rem; }
-    a {
-      color: var(--primary);
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       text-decoration: none;
+      color: inherit;
     }
-    a:hover { text-decoration: underline; }
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #6b7280;
-      font-size: 0.9rem;
+    .logo-link span {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #fff;
     }
+    .logo-link span em { color: var(--brand); font-style: normal; }
     .back-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
       display: inline-flex;
       align-items: center;
-      gap: 0.35rem;
-      margin-top: 1rem;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--brand); }
+
+    .page-header {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 48px 24px 0;
+      text-align: center;
+    }
+    .pill {
+      display: inline-flex;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--brand-light);
+      color: var(--brand);
+      border: 1px solid var(--border-brand);
+      margin-bottom: 16px;
+    }
+    .page-header h1 {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin: 0 0 12px;
+      color: #fff;
+    }
+    .page-header p {
+      color: var(--text-muted);
+      margin: 0;
+      font-size: 17px;
+    }
+
+    main {
+      max-width: 900px;
+      margin: 32px auto 0;
+      padding: 0 24px 64px;
+    }
+    .content-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: clamp(28px, 5vw, 48px);
+      box-shadow: 0 0 60px rgba(255, 82, 0, 0.05);
+    }
+    .content-card h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #fff;
+      margin: 0 0 16px;
+      letter-spacing: -0.02em;
+    }
+    .content-card h2:not(:first-child) { margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border); }
+    .content-card h3 {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--brand);
+      margin: 28px 0 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .content-card p { color: var(--text-muted); margin: 0 0 12px; }
+    .content-card ul {
+      color: var(--text-muted);
+      padding-left: 1.25rem;
+      margin: 0 0 8px;
+    }
+    .content-card li { margin-bottom: 8px; }
+    .content-card strong { color: #fff; }
+    a { color: var(--brand); text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; }
+
+    .cta-row {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      background: var(--brand);
+      color: #fff;
+      font-weight: 700;
+      border-radius: 14px;
+      padding: 14px 28px;
+      font-size: 15px;
+      text-decoration: none;
+      display: inline-block;
+      box-shadow: 0 8px 32px rgba(255, 82, 0, 0.35);
+      transition: transform 0.15s, box-shadow 0.2s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 12px 40px rgba(255, 82, 0, 0.45);
+      text-decoration: none;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 32px 24px;
+      color: var(--text-dim);
+      font-size: 12px;
       font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>GoGoHungry</h1>
-    <p>Terms &amp; Conditions · Privacy Policy</p>
+  <header class="glass-nav">
+    <div class="nav-inner">
+      <a href="/" class="logo-link">
+        <img src="gogohungry-logo.png" alt="GoGoHungry" style="width:38px; height:38px; object-fit:contain;" onerror="this.style.display='none'">
+        <span>GoGo<em>Hungry</em></span>
+      </a>
+      <a href="/" class="back-link">← Back to home</a>
+    </div>
   </header>
 
+  <div class="page-header">
+    <div class="pill">Legal</div>
+    <h1>Terms &amp; Privacy</h1>
+    <p>Everything you need to know about using GoGoHungry.</p>
+  </div>
+
   <main>
-    <section>
+    <div class="content-card">
       <h2>Terms &amp; Conditions</h2>
       <p>Welcome to GoGoHungry! By accessing or using our services, you agree to the terms outlined below.</p>
 
@@ -110,9 +251,7 @@
 
       <h3>Updates</h3>
       <p>We may revise these terms periodically. Updates become effective once published on this page.</p>
-    </section>
 
-    <section>
       <h2>Privacy Policy</h2>
       <p>Your privacy matters to us. This section explains what we collect and how we use it.</p>
 
@@ -143,15 +282,14 @@
 
       <h3>Policy Changes</h3>
       <p>Privacy terms may evolve as we launch new features. Any update will be reflected on this page.</p>
-    </section>
 
-    <a class="back-link" href="/">
-      ← Back to GoGoHungry
-    </a>
+      <div class="cta-row">
+        <a href="/" class="btn-primary">Back to GoGoHungry</a>
+        <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" class="back-link" style="margin-left:8px;">Download the app →</a>
+      </div>
+    </div>
   </main>
 
-  <footer>
-    © 2025 GoGoHungry. All rights reserved.
-  </footer>
+  <footer>© 2026 GoGoHungry · All rights reserved</footer>
 </body>
 </html>
