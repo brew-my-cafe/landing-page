@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="light" />
   <title>GoGoHungry — Campus Food Delivery with Zero Delivery Charges</title>
   <meta name="description" content="GoGoHungry delivers food from your college canteens with zero delivery fees and a flat 1% platform fee. Live tracking, secure UPI payments, and a 2x refund guarantee." />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -13,16 +13,16 @@
       --brand: #FF5200;
       --brand-dark: #E64A00;
       --brand-glow: #FF6B1A;
-      --brand-light: rgba(255, 82, 0, 0.10);
-      --border-brand: rgba(255, 82, 0, 0.30);
-      --bg: #000000;
-      --bg-elevated: #080808;
-      --bg-card: #0e0e0e;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.14);
-      --text: #ffffff;
-      --text-muted: rgba(255, 255, 255, 0.60);
-      --text-dim: rgba(255, 255, 255, 0.38);
+      --brand-light: rgba(255, 82, 0, 0.08);
+      --border-brand: rgba(255, 82, 0, 0.25);
+      --bg: #ffffff;
+      --bg-elevated: #f8f9fb;
+      --bg-card: #ffffff;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.12);
+      --text: #111111;
+      --text-muted: rgba(0, 0, 0, 0.58);
+      --text-dim: rgba(0, 0, 0, 0.40);
       --maxw: 1200px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -86,7 +86,7 @@
       color: var(--text);
       border-color: var(--border-strong);
     }
-    .btn-outline:hover { border-color: var(--brand); color: var(--brand); }
+    .btn-outline:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-light); }
 
     /* Nav */
     .nav {
@@ -95,7 +95,7 @@
       z-index: 50;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      background: rgba(0, 0, 0, 0.72);
+      background: rgba(255, 255, 255, 0.92);
       border-bottom: 1px solid var(--border);
     }
     .nav-inner {
@@ -117,7 +117,7 @@
     .brand span em { font-style: normal; color: var(--brand); }
     .nav-links { display: none; gap: 32px; align-items: center; }
     .nav-links a { font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: var(--brand); }
     .nav-actions { display: flex; align-items: center; gap: 12px; }
     .menu-btn {
       display: inline-flex;
@@ -128,16 +128,16 @@
       border-radius: 9px;
       border: 1px solid var(--border-strong);
       background: transparent;
-      color: #fff;
+      color: var(--text);
       cursor: pointer;
     }
-    .mobile-menu { display: none; border-top: 1px solid var(--border); background: rgba(0,0,0,0.96); }
+    .mobile-menu { display: none; border-top: 1px solid var(--border); background: #fff; }
     .mobile-menu.open { display: block; }
     .mobile-menu ul { padding: 16px 24px 24px; display: flex; flex-direction: column; gap: 4px; }
     .mobile-menu a { padding: 12px 0; font-size: 16px; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); }
 
     /* Hero */
-    .hero { position: relative; padding: 80px 0 72px; overflow: hidden; }
+    .hero { position: relative; padding: 80px 0 72px; overflow: hidden; background: linear-gradient(180deg, #fff 0%, #fff8f4 100%); }
     .hero::before {
       content: '';
       position: absolute;
@@ -145,7 +145,7 @@
       right: -10%;
       width: 640px;
       height: 640px;
-      background: radial-gradient(circle, rgba(255,82,0,0.16) 0%, transparent 62%);
+      background: radial-gradient(circle, rgba(255,82,0,0.10) 0%, transparent 62%);
       pointer-events: none;
     }
     .hero-grid {
@@ -186,51 +186,41 @@
     .hero-cta { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 14px; }
     .hero-note { margin-top: 18px; font-size: 13px; color: var(--text-dim); }
 
-    /* Hero visual */
-    .hero-visual { display: flex; justify-content: center; }
-    .app-frame {
-      width: 300px;
-      background: #141414;
-      border: 1px solid var(--border-strong);
-      border-radius: 30px;
-      padding: 12px;
-      box-shadow: 0 40px 90px rgba(0,0,0,0.6), 0 0 60px rgba(255,82,0,0.10);
+    /* Phone mockup */
+    @keyframes floatA {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
     }
-    .app-screen { background: #0b0b0b; border-radius: 22px; overflow: hidden; }
-    .app-top { padding: 18px 18px 14px; border-bottom: 1px solid var(--border); }
-    .app-top .greet { font-size: 12px; color: var(--text-dim); font-weight: 600; }
-    .app-top .q { font-size: 16px; font-weight: 800; margin-top: 2px; }
-    .app-search {
-      margin: 14px 18px;
-      padding: 11px 14px;
-      background: #151515;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 13px;
-      color: var(--text-dim);
+    @keyframes floatB {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
-    .app-list { padding: 0 18px 18px; display: flex; flex-direction: column; gap: 10px; }
-    .app-item {
+    .float-a { animation: floatA 3.5s ease-in-out infinite; }
+    .float-b { animation: floatB 4s ease-in-out infinite 1s; }
+    .phone-wrapper {
       display: flex;
+      justify-content: center;
       align-items: center;
-      justify-content: space-between;
-      padding: 14px;
-      background: #131313;
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      position: relative;
+      height: 600px;
     }
-    .app-item .name { font-size: 13px; font-weight: 700; }
-    .app-item .meta { font-size: 11px; color: var(--text-dim); margin-top: 3px; }
-    .app-item .price { font-size: 13px; font-weight: 800; color: var(--brand); }
-    .app-cta {
-      margin: 4px 18px 18px;
-      padding: 13px;
-      text-align: center;
-      background: var(--brand);
-      border-radius: 12px;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.02em;
+    .phone-shell {
+      background: #111;
+      border-radius: 3rem;
+      padding: 12px;
+      box-shadow: 0 40px 80px rgba(255, 82, 0, 0.18), 0 10px 30px rgba(0, 0, 0, 0.15);
+      width: 280px;
+      height: 540px;
+      position: relative;
+      z-index: 2;
+    }
+    .phone-screen {
+      background: #fff;
+      border-radius: 2.4rem;
+      overflow: hidden;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Stats */
@@ -256,9 +246,10 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 32px;
-      transition: border-color 0.25s, transform 0.25s;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
     }
-    .card:hover { border-color: var(--border-brand); transform: translateY(-4px); }
+    .card:hover { border-color: var(--border-brand); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255, 82, 0, 0.08); }
     .card .icon {
       width: 46px;
       height: 46px;
@@ -337,13 +328,13 @@
     .calc-input-wrap .cur { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 22px; font-weight: 700; color: var(--text-dim); }
     .calc-input {
       width: 100%;
-      background: var(--bg);
+      background: var(--bg-elevated);
       border: 1px solid var(--border-strong);
       border-radius: 12px;
       padding: 16px 18px 16px 44px;
       font-size: 22px;
       font-weight: 700;
-      color: #fff;
+      color: var(--text);
       font-family: inherit;
       outline: none;
       transition: border-color 0.2s;
@@ -354,9 +345,9 @@
       border-radius: 14px;
       padding: 24px;
       border: 1px solid var(--border);
-      background: var(--bg);
+      background: var(--bg-elevated);
     }
-    .col.us { border-color: var(--border-brand); background: linear-gradient(160deg, rgba(255,82,0,0.08), var(--bg)); }
+    .col.us { border-color: var(--border-brand); background: linear-gradient(160deg, rgba(255,82,0,0.06), #fff); }
     .col .col-title { font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
     .col.us .col-title { color: var(--brand); }
     .col:not(.us) .col-title { color: var(--text-dim); }
@@ -365,7 +356,7 @@
     .row .k { color: var(--text-muted); }
     .row .v { font-weight: 700; }
     .row.total { border-top: 1px solid var(--border-strong); margin-top: 8px; padding-top: 14px; border-bottom: none; }
-    .row.total .k { font-size: 15px; font-weight: 800; color: #fff; }
+    .row.total .k { font-size: 15px; font-weight: 800; color: var(--text); }
     .row.total .v { font-size: 24px; font-weight: 800; }
     .col.us .row.total .v { color: var(--brand); }
     .neg { color: #ff6b6b; }
@@ -408,7 +399,7 @@
       text-align: left;
       background: transparent;
       border: none;
-      color: #fff;
+      color: var(--text);
       font-family: inherit;
       font-size: 16px;
       font-weight: 700;
@@ -440,13 +431,13 @@
     .cta-band h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
     .cta-band p { margin-top: 14px; color: var(--text-muted); font-size: 16px; max-width: 420px; }
     .cta-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; }
-    .qr-box { justify-self: center; background: #141414; border: 1px solid var(--border-strong); border-radius: 18px; padding: 16px; width: 180px; text-align: center; }
+    .qr-box { justify-self: center; background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 16px; width: 180px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
     .qr-box .qr { background: #fff; border-radius: 10px; padding: 10px; }
     .qr-box .qr img { width: 100%; display: block; }
     .qr-box .cap { font-size: 11px; color: var(--text-dim); margin-top: 10px; }
 
     /* Footer */
-    footer { border-top: 1px solid var(--border); background: #000; padding: 64px 0 32px; }
+    footer { border-top: 1px solid var(--border); background: var(--bg-elevated); padding: 64px 0 32px; }
     .foot-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
     .foot-col h5 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 18px; }
     .foot-col ul { display: flex; flex-direction: column; gap: 12px; }
@@ -468,6 +459,7 @@
       .nav-links { display: flex; }
       .menu-btn { display: none; }
       .hero-grid { grid-template-columns: 1.1fr 0.9fr; }
+      .phone-wrapper { display: flex !important; }
       .stats-grid { grid-template-columns: repeat(4, 1fr); }
       .cards { grid-template-columns: repeat(4, 1fr); }
       .steps { grid-template-columns: repeat(5, 1fr); }
@@ -475,6 +467,9 @@
       .trust { grid-template-columns: 1fr auto; }
       .cta-band { grid-template-columns: 1fr auto; }
       .foot-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+    }
+    @media (max-width: 899px) {
+      .phone-wrapper { display: none !important; }
     }
   </style>
 </head>
@@ -526,30 +521,75 @@
         <p class="hero-note">No hidden fees. You pay the menu price plus 1% — nothing else.</p>
       </div>
 
-      <div class="hero-visual">
-        <div class="app-frame">
-          <div class="app-screen">
-            <div class="app-top">
-              <p class="greet">Good morning</p>
-              <p class="q">Order from your campus</p>
+      <div class="phone-wrapper">
+        <div style="position:absolute; width:400px; height:400px; background:radial-gradient(circle, rgba(255,82,0,0.12) 0%, transparent 70%); border-radius:50%; z-index:0;"></div>
+        <div style="position:absolute; width:240px; height:440px; background:#e8e8e8; border-radius:2.5rem; z-index:1; transform:rotate(10deg) translate(100px,-20px); opacity:0.25;"></div>
+
+        <div class="phone-shell">
+          <div class="phone-screen">
+            <div style="background:#fff; padding:10px 20px 6px; display:flex; justify-content:center;">
+              <div style="width:72px; height:18px; background:#f0f0f0; border-radius:999px;"></div>
             </div>
-            <div class="app-search">Search canteens and dishes</div>
-            <div class="app-list">
-              <div class="app-item">
-                <div><div class="name">Central Canteen</div><div class="meta">Meals · 12 min</div></div>
-                <div class="price">₹89</div>
+            <div style="flex:1; background:#fff; display:flex; flex-direction:column; padding:16px; gap:14px; overflow:hidden;">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div>
+                  <p style="font-size:10px; color:#888; margin:0; font-weight:600;">GOOD MORNING</p>
+                  <p style="font-size:14px; font-weight:800; color:#111; margin:0;">What's your vibe?</p>
+                </div>
+                <div style="width:32px; height:32px; border-radius:50%; background:var(--brand-light); display:flex; align-items:center; justify-content:center;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF5200" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                </div>
               </div>
-              <div class="app-item">
-                <div><div class="name">Café Corner</div><div class="meta">Beverages · 8 min</div></div>
-                <div class="price">₹30</div>
+              <div style="background:#f7f7f7; border-radius:12px; padding:10px 14px; display:flex; align-items:center; gap:8px;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <span style="font-size:12px; color:#aaa; font-weight:500;">Search canteens...</span>
               </div>
-              <div class="app-item">
-                <div><div class="name">Food Court</div><div class="meta">Fast food · 15 min</div></div>
-                <div class="price">₹65</div>
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; flex:1;">
+                <div style="background:#fff7f3; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #ffe5d5; gap:6px;">
+                  <span style="font-size:28px;">🍕</span>
+                  <span style="font-size:10px; font-weight:700; color:#333;">Pizza</span>
+                  <span style="font-size:9px; background:var(--brand); color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹89</span>
+                </div>
+                <div style="background:#fff0fb; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #f5d5ed; gap:6px;">
+                  <span style="font-size:28px;">🍜</span>
+                  <span style="font-size:10px; font-weight:700; color:#333;">Noodles</span>
+                  <span style="font-size:9px; background:#333; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹65</span>
+                </div>
+                <div style="background:#f0fff4; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #c3f0d2; gap:6px;">
+                  <span style="font-size:28px;">🥗</span>
+                  <span style="font-size:10px; font-weight:700; color:#333;">Salad</span>
+                  <span style="font-size:9px; background:#16a34a; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹55</span>
+                </div>
+                <div style="background:#fff8f0; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #ffd9aa; gap:6px;">
+                  <span style="font-size:28px;">☕</span>
+                  <span style="font-size:10px; font-weight:700; color:#333;">Coffee</span>
+                  <span style="font-size:9px; background:#b45309; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹30</span>
+                </div>
+              </div>
+              <div style="background:var(--brand); border-radius:14px; padding:12px; display:flex; align-items:center; justify-content:center;">
+                <span style="color:#fff; font-size:12px; font-weight:800; letter-spacing:0.02em;">₹0 DELIVERY · ORDER NOW</span>
               </div>
             </div>
-            <div class="app-cta">₹0 DELIVERY · ORDER NOW</div>
           </div>
+        </div>
+
+        <div class="float-a" style="position:absolute; top:80px; left:0; background:#fff; border:1px solid #f0f0f0; border-radius:14px; padding:10px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); z-index:10;">
+          <div style="width:32px; height:32px; border-radius:10px; background:var(--brand-light); display:flex; align-items:center; justify-content:center;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5200" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div>
+            <p style="font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:#aaa; margin:0;">Delivery</p>
+            <p style="font-size:14px; font-weight:800; color:var(--brand); margin:0;">₹0 Fees</p>
+          </div>
+        </div>
+
+        <div class="float-b" style="position:absolute; bottom:100px; right:0; background:#fff; border:1px solid #f0f0f0; border-radius:14px; padding:10px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); z-index:10;">
+          <div style="display:flex; margin-right:2px;">
+            <div style="width:24px; height:24px; border-radius:50%; background:#ffb380; border:2px solid #fff; z-index:2;"></div>
+            <div style="width:24px; height:24px; border-radius:50%; background:var(--brand); border:2px solid #fff; margin-left:-8px;"></div>
+            <div style="width:24px; height:24px; border-radius:50%; background:#ff7a3d; border:2px solid #fff; margin-left:-8px;"></div>
+          </div>
+          <p style="font-size:12px; font-weight:800; color:#111; margin:0; white-space:nowrap;">1k+ Students</p>
         </div>
       </div>
     </div>
@@ -720,8 +760,8 @@
             <span class="trust-badge"><span class="g"></span> Razorpay Secured</span>
           </div>
         </div>
-        <div style="width:110px; height:110px; border-radius:50%; border:1px solid var(--border-brand); display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0; background:var(--bg);">
-          <span style="font-size:26px; font-weight:800; font-style:italic;">d&amp;b</span>
+        <div style="width:110px; height:110px; border-radius:50%; border:1px solid var(--border-brand); display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0; background:#fff;">
+          <span style="font-size:26px; font-weight:800; font-style:italic; color:#111;">d&amp;b</span>
           <span style="font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--brand); margin-top:4px;">Verified</span>
         </div>
       </div>

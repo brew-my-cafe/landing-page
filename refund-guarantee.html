@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#000000" />
-  <meta name="color-scheme" content="dark" />
+  <meta name="theme-color" content="#ffffff" />
+  <meta name="color-scheme" content="light" />
   <title>2x Refund Guarantee | GoGoHungry</title>
   <meta name="description" content="GoGoHungry delivery guarantee: if we fail on our side, you get double your money back plus the same order free." />
   <link rel="icon" type="image/png" href="gogohungry-logo.png" />
@@ -13,16 +13,16 @@
     :root {
       --brand: #FF5200;
       --brand-glow: #FF6B1A;
-      --brand-light: rgba(255, 82, 0, 0.10);
-      --border-brand: rgba(255, 82, 0, 0.30);
-      --bg: #000000;
-      --bg-elevated: #080808;
-      --bg-card: #0e0e0e;
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.14);
-      --text: #ffffff;
-      --text-muted: rgba(255, 255, 255, 0.60);
-      --text-dim: rgba(255, 255, 255, 0.38);
+      --brand-light: rgba(255, 82, 0, 0.08);
+      --border-brand: rgba(255, 82, 0, 0.25);
+      --bg: #ffffff;
+      --bg-elevated: #f8f9fb;
+      --bg-card: #ffffff;
+      --border: rgba(0, 0, 0, 0.08);
+      --border-strong: rgba(0, 0, 0, 0.12);
+      --text: #111111;
+      --text-muted: rgba(0, 0, 0, 0.58);
+      --text-dim: rgba(0, 0, 0, 0.40);
       --maxw: 1200px;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -45,7 +45,7 @@
 
     .nav {
       position: sticky; top: 0; z-index: 50;
-      backdrop-filter: blur(18px); background: rgba(0, 0, 0, 0.72); border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(18px); background: rgba(255, 255, 255, 0.92); border-bottom: 1px solid var(--border);
     }
     .nav-inner { height: 68px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
     .brand { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; }
@@ -53,14 +53,14 @@
     .brand span em { font-style: normal; color: var(--brand); }
     .nav-links { display: none; gap: 32px; align-items: center; }
     .nav-links a { font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }
-    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover, .nav-links a.active { color: var(--brand); }
     .nav-actions { display: flex; align-items: center; gap: 12px; }
     .menu-btn {
       display: inline-flex; align-items: center; justify-content: center;
       width: 40px; height: 40px; border-radius: 9px; border: 1px solid var(--border-strong);
-      background: transparent; color: #fff; cursor: pointer;
+      background: transparent; color: var(--text); cursor: pointer;
     }
-    .mobile-menu { display: none; border-top: 1px solid var(--border); background: rgba(0,0,0,0.96); }
+    .mobile-menu { display: none; border-top: 1px solid var(--border); background: #fff; }
     .mobile-menu.open { display: block; }
     .mobile-menu ul { padding: 16px 24px 24px; display: flex; flex-direction: column; gap: 4px; }
     .mobile-menu a { padding: 12px 0; font-size: 16px; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); }
@@ -94,7 +94,7 @@
       padding: clamp(28px, 5vw, 48px);
     }
     .legal-card h2 {
-      font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: #fff; margin-bottom: 14px;
+      font-size: 22px; font-weight: 800; letter-spacing: -0.02em; color: var(--text); margin-bottom: 14px;
     }
     .legal-card h2:not(:first-child) {
       margin-top: 40px; padding-top: 40px; border-top: 1px solid var(--border);
@@ -106,7 +106,7 @@
     .legal-card p { color: var(--text-muted); font-size: 15px; margin-bottom: 12px; }
     .legal-card ul { color: var(--text-muted); font-size: 15px; padding-left: 1.25rem; list-style: disc; margin-bottom: 8px; }
     .legal-card li { margin-bottom: 8px; }
-    .legal-card strong { color: #fff; }
+    .legal-card strong { color: var(--text); }
     .legal-card a { color: var(--brand); font-weight: 600; }
     .legal-card a:hover { text-decoration: underline; }
     .legal-links {
@@ -114,7 +114,7 @@
       display: flex; flex-wrap: wrap; gap: 14px;
     }
 
-    footer { border-top: 1px solid var(--border); background: #000; padding: 64px 0 32px; }
+    footer { border-top: 1px solid var(--border); background: var(--bg-elevated); padding: 64px 0 32px; }
     .foot-grid { display: grid; grid-template-columns: 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid var(--border); }
     .foot-col h5 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 18px; }
     .foot-col ul { display: flex; flex-direction: column; gap: 12px; }
