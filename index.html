@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -7,12 +7,21 @@
   <meta name="color-scheme" content="light" />
   <title>GoGoHungry — Campus Food Delivery with Zero Delivery Charges</title>
   <meta name="description" content="GoGoHungry delivers food from your college canteens with zero delivery fees and a flat 1% platform fee. Live tracking, secure UPI payments, and a missed-delivery guarantee." />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta property="og:title" content="GoGoHungry — Campus Food Delivery with Zero Delivery Charges" />
+  <meta property="og:description" content="Order from your college canteens with no delivery fee and a flat 1% platform fee. Live tracking, secure UPI payments, and a refund guarantee." />
+  <meta property="og:image" content="gogohungry-logo.png" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="gogohungry-logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
   <style>
     :root {
       --brand: #FF5200;
       --brand-dark: #E64A00;
       --brand-glow: #FF6B1A;
+      --brand-2: #FFB020;
       --brand-light: rgba(255, 82, 0, 0.08);
       --border-brand: rgba(255, 82, 0, 0.25);
       --bg: #ffffff;
@@ -24,6 +33,7 @@
       --text-muted: rgba(0, 0, 0, 0.58);
       --text-dim: rgba(0, 0, 0, 0.40);
       --maxw: 1200px;
+      --ease: cubic-bezier(.16,.8,.24,1);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -38,8 +48,11 @@
     a { color: inherit; text-decoration: none; }
     ul { list-style: none; }
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+    .display { font-family: 'Fraunces', Georgia, serif; font-style: italic; font-weight: 600; }
     .eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 0.14em;
@@ -47,6 +60,7 @@
       color: var(--brand);
       margin-bottom: 16px;
     }
+    .eyebrow::before { content:''; width: 16px; height: 2px; background: var(--brand); border-radius: 2px; }
     .section-head { max-width: 640px; margin: 0 auto 56px; text-align: center; }
     .section-head h2 {
       font-size: clamp(28px, 4vw, 42px);
@@ -60,8 +74,35 @@
       font-size: 17px;
     }
 
+    /* Reduced motion: neutralize everything */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.in { opacity: 1; transform: none; }
+    .cards .card:nth-child(1), .steps .step:nth-child(1) { transition-delay: 0s; }
+    .cards .card:nth-child(2), .steps .step:nth-child(2) { transition-delay: .08s; }
+    .cards .card:nth-child(3), .steps .step:nth-child(3) { transition-delay: .16s; }
+    .cards .card:nth-child(4), .steps .step:nth-child(4) { transition-delay: .24s; }
+    .steps .step:nth-child(5) { transition-delay: .32s; }
+
+    /* Load-in animation for hero */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(18px);} to { opacity: 1; transform: none; } }
+    .fade-up { animation: fadeUp .8s var(--ease) both; }
+
+    /* Scroll progress bar */
+    .scroll-bar { position: fixed; top: 0; left: 0; height: 3px; width: 0%; background: linear-gradient(90deg, var(--brand), var(--brand-2)); z-index: 200; transition: width .1s linear; }
+
     /* Buttons */
     .btn {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -70,23 +111,26 @@
       font-size: 15px;
       border-radius: 10px;
       padding: 13px 24px;
-      transition: transform 0.15s, background 0.2s, border-color 0.2s, color 0.2s;
+      transition: transform 0.15s, background 0.2s, border-color 0.2s, color 0.2s, box-shadow .25s;
       cursor: pointer;
       border: 1px solid transparent;
       white-space: nowrap;
+      overflow: hidden;
     }
     .btn-primary {
-      background: var(--brand);
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
       color: #fff;
       box-shadow: 0 8px 30px rgba(255, 82, 0, 0.28);
     }
-    .btn-primary:hover { background: var(--brand-glow); transform: translateY(-1px); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(255, 82, 0, 0.38); }
+    .btn-primary:active { transform: translateY(0) scale(.98); }
     .btn-outline {
       background: transparent;
       color: var(--text);
       border-color: var(--border-strong);
     }
-    .btn-outline:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-light); }
+    .btn-outline:hover { border-color: var(--brand); color: var(--brand); background: var(--brand-light); transform: translateY(-2px); }
+    .btn-outline:active { transform: translateY(0) scale(.98); }
 
     /* Nav */
     .nav {
@@ -95,16 +139,20 @@
       z-index: 50;
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.86);
       border-bottom: 1px solid var(--border);
+      transition: box-shadow .3s, height .2s;
     }
+    .nav.scrolled { box-shadow: 0 6px 24px rgba(0,0,0,0.06); }
     .nav-inner {
       height: 68px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 20px;
+      transition: height .2s;
     }
+    .nav.scrolled .nav-inner { height: 60px; }
     .brand {
       display: flex;
       align-items: center;
@@ -116,8 +164,10 @@
     .brand img { width: 34px; height: 34px; object-fit: contain; }
     .brand span em { font-style: normal; color: var(--brand); }
     .nav-links { display: none; gap: 32px; align-items: center; }
-    .nav-links a { font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; }
+    .nav-links a { position: relative; font-size: 14px; font-weight: 600; color: var(--text-muted); transition: color 0.2s; padding: 4px 0; }
+    .nav-links a::after { content: ''; position: absolute; left: 0; right: 100%; bottom: -2px; height: 2px; background: var(--brand); border-radius: 2px; transition: right .25s var(--ease); }
     .nav-links a:hover { color: var(--brand); }
+    .nav-links a:hover::after { right: 0; }
     .nav-actions { display: flex; align-items: center; gap: 12px; }
     .menu-btn {
       display: inline-flex;
@@ -134,26 +184,31 @@
     .mobile-menu { display: none; border-top: 1px solid var(--border); background: #fff; }
     .mobile-menu.open { display: block; }
     .mobile-menu ul { padding: 16px 24px 24px; display: flex; flex-direction: column; gap: 4px; }
-    .mobile-menu a { padding: 12px 0; font-size: 16px; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); }
+    .mobile-menu a { padding: 12px 0; font-size: 16px; font-weight: 600; color: var(--text-muted); border-bottom: 1px solid var(--border); display: block; }
+
+    /* Marquee */
+    .marquee { border-bottom: 1px solid var(--border); background: #111; overflow: hidden; }
+    .marquee-track { display: flex; width: max-content; gap: 48px; padding: 12px 0; animation: marquee 26s linear infinite; }
+    .marquee:hover .marquee-track { animation-play-state: paused; }
+    .marquee-track span { display: inline-flex; align-items: center; gap: 10px; font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(255,255,255,0.85); white-space: nowrap; }
+    .marquee-track span::before { content: '✦'; color: var(--brand-2); font-size: 12px; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
 
     /* Hero */
-    .hero { position: relative; padding: 80px 0 72px; overflow: hidden; background: linear-gradient(180deg, #fff 0%, #fff8f4 100%); }
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: -20%;
-      right: -10%;
-      width: 640px;
-      height: 640px;
-      background: radial-gradient(circle, rgba(255,82,0,0.10) 0%, transparent 62%);
-      pointer-events: none;
-    }
+    .hero { position: relative; padding: 64px 0 72px; overflow: hidden; background: linear-gradient(180deg, #fff 0%, #fff8f4 100%); }
+    .blob { position: absolute; border-radius: 50%; filter: blur(10px); pointer-events: none; opacity: .55; }
+    .blob-1 { top: -18%; right: -12%; width: 640px; height: 640px; background: radial-gradient(circle, rgba(255,82,0,0.14) 0%, transparent 62%); animation: driftA 14s ease-in-out infinite; }
+    .blob-2 { bottom: -25%; left: -14%; width: 520px; height: 520px; background: radial-gradient(circle, rgba(255,176,32,0.14) 0%, transparent 65%); animation: driftB 16s ease-in-out infinite; }
+    @keyframes driftA { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(-24px, 20px) scale(1.06);} }
+    @keyframes driftB { 0%,100% { transform: translate(0,0) scale(1);} 50% { transform: translate(20px, -18px) scale(1.08);} }
+    .cursor-glow { position: absolute; width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(255,82,0,0.10) 0%, transparent 70%); pointer-events: none; transform: translate(-50%,-50%); left: 0; top: 0; opacity: 0; transition: opacity .3s; z-index: 0; }
     .hero-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 56px;
       align-items: center;
       position: relative;
+      z-index: 1;
     }
     .badge {
       display: inline-flex;
@@ -169,14 +224,23 @@
       color: var(--brand);
       margin-bottom: 24px;
     }
-    .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); }
+    .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--brand); animation: pulse 1.8s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,82,0,0.45); } 50% { box-shadow: 0 0 0 6px rgba(255,82,0,0); } }
     .hero h1 {
-      font-size: clamp(38px, 6vw, 62px);
+      font-size: clamp(38px, 6vw, 64px);
       font-weight: 800;
       letter-spacing: -0.04em;
       line-height: 1.03;
     }
-    .hero h1 .accent { color: var(--brand); }
+    .hero h1 .accent {
+      background: linear-gradient(100deg, var(--brand) 20%, var(--brand-2) 50%, var(--brand) 80%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: shine 5s linear infinite;
+    }
+    @keyframes shine { to { background-position: -200% center; } }
     .hero .lede {
       margin-top: 22px;
       font-size: clamp(16px, 2vw, 19px);
@@ -203,7 +267,9 @@
       align-items: center;
       position: relative;
       height: 600px;
+      perspective: 1200px;
     }
+    .phone-tilt { transition: transform .25s ease-out; transform-style: preserve-3d; }
     .phone-shell {
       background: #111;
       border-radius: 3rem;
@@ -222,6 +288,7 @@
       display: flex;
       flex-direction: column;
     }
+    .tag-pop { animation: floatA 3.5s ease-in-out infinite; }
 
     /* Stats */
     .stats { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: var(--bg-elevated); }
@@ -231,7 +298,8 @@
       gap: 1px;
       background: var(--border);
     }
-    .stat { background: var(--bg-elevated); padding: 36px 24px; text-align: center; }
+    .stat { background: var(--bg-elevated); padding: 36px 24px; text-align: center; transition: background .25s; }
+    .stat:hover { background: #fff; }
     .stat .num { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -0.03em; color: var(--brand); }
     .stat .lbl { margin-top: 6px; font-size: 13px; color: var(--text-muted); font-weight: 600; }
 
@@ -242,14 +310,18 @@
     /* Feature cards */
     .cards { display: grid; grid-template-columns: 1fr; gap: 20px; }
     .card {
+      position: relative;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 32px;
       transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
       box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
+      overflow: hidden;
     }
-    .card:hover { border-color: var(--border-brand); transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255, 82, 0, 0.08); }
+    .card::before { content:''; position:absolute; inset:0; opacity:0; background: linear-gradient(160deg, rgba(255,82,0,0.06), transparent 60%); transition: opacity .3s; }
+    .card:hover { border-color: var(--border-brand); transform: translateY(-6px); box-shadow: 0 16px 36px rgba(255, 82, 0, 0.1); }
+    .card:hover::before { opacity: 1; }
     .card .icon {
       width: 46px;
       height: 46px;
@@ -261,12 +333,17 @@
       justify-content: center;
       margin-bottom: 20px;
       color: var(--brand);
+      transition: transform .3s var(--ease), background .3s;
+      position: relative;
     }
-    .card h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; }
-    .card p { margin-top: 10px; font-size: 14px; color: var(--text-muted); }
+    .card:hover .icon { transform: scale(1.08) rotate(-4deg); background: var(--brand); color: #fff; }
+    .card h3 { font-size: 18px; font-weight: 800; letter-spacing: -0.02em; position: relative; }
+    .card p { margin-top: 10px; font-size: 14px; color: var(--text-muted); position: relative; }
 
     /* Steps */
-    .steps { display: grid; grid-template-columns: 1fr; gap: 20px; counter-reset: step; }
+    .steps-wrap { position: relative; }
+    .steps-line { position: absolute; top: 45px; left: 6%; right: 6%; height: 2px; background: linear-gradient(90deg, transparent, var(--border-brand) 20%, var(--border-brand) 80%, transparent); display: none; }
+    .steps { display: grid; grid-template-columns: 1fr; gap: 20px; counter-reset: step; position: relative; }
     .step {
       display: flex;
       gap: 18px;
@@ -275,7 +352,11 @@
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 24px;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+      position: relative;
+      z-index: 1;
     }
+    .step:hover { transform: translateY(-4px); box-shadow: 0 12px 28px rgba(0,0,0,0.06); border-color: var(--border-brand); }
     .step .n {
       flex-shrink: 0;
       width: 42px;
@@ -289,7 +370,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background .3s, color .3s;
     }
+    .step:hover .n { background: var(--brand); color: #fff; }
     .step h4 { font-size: 16px; font-weight: 700; }
     .step p { margin-top: 4px; font-size: 14px; color: var(--text-muted); }
 
@@ -322,6 +405,7 @@
       border: 1px solid var(--border);
       border-radius: 20px;
       padding: clamp(24px, 4vw, 40px);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.05);
     }
     .calc-label { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; }
     .calc-input-wrap { position: relative; margin: 12px 0 32px; }
@@ -337,17 +421,19 @@
       color: var(--text);
       font-family: inherit;
       outline: none;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, box-shadow .2s;
     }
-    .calc-input:focus { border-color: var(--brand); }
+    .calc-input:focus { border-color: var(--brand); box-shadow: 0 0 0 4px var(--brand-light); }
     .compare { display: grid; grid-template-columns: 1fr; gap: 18px; }
     .col {
       border-radius: 14px;
       padding: 24px;
       border: 1px solid var(--border);
       background: var(--bg-elevated);
+      transition: transform .25s var(--ease);
     }
     .col.us { border-color: var(--border-brand); background: linear-gradient(160deg, rgba(255,82,0,0.06), #fff); }
+    .col.us:hover { transform: translateY(-3px); }
     .col .col-title { font-size: 12px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 16px; }
     .col.us .col-title { color: var(--brand); }
     .col:not(.us) .col-title { color: var(--text-dim); }
@@ -367,10 +453,14 @@
       text-align: center;
       background: linear-gradient(135deg, var(--brand), var(--brand-dark));
       border-radius: 14px;
+      position: relative;
+      overflow: hidden;
     }
-    .savings .cap { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9; }
-    .savings .amt { font-size: 42px; font-weight: 800; letter-spacing: -0.03em; margin: 4px 0; }
-    .savings .sub { font-size: 13px; opacity: 0.9; }
+    .savings::after { content:''; position:absolute; top:-50%; left:-20%; width:60%; height:200%; background: linear-gradient(100deg, transparent, rgba(255,255,255,0.16), transparent); animation: sweep 3.5s ease-in-out infinite; }
+    @keyframes sweep { 0% { transform: translateX(-120%); } 100% { transform: translateX(320%); } }
+    .savings .cap { font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.9; position: relative; }
+    .savings .amt { font-size: 42px; font-weight: 800; letter-spacing: -0.03em; margin: 4px 0; position: relative; }
+    .savings .sub { font-size: 13px; opacity: 0.9; position: relative; }
 
     /* Trust */
     .trust {
@@ -388,12 +478,18 @@
     .trust h3 { font-size: clamp(22px, 3vw, 30px); font-weight: 800; letter-spacing: -0.02em; }
     .trust p { margin-top: 12px; color: var(--text-muted); font-size: 15px; }
     .trust-badges { display: flex; gap: 14px; margin-top: 22px; flex-wrap: wrap; }
-    .trust-badge { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 10px; font-size: 13px; font-weight: 700; color: var(--text-muted); }
+    .trust-badge { display: flex; align-items: center; gap: 8px; padding: 10px 16px; border: 1px solid var(--border); border-radius: 10px; font-size: 13px; font-weight: 700; color: var(--text-muted); transition: border-color .25s, color .25s, transform .25s; }
+    .trust-badge:hover { border-color: var(--border-brand); color: var(--brand); transform: translateY(-2px); }
     .trust-badge .g { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; }
+    .dnb-seal { width: 110px; height: 110px; border-radius: 50%; border: 1px solid var(--border-brand); display: flex; flex-direction: column; align-items: center; justify-content: center; flex-shrink: 0; background: #fff; position: relative; overflow: hidden; }
+    .dnb-seal::before { content:''; position:absolute; inset:-2px; border-radius:50%; background: conic-gradient(from 0deg, transparent, var(--brand-light), transparent 30%); animation: spin 6s linear infinite; }
+    .dnb-seal span { position: relative; }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     /* FAQ */
     .faq { max-width: 760px; margin: 0 auto; }
-    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; background: var(--bg-card); overflow: hidden; }
+    .faq-item { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 12px; background: var(--bg-card); overflow: hidden; transition: border-color .25s, box-shadow .25s; }
+    .faq-item.open { border-color: var(--border-brand); box-shadow: 0 8px 24px rgba(255,82,0,0.08); }
     .faq-q {
       width: 100%;
       text-align: left;
@@ -427,11 +523,18 @@
       grid-template-columns: 1fr;
       gap: 32px;
       align-items: center;
+      position: relative;
+      overflow: hidden;
     }
-    .cta-band h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
-    .cta-band p { margin-top: 14px; color: var(--text-muted); font-size: 16px; max-width: 420px; }
-    .cta-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; }
-    .qr-box { justify-self: center; background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 16px; width: 180px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.06); }
+    .cta-band .deco { position: absolute; font-size: 34px; opacity: .5; filter: blur(.2px); pointer-events: none; }
+    .cta-band .deco.d1 { top: 12%; left: 6%; animation: floatA 4s ease-in-out infinite; }
+    .cta-band .deco.d2 { bottom: 14%; left: 18%; animation: floatB 5s ease-in-out infinite; }
+    .cta-band .deco.d3 { top: 20%; right: 30%; animation: floatA 4.5s ease-in-out infinite 0.5s; }
+    .cta-band h2 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; position: relative; }
+    .cta-band p { margin-top: 14px; color: var(--text-muted); font-size: 16px; max-width: 420px; position: relative; }
+    .cta-actions { margin-top: 26px; display: flex; flex-wrap: wrap; gap: 14px; position: relative; }
+    .qr-box { justify-self: center; background: #fff; border: 1px solid var(--border); border-radius: 18px; padding: 16px; width: 180px; text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.06); position: relative; transition: transform .3s var(--ease); }
+    .qr-box:hover { transform: translateY(-4px) rotate(-1deg); }
     .qr-box .qr { background: #fff; border-radius: 10px; padding: 10px; }
     .qr-box .qr img { width: 100%; display: block; }
     .qr-box .cap { font-size: 11px; color: var(--text-dim); margin-top: 10px; }
@@ -447,8 +550,8 @@
     .foot-bottom { padding-top: 28px; display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: center; }
     .foot-bottom p { font-size: 12px; color: var(--text-dim); letter-spacing: 0.04em; }
     .social { display: flex; gap: 10px; }
-    .social a { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: border-color 0.2s, color 0.2s; }
-    .social a:hover { border-color: var(--brand); color: var(--brand); }
+    .social a { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-muted); transition: border-color 0.2s, color 0.2s, transform .2s; }
+    .social a:hover { border-color: var(--brand); color: var(--brand); transform: translateY(-2px); }
 
     @media (min-width: 640px) {
       .cards { grid-template-columns: repeat(2, 1fr); }
@@ -464,6 +567,7 @@
       .cards { grid-template-columns: repeat(4, 1fr); }
       .steps { grid-template-columns: repeat(5, 1fr); }
       .step { flex-direction: column; }
+      .steps-line { display: block; }
       .trust { grid-template-columns: 1fr auto; }
       .cta-band { grid-template-columns: 1fr auto; }
       .foot-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
@@ -475,8 +579,10 @@
 </head>
 <body>
 
+  <div class="scroll-bar" id="scrollBar"></div>
+
   <!-- NAV -->
-  <nav class="nav">
+  <nav class="nav" id="siteNav">
     <div class="wrap nav-inner">
       <a href="/" class="brand">
         <img src="gogohungry-logo.png" alt="GoGoHungry" onerror="this.style.display='none'">
@@ -507,73 +613,96 @@
     </div>
   </nav>
 
+  <!-- MARQUEE -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track" id="marqueeTrack">
+      <span>Zero delivery fees</span>
+      <span>Flat 1% platform fee</span>
+      <span>Live order tracking</span>
+      <span>Secure UPI payments</span>
+      <span>Missed-delivery guarantee</span>
+      <span>Verified by Dun &amp; Bradstreet</span>
+      <span>Zero delivery fees</span>
+      <span>Flat 1% platform fee</span>
+      <span>Live order tracking</span>
+      <span>Secure UPI payments</span>
+      <span>Missed-delivery guarantee</span>
+      <span>Verified by Dun &amp; Bradstreet</span>
+    </div>
+  </div>
+
   <!-- HERO -->
-  <section class="hero">
+  <section class="hero" id="heroSection">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
     <div class="wrap hero-grid">
       <div>
-        <span class="badge"><span class="dot"></span> Campus food delivery</span>
-        <h1>Campus food,<br><span class="accent">zero delivery charges.</span></h1>
-        <p class="lede">Order from your college canteens and cafés with no delivery fee and a flat 1% platform fee. Live tracking, secure UPI payments, and a refund guarantee — built for students.</p>
-        <div class="hero-cta">
+        <span class="badge fade-up" style="animation-delay:.05s"><span class="dot"></span> Campus food delivery</span>
+        <h1 class="fade-up" style="animation-delay:.12s">Campus food,<br><span class="accent">zero delivery charges.</span></h1>
+        <p class="lede fade-up" style="animation-delay:.2s">Order from your college canteens and cafés with no delivery fee and a flat 1% platform fee. Live tracking, secure UPI payments, and a refund guarantee — built for students.</p>
+        <div class="hero-cta fade-up" style="animation-delay:.28s">
           <a href="https://play.google.com/store/apps/details?id=com.gogohungry.app" rel="noopener" class="btn btn-primary">Download the app</a>
           <a href="#pricing" class="btn btn-outline">See pricing</a>
         </div>
-        <p class="hero-note">No hidden fees. You pay the menu price plus 1% — nothing else.</p>
+        <p class="hero-note fade-up" style="animation-delay:.36s">No hidden fees. You pay the menu price plus 1% — nothing else.</p>
       </div>
 
-      <div class="phone-wrapper">
+      <div class="phone-wrapper fade-up" style="animation-delay:.2s">
         <div style="position:absolute; width:400px; height:400px; background:radial-gradient(circle, rgba(255,82,0,0.12) 0%, transparent 70%); border-radius:50%; z-index:0;"></div>
         <div style="position:absolute; width:240px; height:440px; background:#e8e8e8; border-radius:2.5rem; z-index:1; transform:rotate(10deg) translate(100px,-20px); opacity:0.25;"></div>
 
-        <div class="phone-shell">
-          <div class="phone-screen">
-            <div style="background:#fff; padding:10px 20px 6px; display:flex; justify-content:center;">
-              <div style="width:72px; height:18px; background:#f0f0f0; border-radius:999px;"></div>
-            </div>
-            <div style="flex:1; background:#fff; display:flex; flex-direction:column; padding:16px; gap:14px; overflow:hidden;">
-              <div style="display:flex; justify-content:space-between; align-items:center;">
-                <div>
-                  <p style="font-size:10px; color:#888; margin:0; font-weight:600;">GOOD MORNING</p>
-                  <p style="font-size:14px; font-weight:800; color:#111; margin:0;">What's your vibe?</p>
-                </div>
-                <div style="width:32px; height:32px; border-radius:50%; background:var(--brand-light); display:flex; align-items:center; justify-content:center;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF5200" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                </div>
+        <div class="phone-tilt" id="phoneTilt">
+          <div class="phone-shell">
+            <div class="phone-screen">
+              <div style="background:#fff; padding:10px 20px 6px; display:flex; justify-content:center;">
+                <div style="width:72px; height:18px; background:#f0f0f0; border-radius:999px;"></div>
               </div>
-              <div style="background:#f7f7f7; border-radius:12px; padding:10px 14px; display:flex; align-items:center; gap:8px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                <span style="font-size:12px; color:#aaa; font-weight:500;">Search canteens...</span>
-              </div>
-              <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; flex:1;">
-                <div style="background:#fff7f3; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #ffe5d5; gap:6px;">
-                  <span style="font-size:28px;">🍕</span>
-                  <span style="font-size:10px; font-weight:700; color:#333;">Pizza</span>
-                  <span style="font-size:9px; background:var(--brand); color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹89</span>
+              <div style="flex:1; background:#fff; display:flex; flex-direction:column; padding:16px; gap:14px; overflow:hidden;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <p style="font-size:10px; color:#888; margin:0; font-weight:600;">GOOD MORNING</p>
+                    <p style="font-size:14px; font-weight:800; color:#111; margin:0;">What's your vibe?</p>
+                  </div>
+                  <div style="width:32px; height:32px; border-radius:50%; background:var(--brand-light); display:flex; align-items:center; justify-content:center;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF5200" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                  </div>
                 </div>
-                <div style="background:#fff0fb; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #f5d5ed; gap:6px;">
-                  <span style="font-size:28px;">🍜</span>
-                  <span style="font-size:10px; font-weight:700; color:#333;">Noodles</span>
-                  <span style="font-size:9px; background:#333; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹65</span>
+                <div style="background:#f7f7f7; border-radius:12px; padding:10px 14px; display:flex; align-items:center; gap:8px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <span style="font-size:12px; color:#aaa; font-weight:500;">Search canteens...</span>
                 </div>
-                <div style="background:#f0fff4; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #c3f0d2; gap:6px;">
-                  <span style="font-size:28px;">🥗</span>
-                  <span style="font-size:10px; font-weight:700; color:#333;">Salad</span>
-                  <span style="font-size:9px; background:#16a34a; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹55</span>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; flex:1;">
+                  <div style="background:#fff7f3; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #ffe5d5; gap:6px;">
+                    <span style="font-size:28px;">🍕</span>
+                    <span style="font-size:10px; font-weight:700; color:#333;">Pizza</span>
+                    <span style="font-size:9px; background:var(--brand); color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹89</span>
+                  </div>
+                  <div style="background:#fff0fb; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #f5d5ed; gap:6px;">
+                    <span style="font-size:28px;">🍜</span>
+                    <span style="font-size:10px; font-weight:700; color:#333;">Noodles</span>
+                    <span style="font-size:9px; background:#333; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹65</span>
+                  </div>
+                  <div style="background:#f0fff4; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #c3f0d2; gap:6px;">
+                    <span style="font-size:28px;">🥗</span>
+                    <span style="font-size:10px; font-weight:700; color:#333;">Salad</span>
+                    <span style="font-size:9px; background:#16a34a; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹55</span>
+                  </div>
+                  <div style="background:#fff8f0; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #ffd9aa; gap:6px;">
+                    <span style="font-size:28px;">☕</span>
+                    <span style="font-size:10px; font-weight:700; color:#333;">Coffee</span>
+                    <span style="font-size:9px; background:#b45309; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹30</span>
+                  </div>
                 </div>
-                <div style="background:#fff8f0; border-radius:16px; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:14px; border:1px solid #ffd9aa; gap:6px;">
-                  <span style="font-size:28px;">☕</span>
-                  <span style="font-size:10px; font-weight:700; color:#333;">Coffee</span>
-                  <span style="font-size:9px; background:#b45309; color:#fff; padding:2px 8px; border-radius:20px; font-weight:700;">₹30</span>
+                <div style="background:var(--brand); border-radius:14px; padding:12px; display:flex; align-items:center; justify-content:center;">
+                  <span style="color:#fff; font-size:12px; font-weight:800; letter-spacing:0.02em;">₹0 DELIVERY · ORDER NOW</span>
                 </div>
-              </div>
-              <div style="background:var(--brand); border-radius:14px; padding:12px; display:flex; align-items:center; justify-content:center;">
-                <span style="color:#fff; font-size:12px; font-weight:800; letter-spacing:0.02em;">₹0 DELIVERY · ORDER NOW</span>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="float-a" style="position:absolute; top:80px; left:0; background:#fff; border:1px solid #f0f0f0; border-radius:14px; padding:10px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); z-index:10;">
+        <div class="float-a tag-pop" style="position:absolute; top:80px; left:0; background:#fff; border:1px solid #f0f0f0; border-radius:14px; padding:10px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); z-index:10;">
           <div style="width:32px; height:32px; border-radius:10px; background:var(--brand-light); display:flex; align-items:center; justify-content:center;">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF5200" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
           </div>
@@ -583,7 +712,7 @@
           </div>
         </div>
 
-        <div class="float-b" style="position:absolute; bottom:100px; right:0; background:#fff; border:1px solid #f0f0f0; border-radius:14px; padding:10px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); z-index:10;">
+        <div class="float-b tag-pop" style="position:absolute; bottom:100px; right:0; background:#fff; border:1px solid #f0f0f0; border-radius:14px; padding:10px 14px; display:flex; align-items:center; gap:10px; box-shadow:0 8px 24px rgba(0,0,0,0.08); z-index:10;">
           <div style="display:flex; margin-right:2px;">
             <div style="width:24px; height:24px; border-radius:50%; background:#ffb380; border:2px solid #fff; z-index:2;"></div>
             <div style="width:24px; height:24px; border-radius:50%; background:var(--brand); border:2px solid #fff; margin-left:-8px;"></div>
@@ -599,10 +728,10 @@
   <section class="stats">
     <div class="wrap">
       <div class="stats-grid">
-        <div class="stat"><div class="num">₹0</div><div class="lbl">Delivery fees</div></div>
-        <div class="stat"><div class="num">1%</div><div class="lbl">Flat platform fee</div></div>
-        <div class="stat"><div class="num">Free+</div><div class="lbl"><a href="refund-guarantee.html" style="color:inherit;">Missed-delivery cover</a></div></div>
-        <div class="stat"><div class="num">1k+</div><div class="lbl">Students onboard</div></div>
+        <div class="stat reveal"><div class="num">₹0</div><div class="lbl">Delivery fees</div></div>
+        <div class="stat reveal"><div class="num" data-count-to="1" data-suffix="%">0%</div><div class="lbl">Flat platform fee</div></div>
+        <div class="stat reveal"><div class="num"><a href="refund-guarantee.html" style="color:inherit;">Free+</a></div><div class="lbl">Missed-delivery cover</div></div>
+        <div class="stat reveal"><div class="num" data-count-to="1" data-suffix="k+">0k+</div><div class="lbl">Students onboard</div></div>
       </div>
     </div>
   </section>
@@ -610,34 +739,34 @@
   <!-- FEATURES -->
   <section class="block" id="features">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="eyebrow">Why GoGoHungry</span>
         <h2>Built for campus life</h2>
         <p>Everything students need in one app, without the hidden charges other platforms add.</p>
       </div>
       <div class="cards">
-        <div class="card">
+        <div class="card reveal">
           <div class="icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
           <h3>Zero extra charges</h3>
           <p>No delivery fee and no hidden platform fee. You pay exactly what the menu says, plus a flat 1%.</p>
         </div>
-        <a href="refund-guarantee.html" class="card" style="display:block;">
+        <a href="refund-guarantee.html" class="card reveal" style="display:block;">
           <div class="icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h3>Missed-delivery guarantee</h3>
           <p>If we miss delivery on our side: same food again free, plus a full refund if you paid online. Read full details.</p>
         </a>
-        <div class="card">
+        <div class="card reveal">
           <div class="icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
           </div>
           <h3>Live order tracking</h3>
           <p>Real-time updates from the moment your food is prepared until it reaches you on campus.</p>
         </div>
-        <div class="card">
+        <div class="card reveal">
           <div class="icon">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           </div>
@@ -649,26 +778,29 @@
   </section>
 
   <!-- HOW IT WORKS -->
-  <section class="block alt" id="how">
+  <section class="block" id="how">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="eyebrow">How it works</span>
         <h2>From craving to canteen in five steps</h2>
       </div>
-      <div class="steps">
-        <div class="step"><div class="n">1</div><div><h4>Browse</h4><p>See every canteen near your college.</p></div></div>
-        <div class="step"><div class="n">2</div><div><h4>Pick</h4><p>Add your favourites to the cart.</p></div></div>
-        <div class="step"><div class="n">3</div><div><h4>Pay</h4><p>Fast, secure UPI checkout.</p></div></div>
-        <div class="step"><div class="n">4</div><div><h4>Track</h4><p>Live updates as it's prepared.</p></div></div>
-        <div class="step"><div class="n">5</div><div><h4>Collect</h4><p>Get your hot meal on time.</p></div></div>
+      <div class="steps-wrap">
+        <div class="steps-line"></div>
+        <div class="steps">
+          <div class="step reveal"><div class="n">1</div><div><h4>Browse</h4><p>See every canteen near your college.</p></div></div>
+          <div class="step reveal"><div class="n">2</div><div><h4>Pick</h4><p>Add your favourites to the cart.</p></div></div>
+          <div class="step reveal"><div class="n">3</div><div><h4>Pay</h4><p>Fast, secure UPI checkout.</p></div></div>
+          <div class="step reveal"><div class="n">4</div><div><h4>Track</h4><p>Live updates as it's prepared.</p></div></div>
+          <div class="step reveal"><div class="n">5</div><div><h4>Collect</h4><p>Get your hot meal on time.</p></div></div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- PRICING -->
-  <section class="block" id="pricing">
+  <section class="block alt" id="pricing">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="eyebrow">Transparent pricing</span>
         <h2>Honest pricing, real savings</h2>
         <p>No delivery fee. No hidden platform fee. See exactly what you pay or earn.</p>
@@ -682,7 +814,7 @@
       </div>
 
       <!-- Student -->
-      <div class="calc" id="studentCalc">
+      <div class="calc reveal" id="studentCalc">
         <label class="calc-label" for="orderAmount">Your order amount</label>
         <div class="calc-input-wrap">
           <span class="cur">₹</span>
@@ -713,7 +845,7 @@
       </div>
 
       <!-- Restaurant -->
-      <div class="calc" id="restaurantCalc" style="display:none;">
+      <div class="calc reveal" id="restaurantCalc" style="display:none;">
         <label class="calc-label" for="restAmount">Order value</label>
         <div class="calc-input-wrap">
           <span class="cur">₹</span>
@@ -746,9 +878,9 @@
   </section>
 
   <!-- TRUST -->
-  <section class="block alt">
+  <section class="block">
     <div class="wrap">
-      <div class="trust">
+      <div class="trust reveal">
         <div>
           <div class="section-head" style="margin:0; text-align:left;">
             <span class="eyebrow">Registered and verified</span>
@@ -760,47 +892,47 @@
             <span class="trust-badge"><span class="g"></span> Razorpay Secured</span>
           </div>
         </div>
-        <div style="width:110px; height:110px; border-radius:50%; border:1px solid var(--border-brand); display:flex; flex-direction:column; align-items:center; justify-content:center; flex-shrink:0; background:#fff;">
+        <div class="dnb-seal">
           <span style="font-size:26px; font-weight:800; font-style:italic; color:#111;">d&amp;b</span>
-          <span style="font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--brand); margin-top:4px;">Verified</span>
+          <span style="font-size:9px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:var(--brand); margin-top:4px; position:relative;">Verified</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="block" id="faq">
+  <section class="block alt" id="faq">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="eyebrow">FAQ</span>
         <h2>Frequently asked questions</h2>
       </div>
       <div class="faq">
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <button class="faq-q">Do you really charge zero delivery fees?
             <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-a"><p>Yes. There is no delivery fee. You pay the menu price plus a flat 1% platform fee, and nothing else.</p></div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <button class="faq-q">What if you miss my delivery?
             <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-a"><p>If the miss is on our side (not a wrong address or unreachable customer), you get the same food again at no charge. If you paid online, we also refund your money. <a href="refund-guarantee.html" style="color:var(--brand); font-weight:600;">Read the full guarantee</a>.</p></div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <button class="faq-q">What payment methods are supported?
             <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-a"><p>Payments are made through UPI and are secured by Razorpay. Please confirm your transaction succeeds to avoid order delays.</p></div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <button class="faq-q">Can I cancel an order after placing it?
             <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
           <div class="faq-a"><p>Confirmed orders currently cannot be cancelled, since food is prepared fresh immediately. See our <a href="terms.html" style="color:var(--brand); font-weight:600;">Terms &amp; Privacy</a> for the full policy.</p></div>
         </div>
-        <div class="faq-item">
+        <div class="faq-item reveal">
           <button class="faq-q">Which campuses is GoGoHungry available on?
             <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
           </button>
@@ -811,9 +943,12 @@
   </section>
 
   <!-- CTA -->
-  <section class="block alt">
+  <section class="block">
     <div class="wrap">
-      <div class="cta-band">
+      <div class="cta-band reveal">
+        <span class="deco d1">🍕</span>
+        <span class="deco d2">🍜</span>
+        <span class="deco d3">☕</span>
         <div>
           <span class="eyebrow">Get started</span>
           <h2>Download the app and order now</h2>
@@ -887,6 +1022,8 @@
   <script>
     if (window.top !== window.self) { window.top.location = window.location.href; }
 
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
     /* Mobile menu */
     (function () {
       var btn = document.getElementById('menuBtn');
@@ -894,6 +1031,95 @@
       btn.addEventListener('click', function () { menu.classList.toggle('open'); });
       menu.querySelectorAll('a').forEach(function (a) {
         a.addEventListener('click', function () { menu.classList.remove('open'); });
+      });
+    })();
+
+    /* Nav shrink + scroll progress */
+    (function () {
+      var nav = document.getElementById('siteNav');
+      var bar = document.getElementById('scrollBar');
+      function onScroll() {
+        nav.classList.toggle('scrolled', window.scrollY > 10);
+        var h = document.documentElement;
+        var pct = (h.scrollTop || document.body.scrollTop) / ((h.scrollHeight || document.body.scrollHeight) - h.clientHeight) * 100;
+        bar.style.width = (pct || 0) + '%';
+      }
+      document.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+
+    /* Scroll reveal */
+    (function () {
+      var items = document.querySelectorAll('.reveal');
+      if (!items.length) return;
+      if (reduceMotion || !('IntersectionObserver' in window)) {
+        items.forEach(function (el) { el.classList.add('in'); });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+      items.forEach(function (el) { io.observe(el); });
+    })();
+
+    /* Animated stat counters */
+    (function () {
+      var nums = document.querySelectorAll('.num[data-count-to]');
+      if (!nums.length) return;
+      function animate(el) {
+        var target = parseFloat(el.getAttribute('data-count-to'));
+        var suffix = el.getAttribute('data-suffix') || '';
+        if (reduceMotion) { el.textContent = target + suffix; return; }
+        var start = null, duration = 900;
+        function step(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      if ('IntersectionObserver' in window) {
+        var io2 = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) { animate(entry.target); io2.unobserve(entry.target); }
+          });
+        }, { threshold: 0.6 });
+        nums.forEach(function (el) { io2.observe(el); });
+      } else {
+        nums.forEach(animate);
+      }
+    })();
+
+    /* Hero cursor glow + phone tilt (desktop, fine pointer only) */
+    (function () {
+      var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+      if (!canHover || reduceMotion) return;
+      var hero = document.getElementById('heroSection');
+      var glow = document.getElementById('cursorGlow');
+      var tilt = document.getElementById('phoneTilt');
+      hero.addEventListener('mousemove', function (e) {
+        var r = hero.getBoundingClientRect();
+        var x = e.clientX - r.left, y = e.clientY - r.top;
+        glow.style.opacity = '1';
+        glow.style.left = x + 'px';
+        glow.style.top = y + 'px';
+        if (tilt) {
+          var cx = r.width / 2, cy = r.height / 2;
+          var ry = ((x - cx) / cx) * 8;
+          var rx = -((y - cy) / cy) * 8;
+          tilt.style.transform = 'rotateX(' + rx + 'deg) rotateY(' + ry + 'deg)';
+        }
+      });
+      hero.addEventListener('mouseleave', function () {
+        glow.style.opacity = '0';
+        if (tilt) tilt.style.transform = 'rotateX(0) rotateY(0)';
       });
     })();
 
